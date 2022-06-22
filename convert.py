@@ -5,7 +5,7 @@ import xmltodict
 INPUT_FILE = "vdj-export/database.xml"
 
 OUTPUT_DIR = "processed-files"
-OUTPUT_FILE = f"{OUTPUT_DIR}/py-database.json"
+OUTPUT_FILE = f"{OUTPUT_DIR}/database.json"
 
 
 def xml_to_json(database_xml_path=INPUT_FILE, output_json_path=OUTPUT_FILE):
