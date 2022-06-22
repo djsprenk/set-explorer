@@ -1,7 +1,7 @@
 """From the database, write a filtered list of sets"""
 
-from scripts.constants import PROCESSED_FILES_DIR
-from scripts.utils import read_json_file, write_json_file
+from constants import PROCESSED_FILES_DIR, JSON_DB_FILE
+from utils import read_json_file, write_json_file
 
 OUTPUT_FILE = f"{PROCESSED_FILES_DIR}/zouk-sets.json"
 
@@ -19,7 +19,7 @@ def set_filter(elem):
 
 
 if __name__ == "__main__":
-    db = read_json_file()
+    db = read_json_file(JSON_DB_FILE)
     songs = db["VirtualDJ_Database"]["Song"]
     filtered = filter(set_filter, songs)
 
