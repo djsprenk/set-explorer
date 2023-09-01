@@ -5,7 +5,7 @@ Given a set name, generate a cue file
 from math import floor
 from os.path import basename, splitext
 
-from constants import PROCESSED_FILES_DIR
+from constants import JSON_DB_FILE, PROCESSED_FILES_DIR
 from utils import read_json_file
 
 SET_FILE_NAME = "Sprenk - Dani & Nate.mp3"
@@ -43,8 +43,12 @@ def seconds_to_minutes_and_seconds(time):
 
 
 if __name__ == "__main__":
-    filtered_sets = read_json_file(INPUT_FILE)
-    set_metadata = find_set_metadata(filtered_sets, SET_FILE_NAME)
+    songs = read_json_file(JSON_DB_FILE)["VirtualDJ_Database"]["Song"]
+    set_metadata = find_set_metadata(songs, SET_FILE_NAME)
+
+    if set_metadata is None:
+        print(f"No set found in database for file {SET_FILE_NAME}")
+
     cue_points = filter(cue_filter, set_metadata["Poi"])
 
     text_data = ""
@@ -56,16 +60,19 @@ if __name__ == "__main__":
 
     for cue in cue_points:
         cue_number = cue.get("@Num", "0").zfill(2)
-        title = cue.get("@Name", " - ").split(" - ")[1]
-        performer = cue.get("@Name", " - ").split(" - ")[0]
+
+        if len(cue.get("@Name", "").split(" - ")) == 2:
+            performer, title = cue.get("@Name", " - ").split(" - ")
+        else:
+            print(f"Bad cue point found at [{cue_number}]: f{cue.get('@Name')}")
+            title = cue.get("@Name", "Unknown")
+            performer = "Unknown"
         timestamp = seconds_to_minutes_and_seconds(cue.get("@Pos", "0"))
 
         text_data += f"  TRACK {cue_number} AUDIO\n"
         text_data += f'    TITLE "{title}"\n'
         text_data += f'    PERFORMER "{performer}"\n'
         text_data += f"    INDEX 01 {timestamp}\n"
-
-    breakpoint()
 
     # Write the json data to output json file
     with open(OUTPUT_FILE, "w") as cue_file:
