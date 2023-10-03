@@ -49,9 +49,6 @@ if __name__ == "__main__":
     if set_metadata is None:
         print(f"No set found in database for file {SET_FILE_NAME}")
         exit(1)
-    elif len(set_metadata) > 1:
-        print(f"Multiple sets found in database for file {SET_FILE_NAME}")
-        exit(1)
 
     cue_points = filter(cue_filter, set_metadata["Poi"])
 
