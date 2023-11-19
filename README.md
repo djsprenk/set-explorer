@@ -1,10 +1,10 @@
 # VirtualDJ Analysis
 
-Scirpts & projects around analysis of VirtualDJ databse.
+Scripts & projects around analysis of VirtualDJ datable.
 
 ## Quickstart
 
-Unpack the contents of a VirtualDJ database export into `vdj-epxort`. The program expects a `database.xml` file as an immediate child to `vdj-export`.
+Unpack the contents of a VirtualDJ database export into `vdj-export`. The program expects a `database.xml` file as an immediate child to `vdj-export`.
 
 From the project directory, scripts to run:
 
