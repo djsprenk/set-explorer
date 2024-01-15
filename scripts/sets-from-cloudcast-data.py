@@ -2,8 +2,8 @@ import json
 from constants import MIXCLOUD_EXPORT_DIR, PROCESSED_FILES_DIR
 from utils import read_json_file
 
-INPUT_FILE = f"{MIXCLOUD_EXPORT_DIR}/cloudcasts.json"
-OUTPUT_FILE = f"{PROCESSED_FILES_DIR}/set_slugs.json"
+INPUT_FILE = f"{MIXCLOUD_EXPORT_DIR}/collected-cloudcasts.json"
+OUTPUT_FILE = f"{MIXCLOUD_EXPORT_DIR}/set-slugs.json"
 
 
 def get_set_slugs(input_file=INPUT_FILE):
