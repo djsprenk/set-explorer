@@ -81,13 +81,79 @@ The next task is to automate it!
 
 I want to go through every set in a list and pull stats. To do this, I'm learning how to use the [Runner in postman to run a set of requests using data file input](https://blog.postman.com/looping-through-a-data-file-in-the-postman-collection-runner/).
 
-To get the actual set of tracks, I'm using the (published) APIs to get a list of set slugs:
+### Get Set Slugs
 
-https://api.mixcloud.com/{username}/cloudcasts/?metadata=1
+First thing is to get a list of track URLs. To do this, I'm using one of the (published) APIs to get a list of set slugs:
 
-And wrote the `sets_from_cloudcast_data.py` script to extract the slugs into a JSON file for running through Postman.
+https://api.mixcloud.com/{{username}}/cloudcasts/?metadata={{page}}
 
-This allowed me to use the Postman runner with the output JSON (and, importantly `Preserve Responses` setting checked) to get the stats for a bunch of sets in bulk.
+Running this returns data like this:
+
+```
+{
+    "data": [
+        {
+            "key": "/{{username}}/{{slug}}/",
+            "url": "https://www.mixcloud.com/{{username}}/{{slug}}",
+            "name": "{{name}}",
+            "tags": [ ... ]
+            ...
+            "play_count": {{play_count}},
+            "favorite_count": {{favorite_count}},
+            "comment_count": {{comment_count}},
+            "listener_count": {{listener_count}},
+            "repost_count": {{repost_count}},
+            "pictures": { ... },
+            "slug": "{{slug}}",
+            "user": { ... }
+            "audio_length": {{audio_length}},
+            "type": "cloudcast"
+        },
+        ...
+    ],
+    "paging": {
+        "next": "https://api.mixcloud.com/{{username}}/cloudcasts/?limit=20&metadata=1&until={{datetime}}",
+        "previous": "https://api.mixcloud.com/djsprenk/cloudcasts/?limit=20&metadata=1&since={{datetime}}"
+    }
+}
+```
 
 **Note** that the list of slugs from the Mixcloud API is paginated at 20 responses at a time, so there is some manual collection of this data (or future enhancements of the scripts) to get to a place where all uploaded sets can be analyzed easily.
 
+Next I wrote the wrote the `sets-from-cloudcast-data.py` script to pull the set slugs and format into a JSON file for running through Postman.
+
+### Pull engagement stats
+
+To run, I created a Postman request to `https://app.mixcloud.com/graphql` using the reverse-engineered graphql query above.
+
+To hit any request that gets your specific stats, you need to be authenticated so I used the Postman Interceptor.
+
+1. Log into Mixcloud.
+2. Activate the extension to pull cookies / CSRF tokens from logged in session of Mixcloud.
+3. Run the request in Postman to see it gets a valid response.
+
+### Automate pulling engagement stats
+
+Now that we know we can pull stats and we have a list of set slugs, we can use the Postman runner with the output JSON (and, importantly `Preserve Responses` setting checked) to get the stats for a bunch of sets in bulk.
+
+1. Open the Postman runner.
+2. Select the `POST Get Stats` query to run.
+3. For data, select the output `set-slugs.json` file, this sets the set slug variable per file.
+4. Check "Persist Responses" for a session to save the output stats.
+5. Run.
+
+Unfortunately, there's not a good built-in way to export the response bodies of these requests. So, sing responses from [this stack overflow post](https://stackoverflow.com/questions/56448021/bulk-post-put-api-requests-using-postman-or-any-other-means/71899537#71899537) I added a test to the collection to dump the responses into a collection variable. You do have to manually pull out the response but it is at least some level of persistence.
+
+I saved this to `mixcloud-export/set-stats.json`.
+
+### Graphing engagement over time
+
+The next thing I wanted to do was see how set engagement mapped over time across many sets.
+
+The task here is relatively simple, I want to turn that JSON into a CSV of the schema:
+
+```
+set name, engagement (minute 1), engagement (minute 2) .... etc.
+```
+
+This will chart engagement for all sets aligned together.
