@@ -23,7 +23,7 @@ ARTIST_FILTER = "dj sprenk"
 
 
 def set_name_from_title(title):
-    """ Get title from YYMMDD - {title}.mp3 format"""
+    """Get title from YYMMDD - {title}.mp3 format"""
     return splitext(title)[0]
 
 
