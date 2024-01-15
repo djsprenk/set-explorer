@@ -17,6 +17,18 @@ Start the server with:
 npm run start
 ```
 
+## Scripts
+
+### CUE File
+
+Create a CUE file based off of cue points from a recorded set. Expects an up-to-date zouk-sets.json file, extracted from a database.xml dump.
+
+```bash
+python scripts/cue-file.py "{set file name}"
+```
+
+Outputs a `{set file name}.cue` file to `processed-files` directory.
+
 ## Develop
 
 Format JS with `npm run format`
