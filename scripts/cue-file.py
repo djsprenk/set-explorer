@@ -6,12 +6,12 @@ Args: Set file name
 Outputs: {set file name}.cue file with cue points to processed-files dir
 """
 
-from math import floor
 from os.path import basename, splitext
 import sys
 
-from constants import JSON_DB_FILE, PROCESSED_FILES_DIR
-from utils import read_json_file
+from constants import PROCESSED_FILES_DIR, VDJ_DB_FILE
+from convert import read_from_xml
+from formatters import seconds_to_minutes_and_seconds
 
 DJ_SET_FILE = f"{PROCESSED_FILES_DIR}/zouk-sets.json"
 
@@ -32,46 +32,31 @@ def cue_filter(elem):
     return elem.get("@Type") == "cue"
 
 
-def find_set_metadata(set_list, file_name):
-    """Find matching set metadata"""
-    for set_metadata in set_list:
-        if basename(set_metadata.get("@FilePath")) == file_name:
-            return set_metadata
+def get_songs_from_database(database):
+    """Get a list of all songs from the database"""
+    return database["VirtualDJ_Database"]["Song"]
 
 
-def seconds_to_minutes_and_seconds(time):
-    """Convert cue format ss.mm to MM:ss:mm format"""
-    rounded_seconds = floor(float(time))
-    minutes = floor(rounded_seconds / 60)
-    seconds = rounded_seconds % 60
+def find_song_from_database(database, file_name):
+    """Find a matching song from the database by file name"""
 
-    return f"{str(minutes).zfill(2)}:{str(seconds).zfill(2)}:00"
+    songs = get_songs_from_database(database)
+
+    for song in songs:
+        if basename(song.get("@FilePath")) == file_name:
+            return song
 
 
-if __name__ == "__main__":
-    # Get set from args
-    if len(sys.argv) == 2:
-        set_file = sys.argv[1]
-        set_title = set_name_from_title(set_file)
-    else:
-        print(f"Expected 1 arg: set file name")
-        exit(1)
-
-    songs = read_json_file(JSON_DB_FILE)["VirtualDJ_Database"]["Song"]
-    set_metadata = find_set_metadata(songs, set_file)
-
-    if set_metadata is None:
-        print(f"No set found in database for file {set_file}")
-        exit(1)
-
-    cue_points = filter(cue_filter, set_metadata["Poi"])
-
+def generate_cue_text_from_cues(song_data):
+    """Find cues in the song data and generate text in CUE file format"""
     text_data = ""
 
     # Write Header
     text_data += f'PERFORMER "{DJ_NAME}"\n'
     text_data += f'TITLE "{set_title}"\n'
     text_data += f'FILE "{set_file}"\n'
+
+    cue_points = filter(cue_filter, song_data["Poi"])
 
     for cue in cue_points:
         cue_number = cue.get("@Num", "0").zfill(2)
@@ -89,9 +74,37 @@ if __name__ == "__main__":
         text_data += f'    PERFORMER "{performer}"\n'
         text_data += f"    INDEX 01 {timestamp}\n"
 
+    return text_data
+
+
+if __name__ == "__main__":
+
+    # Get set from args
+    if len(sys.argv) == 2:
+        set_file = sys.argv[1]
+        set_title = set_name_from_title(set_file)
+    else:
+        print(f"Expected 1 arg: set file name")
+        exit(1)
+
+    # Convert XML database dump to JSON
+    print(f"Reading data from {VDJ_DB_FILE} ...")
+    database = read_from_xml(VDJ_DB_FILE)
+
+    # Find sets from database dump
+    print(f"Searching for entry for {set_file} ...")
+    song_data = find_song_from_database(database, set_file)
+
+    if song_data is None:
+        print(f"No set found in database for file {set_file}")
+        exit(1)
+
+    print(f"Generating CUE file text for {len(song_data)} cue points ...")
+    cue_text = generate_cue_text_from_cues(song_data)
+
     output_file = f"{PROCESSED_FILES_DIR}/{set_title}.cue"
 
     # Write the json data to output json file
     with open(output_file, "w") as cue_file:
-        cue_file.write(text_data)
+        cue_file.write(cue_text)
         print(f"Wrote CUE file to {output_file}")
