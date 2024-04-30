@@ -1,6 +1,5 @@
 """Different formatters for time, BPM, etc."""
 
-
 from math import floor
 
 
