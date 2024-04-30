@@ -1,5 +1,6 @@
 """Utility functions used across multiple files"""
 
+import os
 import json
 
 from constants import JSON_DB_FILE
@@ -24,6 +25,13 @@ def lookup_song_from_database(tag, value, database=None):
             return song
 
     raise ValueError
+
+
+def file_in_directory(filename, directory):
+    """Check for a file in a directory."""
+    files = os.listdir(directory)
+
+    return filename in files
 
 
 def read_json_file(file_path):

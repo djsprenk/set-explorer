@@ -1,7 +1,12 @@
 import matplotlib.pyplot as plt
 
-from constants import VDJ_EXPORT_DIR
-from utils import lookup_song_from_database
+from constants import PROCESSED_FILES_DIR, VDJ_EXPORT_DIR
+from utils import (
+    file_in_directory,
+    lookup_song_from_database,
+    read_json_file,
+    write_json_file,
+)
 
 
 def read_playlist(m3u_path):
@@ -45,22 +50,38 @@ def graph_energy(song_list, playlist_name=None):
 
 
 if __name__ == "__main__":
+
     playlist_name = "20240128 - RVA 4"
     playlist_path = f"{VDJ_EXPORT_DIR}/Playlists/Past Events/20240128 - RVA 4.m3u"
+    song_list_file = f"{playlist_name}.song_list.json"
+    song_list_file_path = f"{PROCESSED_FILES_DIR}/{song_list_file}"
 
-    # Get song paths from playlist
-    song_paths = read_playlist(playlist_path)
-    print(f"Found {len(song_paths)} songs in playlist {playlist_path}")
+    # Check to see if we have a cached mapping file for this playlist
+    if file_in_directory(song_list_file, PROCESSED_FILES_DIR):
+        print("Found cached song list, skipping database lookup.")
+        cached_file = True
+        song_list = read_json_file(f"{PROCESSED_FILES_DIR}/{song_list_file}")
 
-    # Lookup these songs from the database by @FilePath attribute
-    song_list = []
-    for song_path in song_paths:
-        print(f"Looking up song by filepath: {song_path}")
-        song = lookup_song_from_database("@FilePath", song_path)
+    #  Otherwise, lookup the songs from the database
+    else:
+        print("No song list file found, looking up songs from database.")
 
-        if song:
-            print(f"Found match: {song['Tags'].get('@Title', 'MISSING TITLE')}")
-        song_list.append(song)
+        # Get song paths from playlist
+        song_paths = read_playlist(playlist_path)
+        print(f"Found {len(song_paths)} songs in playlist {playlist_path}")
+
+        # Lookup these songs from the database by @FilePath attribute
+        song_list = []
+        for song_path in song_paths:
+            print(f"Looking up song by filepath: {song_path}")
+            song = lookup_song_from_database("@FilePath", song_path)
+
+            if song:
+                print(f"Found match: {song['Tags'].get('@Title', 'MISSING TITLE')}")
+            song_list.append(song)
+
+        # Write songs to a file
+        write_json_file(song_list, song_list_file_path)
 
     # Chart the energies
     print(f"Graphing energy...")
