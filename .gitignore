@@ -130,8 +130,8 @@ dist
 .pnp.*
 
 # Workspace Files
-vdj-export/*
-processed-files/*
+data/vdj-database/*
+data/processed-files/*
 
 # Mac OS
 .DS_Store

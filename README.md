@@ -1,33 +1,23 @@
-# VirtualDJ Analysis
+# DJ Visualization
 
-Scripts & projects around analysis of VirtualDJ datable.
+Analysis of DJ data / playlists.
 
 ## Quickstart
 
-Unpack the contents of a VirtualDJ database export into `vdj-export`. The program expects a `database.xml` file as an immediate child to `vdj-export`.
+1. Create and activate a Python virtual environment.
 
-From the project directory, scripts to run:
-
-1. Convert XML to JSON: `python scripts/convert.py`
-2. Extract Zouk Sets: `python scripts/zouk-sets.py`
-
-Start the server with:
-
-```
-npm run start
+```sh
+virtualenv venv
+source venv/bin/activate
 ```
 
-## Scripts
+2. Install project requirements.
 
-### CUE File
-
-Create a CUE file based off of cue points from a recorded set. Expects an up-to-date zouk-sets.json file, extracted from a database.xml dump.
-
-```bash
-python scripts/cue-file.py "{set file name}"
+```sh
+pip install -r requirements.in
 ```
 
-Outputs a `{set file name}.cue` file to `processed-files` directory.
+3. Download and unpack relevant data into `data/` (see [data/README.md](data/README.md))
 
 ## Develop
 
