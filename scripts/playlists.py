@@ -33,7 +33,7 @@ def read_playlist(m3u_path):
     return song_paths
 
 
-def graph_energy(ax, song_list, playlist_name=None):
+def graph_energy(ax, song_list, playlist_name=None, x_limit=None):
     """
     Graph energy levels for an individual set using colored bars.
     
@@ -67,6 +67,10 @@ def graph_energy(ax, song_list, playlist_name=None):
     # Energies range from 1-5
     ax.set_ylim(0, 5)
 
+    # If x_limit is set, set it here
+    if x_limit:
+        ax.set_xlim([0, x_limit])
+
     # Label the axes
     ax.set_xlabel("Song No.")
     ax.set_ylabel("Energy (1-5)")
@@ -75,7 +79,7 @@ def graph_energy(ax, song_list, playlist_name=None):
     ax.set_title(playlist_name)
 
 
-def multi_graph_energy(song_lists, playlist_names=None):
+def multi_graph_energy(song_lists, playlist_names=None, song_align=False):
     """
     Given a list of song_lists and matching playlist_names, plot the energy of several
     sets using colored bar graphs.
@@ -92,9 +96,14 @@ def multi_graph_energy(song_lists, playlist_names=None):
         # Set the overall title
         fig.suptitle("DJ Sprenk - Energy Graphs")
 
+        # If song_align enabled, z-fill extra space
+        max_length = None
+        if song_align:
+            max_length = max([len(song_list) for song_list in song_lists ])
+
         for i, song_list in enumerate(song_lists):
             subplot = ax[i]
-            graph_energy(subplot, song_list, playlist_name=playlist_names[i])
+            graph_energy(subplot, song_list, playlist_name=playlist_names[i], x_limit=max_length)
 
     # Fixes overlapping labels
     plt.tight_layout()
@@ -187,6 +196,11 @@ if __name__ == "__main__":
         print("Expected at least 1 arg: path(s) to / name(s) of playlist(s)")
         exit()
 
+    # Handle flags
+    align = False
+    if "--align" in flags:
+        align = True
+
     song_lists = []
     playlist_names = []
 
@@ -211,4 +225,4 @@ if __name__ == "__main__":
 
     # Chart the energies
     print(f"Graphing energy...")
-    multi_graph_energy(song_lists, playlist_names=playlist_names)
+    multi_graph_energy(song_lists, playlist_names=playlist_names, song_align=align)
