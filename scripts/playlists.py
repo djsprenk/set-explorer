@@ -3,10 +3,18 @@ import matplotlib.pyplot as plt
 
 from constants import SONG_LISTS_DIR, VDJ_EXPORT_DIR
 from utils import (
+    command_args_flags,
     lookup_song_from_database,
     read_json_file,
     write_json_file,
 )
+
+
+# Default playlist path search order:
+# 1) Direct path
+# 2) VDJ/Playlists/Past Events
+# 3) VDJ root
+PLAYLIST_SEARCH_ORDER = ["", Path(VDJ_EXPORT_DIR, "Playlists/Past Events")]
 
 
 def read_playlist(m3u_path):
@@ -100,14 +108,56 @@ def get_song_list_for_playlist(playlist_path, use_cached=True, write_cache=True)
     return song_list
 
 
+def search_playlist(name_or_path, search_order=None):
+    """
+    Search for a playlist given a name or relative path to the playlist.
+
+    Args:
+    - name_or_path: playlist name (with or without extension) or path to playlist
+        (M3U) file.
+
+    Kwargs:
+    - search_order: override for search order (list of paths).
+
+    Returns:
+    - Path or None
+    """
+
+    if not search_order:
+        search_order = PLAYLIST_SEARCH_ORDER
+
+    for folder in search_order:
+        search_path = Path(folder, f"{playlist}{'.m3u' if not playlist.suffix else ''}")
+        if search_path.exists():
+            return search_path
+
+
 if __name__ == "__main__":
 
-    playlist_path = Path(VDJ_EXPORT_DIR, "Playlists/Past Events/20240128 - RVA 4.m3u")
-    playlist_name = playlist_path.name
+    # Get arguments from command line
+    arguments, flags = command_args_flags()
 
+    # We expect only 1 arg, a playlist name
+    if len(arguments) != 1:
+        print("Expected exactly 1 arg: path to / name of playlist")
+        exit()
+
+    # Search for that playlist file
+    playlist = Path(arguments[0])
+    playlist_file = search_playlist(playlist)
+
+    if not playlist_file:
+        print(f"Failed fo find match for {playlist}")
+        exit()
+    print(f"Found matched playlist: {playlist_file}")
+
+    # Get the song list from that file (using cache or writing if new)
     print("Fetching song list...")
-    song_list = get_song_list_for_playlist(playlist_path)
+    song_list = get_song_list_for_playlist(
+        playlist_file, use_cached=True, write_cache=True
+    )
 
     # Chart the energies
     print(f"Graphing energy...")
+    playlist_name = playlist_file.stem
     graph_energy(song_list, playlist_name=playlist_name)
