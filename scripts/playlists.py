@@ -1,7 +1,8 @@
+import json
 from pathlib import Path
 import matplotlib.pyplot as plt  # type: ignore
 
-from constants import SONG_LISTS_DIR, VDJ_EXPORT_DIR
+from constants import PROCESSED_FILES_DIR, SONG_LISTS_DIR, VDJ_EXPORT_DIR
 from utils import (
     command_args_flags,
     lookup_song_from_database,
@@ -13,8 +14,14 @@ from utils import (
 # Default playlist path search order:
 # 1) Direct path
 # 2) VDJ/Playlists/Past Events
-# 3) VDJ root
-PLAYLIST_SEARCH_ORDER = ["", Path(VDJ_EXPORT_DIR, "Playlists/Past Events")]
+# 3) VDJ/Playlist/Past Events/{year}
+PLAYLIST_SEARCH_ORDER = [
+    "",
+    Path(VDJ_EXPORT_DIR, "Playlists/Past Events"),
+    Path(VDJ_EXPORT_DIR, "Playlists/Past Events/2024"),
+    Path(VDJ_EXPORT_DIR, "Playlists/Past Events/2023"),
+    Path(VDJ_EXPORT_DIR, "Playlists/Past Events/2022"),
+]
 
 
 def read_playlist(m3u_path):
@@ -193,9 +200,15 @@ if __name__ == "__main__":
     # Get arguments from command line
     playlists, flags = command_args_flags()
 
+    if "--file" in flags:
+        playlist_paths = Path(PROCESSED_FILES_DIR, "playlists.json").read_text()
+        playlists = json.loads(playlist_paths)
+
     # We expect only 1 arg, a playlist name
     if len(playlists) < 1:
-        print("Expected at least 1 arg: path(s) to / name(s) of playlist(s)")
+        print(
+            "Expected at least 1 arg: path(s) to / name(s) of playlist(s) or to run in --file mode"
+        )
         exit()
 
     # Handle flags
