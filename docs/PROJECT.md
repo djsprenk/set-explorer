@@ -6,10 +6,10 @@
     - [x] Get playlist name from command line args
     - [x] Color coded graphs.
     - [x] Expand graphing to go through a list of playlists.
+    - [x] Song-align energy.
 
 ## Upcoming
 
-- [ ] Song-align energy, z-filling extra sets.
 - [ ] Create BPM graph of sets from VDJ.
 - [ ] Time-align energy / BPM using set cue points.
 - [ ] Investigate using Pandas for data analytics.

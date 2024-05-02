@@ -105,5 +105,17 @@ python scripts/playlists.py "playlist 1" "playlist 2" "playlist 3" "playlist 4"
 
 Creates an example like this one, where I graphed all 4 sets from  Richmond:
 
-
 ![Multi-graph v2](./energy-graph-v2-multi.png)
+
+### Song align
+
+Next, I wanted a way to show sets aligned to each other (by song). Another quick tweak
+(as simple as setting x-axis based on the max set length) and we have the following,
+togglable with the `--align` flag (which pointed out a bug I had to fix with how I was)
+getting flags from my command line.
+
+```sh
+python scripts/playlists.py --align "playlist 1" "playlist 2" "playlist 3" "playlist 4"
+```
+
+![Multi-graph v2](./energy-graph-v2-multi-aligned.png)
