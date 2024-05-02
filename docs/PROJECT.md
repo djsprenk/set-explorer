@@ -3,11 +3,12 @@
 ## In-progress / Complete
 
 - [x] Create energy graph of sets from VDJ.
+    - [x] Get playlist name from command line args
+    - [x] Color coded graphs.
 
 ## Upcoming
 
 - [ ] Expand graphing to go through a list of playlists.
-- [ ] Prettier graphs (e.g. color coding)
 - [ ] Create BPM graph of sets from VDJ.
 - [ ] Time-align energy / BPM using set cue points.
 - [ ] Investigate using Pandas for data analytics.

@@ -71,3 +71,22 @@ can query each song for its Rating (encoded as the `@Stars` attribute) and then 
 **An early example**:
 
 ![Graph v1](./energy-graph-v1.png)
+
+### Graph & Script Improvements
+
+Next I played with some improvements both to the script and the graphs:
+
+- Take set name from command line arguments.
+- Added search, will search several locations (including direct path, and "Past Sets")
+  for provided playlist.
+- Added color-coded bars for prettier graphs.
+
+At the end of all of this, I have a script that looks like this:
+
+```sh
+python scripts/playlists.py <name-or-path-to-playlist>
+```
+
+And produces graphs like this:
+
+![Graph v2](./energy-graph-v2.png)
