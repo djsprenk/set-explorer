@@ -197,6 +197,9 @@ def search_playlist(name_or_path, search_order=None):
 
 if __name__ == "__main__":
 
+    import time
+    start_time = time.time()
+
     # Get arguments from command line
     playlists, flags = command_args_flags()
 
@@ -244,6 +247,8 @@ if __name__ == "__main__":
 
         song_lists.append(song_list)
         playlist_names.append(playlist_file.stem)
+
+    print(f"--- {round(time.time() - start_time, 4)} seconds ---")
 
     # Chart the energies
     print(f"Graphing energy...")
