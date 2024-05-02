@@ -33,10 +33,17 @@ def read_playlist(m3u_path):
     return song_paths
 
 
-def graph_energy(song_list, playlist_name=None):
-    """Given a list of songs and playlist name, plot the energy using colored bars."""
-    fig, ax = plt.subplots()
+def graph_energy(ax, song_list, playlist_name=None):
+    """
+    Graph energy levels for an individual set using colored bars.
+    
+    Args:
+    - ax: Matplotlib Axis object
+    - song_list: A list of song metadata from VirtualDJ database.
 
+    Kwargs:
+    - playlist_name: Playlist name, used as title of figure.
+    """
     # X value is the song number
     x_values = [*range(len(song_list))]
 
@@ -66,6 +73,31 @@ def graph_energy(song_list, playlist_name=None):
 
     # Label the title
     ax.set_title(playlist_name)
+
+
+def multi_graph_energy(song_lists, playlist_names=None):
+    """
+    Given a list of song_lists and matching playlist_names, plot the energy of several
+    sets using colored bar graphs.
+    """
+    # Create subplots for each playlist
+    fig, ax = plt.subplots(len(song_lists))
+
+    # Individual case
+    if len(song_lists) <= 1:
+        graph_energy(ax, song_lists[0], playlist_name=playlist_names[0])
+
+    # Multi set case
+    else:
+        # Set the overall title
+        fig.suptitle("DJ Sprenk - Energy Graphs")
+
+        for i, song_list in enumerate(song_lists):
+            subplot = ax[i]
+            graph_energy(subplot, song_list, playlist_name=playlist_names[i])
+
+    # Fixes overlapping labels
+    plt.tight_layout()
 
     plt.show()
 
@@ -148,29 +180,35 @@ def search_playlist(name_or_path, search_order=None):
 if __name__ == "__main__":
 
     # Get arguments from command line
-    arguments, flags = command_args_flags()
+    playlists, flags = command_args_flags()
 
     # We expect only 1 arg, a playlist name
-    if len(arguments) != 1:
-        print("Expected exactly 1 arg: path to / name of playlist")
+    if len(playlists) < 1:
+        print("Expected at least 1 arg: path(s) to / name(s) of playlist(s)")
         exit()
+
+    song_lists = []
+    playlist_names = []
 
     # Search for that playlist file
-    playlist = Path(arguments[0])
-    playlist_file = search_playlist(playlist)
+    for playlist in playlists:
+        playlist = Path(playlist)
+        playlist_file = search_playlist(playlist)
 
-    if not playlist_file:
-        print(f"Failed fo find match for {playlist}")
-        exit()
-    print(f"Found matched playlist: {playlist_file}")
+        if not playlist_file:
+            print(f"Failed fo find match for {playlist}")
+            exit()
+        print(f"Found matched playlist: {playlist_file}")
 
-    # Get the song list from that file (using cache or writing if new)
-    print("Fetching song list...")
-    song_list = get_song_list_for_playlist(
-        playlist_file, use_cached=True, write_cache=True
-    )
+        # Get the song list from that file (using cache or writing if new)
+        print("Fetching song list...")
+        song_list = get_song_list_for_playlist(
+            playlist_file, use_cached=True, write_cache=True
+        )
+
+        song_lists.append(song_list)
+        playlist_names.append(playlist_file.stem)
 
     # Chart the energies
     print(f"Graphing energy...")
-    playlist_name = playlist_file.stem
-    graph_energy(song_list, playlist_name=playlist_name)
+    multi_graph_energy(song_lists, playlist_names=playlist_names)
