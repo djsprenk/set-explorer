@@ -1,5 +1,5 @@
 from pathlib import Path
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt # type: ignore
 
 from constants import SONG_LISTS_DIR, VDJ_EXPORT_DIR
 from utils import (
