@@ -1,9 +1,36 @@
 """Utility functions used across multiple files"""
 
-import os
 import json
+import os
+import sys
 
 from constants import JSON_DB_FILE
+
+
+def command_args_flags():
+    """
+    Util for getting arguments / flags from command line.
+
+    Returns (Tuple): args, flags
+    """
+
+    # The first element in sys.argv is the script name itself
+    script_name = sys.argv[0]
+
+    # The subsequent elements are the command line arguments
+    # sys.argv[1:] contains all command line arguments passed to the script
+    arguments = sys.argv[1:]
+
+    command_args = []
+    command_flags = []
+
+    # Flags are arguments starting with a dash or double dash
+    for arg in arguments:
+        if arg.strip().startswith("-"):
+            command_flags.append(arg.strip())
+        command_args.append(arg.strip())
+
+    return command_args, command_flags
 
 
 def lookup_song_from_database(tag, value, database=None):
