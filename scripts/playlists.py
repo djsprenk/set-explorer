@@ -1,5 +1,5 @@
 from pathlib import Path
-import matplotlib.pyplot as plt # type: ignore
+import matplotlib.pyplot as plt  # type: ignore
 
 from constants import SONG_LISTS_DIR, VDJ_EXPORT_DIR
 from utils import (
@@ -34,7 +34,8 @@ def read_playlist(m3u_path):
 
 
 def graph_energy(song_list, playlist_name=None):
-    """Given a list of songs and playlist name, plot the energy."""
+    """Given a list of songs and playlist name, plot the energy using colored bars."""
+    fig, ax = plt.subplots()
 
     # X value is the song number
     x_values = [*range(len(song_list))]
@@ -42,17 +43,29 @@ def graph_energy(song_list, playlist_name=None):
     # Y value is the energy (in @Stars) for each song
     y_values = [int(song["Tags"].get("@Stars", 0)) for song in song_list]
 
-    plt.plot(x_values, y_values)
+    # Get colors for each energy level (from https://xkcd.com/color/rgb/)
+    color_mappings = {
+        0: "xkcd:grey",
+        1: "xkcd:dark blue",
+        2: "xkcd:dark sky blue",
+        3: "xkcd:light green",
+        4: "xkcd:golden yellow",
+        5: "xkcd:red",
+    }
+    bar_colors = [color_mappings[energy] for energy in y_values]
+
+    # Plot a bar graph
+    ax.bar(x_values, y_values, color=bar_colors)
 
     # Energies range from 1-5
-    plt.ylim(0, 5)
+    ax.set_ylim(0, 5)
 
     # Label the axes
-    plt.xlabel("Song No.")
-    plt.ylabel("Energy (1-5)")
+    ax.set_xlabel("Song No.")
+    ax.set_ylabel("Energy (1-5)")
 
     # Label the title
-    plt.title(playlist_name)
+    ax.set_title(playlist_name)
 
     plt.show()
 
