@@ -36,7 +36,7 @@ def read_playlist(m3u_path):
 def graph_energy(ax, song_list, playlist_name=None, x_limit=None):
     """
     Graph energy levels for an individual set using colored bars.
-    
+
     Args:
     - ax: Matplotlib Axis object
     - song_list: A list of song metadata from VirtualDJ database.
@@ -99,11 +99,13 @@ def multi_graph_energy(song_lists, playlist_names=None, song_align=False):
         # If song_align enabled, z-fill extra space
         max_length = None
         if song_align:
-            max_length = max([len(song_list) for song_list in song_lists ])
+            max_length = max([len(song_list) for song_list in song_lists])
 
         for i, song_list in enumerate(song_lists):
             subplot = ax[i]
-            graph_energy(subplot, song_list, playlist_name=playlist_names[i], x_limit=max_length)
+            graph_energy(
+                subplot, song_list, playlist_name=playlist_names[i], x_limit=max_length
+            )
 
     # Fixes overlapping labels
     plt.tight_layout()
