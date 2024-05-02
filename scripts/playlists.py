@@ -200,16 +200,23 @@ if __name__ == "__main__":
     # Get arguments from command line
     playlists, flags = command_args_flags()
 
-    if "--file" in flags:
-        playlist_paths = Path(PROCESSED_FILES_DIR, "playlists.json").read_text()
-        playlists = json.loads(playlist_paths)
-
     # We expect only 1 arg, a playlist name
     if len(playlists) < 1:
         print(
             "Expected at least 1 arg: path(s) to / name(s) of playlist(s) or to run in --file mode"
         )
         exit()
+
+    if "--file" in flags:
+        if len(playlists) != 1:
+            print(
+                "Expected exactly 1 arg when in --file mode, path to playlist.json file"
+            )
+            exit()
+
+        playlists_file = Path(playlists[0])
+        playlist_paths = Path(playlists_file).read_text()
+        playlists = json.loads(playlist_paths)
 
     # Handle flags
     align = False
