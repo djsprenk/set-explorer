@@ -7,6 +7,7 @@
     - [x] Color coded graphs.
     - [x] Expand graphing to go through a list of playlists.
     - [x] Song-align energy.
+    - [x] Read playlists from file.
 
 ## Upcoming
 

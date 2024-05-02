@@ -119,3 +119,49 @@ python scripts/playlists.py --align "playlist 1" "playlist 2" "playlist 3" "play
 ```
 
 ![Multi-graph v2](./energy-graph-v2-multi-aligned.png)
+
+### Read playlists from file
+
+A quality of life improvement I added was the ability to read playlists from a file.
+
+This was to keep me from typing in lots of text when I could, instead, get this to a file.
+
+I did this by first getting a list of playlists from a folder:
+
+```sh
+cd {playlist folder}
+ls > playlists.txt
+```
+
+Then with some light regex, I was able to convert this to an array to make it even easier
+to load into Python with `json.loads(playlist path)`.
+
+So now I can run:
+
+```sh
+python scripts/playlists.py --file {playlists.json file path}
+```
+
+And run the script for many playlists.
+
+This, however, has surfaced some pain points:
+
+1. This is SLOW, since it has to do a song lookup for each song in each set. e.g. running
+  this for all 48 playlists from 2023, this took 3 minutes. That's only a few seconds per
+  set, but still...
+
+2. For a long list of sets, the visuals are useless, they scale to fit in a single
+  window (below)
+
+![Too many graphs](./energy-graph-v2-crowded.png)
+
+But this gives me new ideas for improvements:
+
+1. Thinking a speed enhancement might be to add a better song lookup instead (or in
+  addition to) a playlist lookup.
+
+2. There isn't a way in Matplotlib to fix this, but this was never the end-game.
+  Thinking of moving to web-based visualization / discovery. The other option is looking
+  into PyQt programming which seems... hard.
+
+Yay, new ideas!
