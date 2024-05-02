@@ -28,7 +28,8 @@ def command_args_flags():
     for arg in arguments:
         if arg.strip().startswith("-"):
             command_flags.append(arg.strip())
-        command_args.append(arg.strip())
+        else:
+            command_args.append(arg.strip())
 
     return command_args, command_flags
 
