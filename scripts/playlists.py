@@ -1,8 +1,8 @@
+from pathlib import Path
 import matplotlib.pyplot as plt
 
-from constants import PROCESSED_FILES_DIR, VDJ_EXPORT_DIR
+from constants import SONG_LISTS_DIR, VDJ_EXPORT_DIR
 from utils import (
-    file_in_directory,
     lookup_song_from_database,
     read_json_file,
     write_json_file,
@@ -49,18 +49,30 @@ def graph_energy(song_list, playlist_name=None):
     plt.show()
 
 
-if __name__ == "__main__":
+def get_song_list_for_playlist(playlist_path, use_cached=True, write_cache=True):
+    """
+    Given an M3U-style playlist, poll the database for song data for those songs.
 
-    playlist_name = "20240128 - RVA 4"
-    playlist_path = f"{VDJ_EXPORT_DIR}/Playlists/Past Events/20240128 - RVA 4.m3u"
-    song_list_file = f"{playlist_name}.song_list.json"
-    song_list_file_path = f"{PROCESSED_FILES_DIR}/{song_list_file}"
+    Args:
+    - playlist_path: Path object pointing to an M3U file
+
+    Kwargs:
+    - use_cached: whether to look in the SONG_LISTS_DIR for a matching pre-fetched song list.
+    - write_cache: whether to write the fetched song list data to the SONG_LISTS_DIR directory.
+    """
+
+    # Playlist
+    playlist_name = Path(playlist_path).name
+
+    # Cached version of song lookups
+    song_list_file_name = playlist_name.replace(playlist_path.suffix, ".json")
+    song_list_file_path = Path(SONG_LISTS_DIR, song_list_file_name)
 
     # Check to see if we have a cached mapping file for this playlist
-    if file_in_directory(song_list_file, PROCESSED_FILES_DIR):
+    if use_cached and Path(song_list_file_path).is_file():
+
         print("Found cached song list, skipping database lookup.")
-        cached_file = True
-        song_list = read_json_file(f"{PROCESSED_FILES_DIR}/{song_list_file}")
+        return read_json_file(song_list_file_path)
 
     #  Otherwise, lookup the songs from the database
     else:
@@ -80,8 +92,21 @@ if __name__ == "__main__":
                 print(f"Found match: {song['Tags'].get('@Title', 'MISSING TITLE')}")
             song_list.append(song)
 
-        # Write songs to a file
+    # Write a cached version of the song_list file, if enabled
+    if write_cache:
+        print(f"Writing song_list to {song_list_file_path}")
         write_json_file(song_list, song_list_file_path)
+
+    return song_list
+
+
+if __name__ == "__main__":
+
+    playlist_path = Path(VDJ_EXPORT_DIR, "Playlists/Past Events/20240128 - RVA 4.m3u")
+    playlist_name = playlist_path.name
+
+    print("Fetching song list...")
+    song_list = get_song_list_for_playlist(playlist_path)
 
     # Chart the energies
     print(f"Graphing energy...")
