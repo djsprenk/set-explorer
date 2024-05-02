@@ -90,3 +90,20 @@ python scripts/playlists.py <name-or-path-to-playlist>
 And produces graphs like this:
 
 ![Graph v2](./energy-graph-v2.png)
+
+### Multi Graph
+
+Next up I wanted the abliity to show multiple sets at the same time. I refactored the
+script to take multiple input arguments and convert into subplots in the graph.
+
+This required a few tweaks to the initial graphing function, but now works for both
+individual and multiple inputs.
+
+```sh
+python scripts/playlists.py "playlist 1" "playlist 2" "playlist 3" "playlist 4"
+```
+
+Creates an example like this one, where I graphed all 4 sets from  Richmond:
+
+
+![Multi-graph v2](./energy-graph-v2-multi.png)
