@@ -165,3 +165,34 @@ But this gives me new ideas for improvements:
   into PyQt programming which seems... hard.
 
 Yay, new ideas!
+
+### Web-based graphing
+
+I want to (eventually) move this into a web-based visualization. This makes it more
+easily sharable on the web and gets us lots of cool visualization / scaling tools like
+D3 and reactive web development.
+
+Using [this example](https://d3-graph-gallery.com/graph/barplot_basic.html), only lightly edited, I was able to get a version graphing from the exact same output data (`song-list.json`) produced by my other scripts.
+
+2 Tricks I had to figure out:
+
+1. CORS, how I loathe thee. Remembering that it is difficult to load local files for
+  early JS development, I had to copy-paste song data in to a file, set it to a variable,
+  and inject our data that way. Eventually, I'll likely move to putting that data either
+  in the cloud or making a lightweight server to host those to the frontend.
+
+2. D3 needs some form of unique index for each item. Our items were ordered but otherwise
+  not guaranteed to be unique. I added a pre-processing step to add an index to each
+  entry to keep them unique and ordered.
+
+So by adding a file called `song-data.js` in `static`, and copy pasting the output from a `song-list.json` file, setting it to a variable referenced in our `graph.js` file..
+
+```js
+song_data = [ { <song data> }, { <song data> }...]
+```
+
+... we can get a super simple implementation in D3!
+
+![D3 Graph V1](./energy-graph-d3-v1.png)
+
+Next up I want to work on scaling and adding sub-plots as well as actually fetching the data (likely from a Flask backend?) to avoid hard-coding the source data.
