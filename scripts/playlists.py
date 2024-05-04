@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
-import matplotlib.pyplot as plt  # type: ignore
 
+import matplotlib.pyplot as plt  # type: ignore
 from constants import PROCESSED_FILES_DIR, SONG_LISTS_DIR, VDJ_EXPORT_DIR
 from utils import (
     command_args_flags,
@@ -9,7 +9,6 @@ from utils import (
     read_json_file,
     write_json_file,
 )
-
 
 # Default playlist path search order:
 # 1) Direct path
@@ -198,6 +197,7 @@ def search_playlist(name_or_path, search_order=None):
 if __name__ == "__main__":
 
     import time
+
     start_time = time.time()
 
     # Get arguments from command line

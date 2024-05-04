@@ -1,6 +1,6 @@
 """From the database, write a filtered list of sets"""
 
-from constants import PROCESSED_FILES_DIR, JSON_DB_FILE
+from constants import JSON_DB_FILE, PROCESSED_FILES_DIR
 from utils import read_json_file, write_json_file
 
 OUTPUT_FILE = f"{PROCESSED_FILES_DIR}/zouk-sets.json"

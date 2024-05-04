@@ -1,9 +1,9 @@
 """Convert the VDJ XML database to a JSON database"""
 
 import json
-import xmltodict
 
-from constants import VDJ_DB_FILE, JSON_DB_FILE
+import xmltodict
+from constants import JSON_DB_FILE, VDJ_DB_FILE
 
 
 def read_from_xml(xml_path):

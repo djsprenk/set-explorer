@@ -1,4 +1,5 @@
 xmltodict
 matplotlib
 
+isort
 black
