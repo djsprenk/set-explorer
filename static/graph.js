@@ -1,83 +1,81 @@
-function mapColor(data, index) {
+function mapColor (data, index) {
+  // Colors for different energy values
+  const colors = {
+    0: 'grey',
+    1: 'blue',
+    2: 'green',
+    3: 'yellow',
+    4: 'orange',
+    5: 'red'
+  }
 
-    // Colors for different energy values
-    const colors = {
-        "0": "grey",
-        "1": "blue",
-        "2": "green",
-        "3": "yellow",
-        "4": "orange",
-        "5": "red"
-    }
-
-    return colors[data["Tags"]["@Stars"] || "0"]
+  return colors[data.Tags['@Stars'] || '0']
 }
 
-function getSongMeta(data, index) {
-    var artist = data["Tags"]["@Author"] || "Unknown",
-        title = data["Tags"]["@Title"] || "Unknown";
+function getSongMeta (data, index) {
+  const artist = data.Tags['@Author'] || 'Unknown'
+  const title = data.Tags['@Title'] || 'Unknown'
 
-    return `${artist} - ${title}`;
+  return `${artist} - ${title}`
 }
 
-function timelineGraph(timelineContainer, data, title) {
+function timelineGraph (timelineContainer, data, title) {
+  const timelineHeight = 20
+  const timelineWidth = 500
+  const elementWidth = timelineWidth / data.length
 
-    var timelineHeight = 20,
-        timelineWidth = 500,
-        elementWidth = timelineWidth / data.length;
+  // Add title
+  timelineContainer
+    .append('div')
+    .text(title)
+    .style('display', 'inline-block')
+    .style('padding', '20px')
 
-    // Add title
-    timelineContainer
-        .append("div")
-        .text(title)
-        .style("display", "inline-block")
-        .style("padding", "20px");
+  // Build the timeline group
+  const timeline = timelineContainer
+    .append('svg')
+    .attr('width', timelineWidth)
+    .attr('height', timelineHeight)
+    .append('g')
 
-    // Build the timeline group
-    var timeline = timelineContainer
-        .append("svg")
-        .attr("width", timelineWidth)
-        .attr("height", timelineHeight)
-        .append("g");
+  // Map data to rectangles
+  timeline.selectAll('rect')
+    .data(data)
+    .join('rect')
 
-    // Map data to rectangles
-    timeline.selectAll("rect")
-        .data(data)
-        .join("rect")
+  // Block X values are just multiples of width
+    .attr('x', function (d, i) {
+      return i * elementWidth
+    })
 
-        // Block X values are just multiples of width
-        .attr("x", function (d, i) {
-            return i * elementWidth
-        })
+  // Entry should display as a square, equal height / width
+    .attr('width', elementWidth)
+    .attr('height', timelineHeight)
 
-        // Entry should display as a square, equal height / width
-        .attr("width", elementWidth)
-        .attr("height", timelineHeight)
+  // Since this is a horizontal timeline, Y value is always 0
+    .attr('y', 0)
 
-        // Since this is a horizontal timeline, Y value is always 0
-        .attr("y", 0)
+  // Color the rectangles with their energies
+    .style('fill', mapColor)
+    .style('stroke', 'white')
+    .style('stroke-width', '1px')
+    .text(getSongMeta)
 
-        // Color the rectangles with their energies
-        .style("fill", mapColor)
-        .style("stroke", "white")
-        .style("stroke-width", "1px")
-        .text(getSongMeta)
-
-        // Hover Effects
-        // Source: https://medium.com/@kj_schmidt/show-data-on-mouse-over-with-d3-js-3bf598ff8fc2
-        .on('mouseover', function (d, i) {
-            d3.select(this).transition()
-                .duration('50')
-                .attr('opacity', '.75')
-                .style("stroke-width", "4px")
-        })
-        .on('mouseout', function (d, i) {
-            d3.select(this).transition()
-                .duration('50')
-                .attr('opacity', '1')
-                .style("stroke-width", "1px");
-        })
+  // Hover Effects
+  // Source: https://medium.com/@kj_schmidt/show-data-on-mouse-over-with-d3-js-3bf598ff8fc2
+    .on('mouseover', function (d, i) {
+      d3.select(this).transition()
+        .duration('50')
+        .attr('opacity', '.75')
+        .style('stroke-width', '4px')
+    })
+    .on('mouseout', function (d, i) {
+      d3.select(this).transition()
+        .duration('50')
+        .attr('opacity', '1')
+        .style('stroke-width', '1px')
+    })
 }
 
-timelineContainer = d3.select("#my_dataviz");
+timelineContainer = d3.select('#my_dataviz')
 timelineGraph(timelineContainer, song_data, set_title)
