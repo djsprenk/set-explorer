@@ -1,132 +1,81 @@
 
-// set the dimensions and margins of the graph
-var margin = { top: 30, right: 30, bottom: 70, left: 60 },
-    width = 460 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+// Colors for different energy values
+const colors = {
+    "0": "grey",
+    "1": "blue",
+    "2": "green",
+    "3": "yellow",
+    "4": "orange",
+    "5": "red"
+}
 
-// append the svg object to the body of the page
-var bar = d3.select("#my_dataviz")
-    .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform",
-        "translate(" + margin.left + "," + margin.top + ")");
+function timelineGraph(data, title) {
 
-var timeline = d3.select("#my_dataviz")
-    .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform",
-        "translate(" + margin.left + "," + margin.top + ")");
+    var timelineMargin = { top: 20, right: 20, bottom: 20, left: 20 },
+        timelineWidth = 460 - timelineMargin.left - timelineMargin.right,
+        timelineHeight = 20,
+        elementWidth = 20;
 
-function barGraph(data, svg) {
+    var timelineContainer = d3.select("#my_dataviz");
 
-    // Add a dummy index to each song entry.
-    // Helps us with songs that are repeated or are missing differentiating metadata.
-    for (var i = 0; i < data.length; i++) {
-        data[i]["index"] = i
-    }
+    var timelineTitle = timelineContainer
+        .append("div")
+        .text(title)
 
-    // X axis
-    var x = d3.scaleBand()
-        .range([0, width])
-        .domain(data.map(function (d) { return d["index"] }))
-        .padding(0.2);
-    svg.append("g")
-        .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x))
-        .selectAll("text")
-        .attr("transform", "translate(-10,0)rotate(-45)")
-        .style("text-anchor", "end");
+        // Some sneaky to get this to align with the SVG
+        .style("display", "inline-block")
+        .style("vertical-align", "top")
+        .style("padding-top", "24px");
 
-    // Add Y axis
-    var y = d3.scaleLinear()
-        .domain([0, 5])
-        .range([height, 0]);
-    svg.append("g")
-        .call(d3.axisLeft(y));
+    var timeline = timelineContainer
+        .append("svg")
+        .attr("width", timelineWidth + timelineMargin.left + timelineMargin.right)
+        .attr("height", timelineHeight + timelineMargin.top + timelineMargin.bottom)
+        .append("g")
+        .attr("transform",
+            "translate(" + timelineMargin.left + "," + timelineMargin.top + ")");
 
-    // Color Mapper
-    colors = {
-        "0": "grey",
-        "1": "blue",
-        "2": "green",
-        "3": "yellow",
-        "4": "orange",
-        "5": "red"
-    }
-
-    // Bars
-    svg.selectAll("mybar")
+    // Map data to rectangles
+    timeline.selectAll("rect")
         .data(data)
-        .enter()
-        .append("rect")
-        .attr("x", function (d) { return x(d["index"]) })
-        .attr("y", function (d) { return y(Number(d["Tags"]["@Stars"] || "0")); })
-        .attr("width", x.bandwidth())
-        .attr("height", function (d) { return height - y(Number(d["Tags"]["@Stars"] || "0")) })
-        .attr("fill", function (d) {
+        .join("rect")
+
+        // Block X values are just multiples of width
+        .attr("x", function(d, i) {
+            return i * elementWidth
+        })
+
+        // Entry should display as a square, equal height / width
+        .attr("width", elementWidth)
+        .attr("height", elementWidth)
+
+        // Since this is a horizontal timeline, Y value is always 0
+        .attr("y", 0)
+
+        // Color the rectangles with their energies
+        .style("fill", function(d,i) {
             return colors[d["Tags"]["@Stars"] || "0"]
+        })
+        .style("stroke", "white")
+        .style("stroke-width", "1px")
+        .text(function(d) {
+            return d["Tags"]["@Title"] || "UNKNOWN"
+        })
+
+        // Hover Effects
+        // Source: https://medium.com/@kj_schmidt/show-data-on-mouse-over-with-d3-js-3bf598ff8fc2
+        .on('mouseover', function (d, i) {
+            d3.select(this).transition()
+                .duration('50')
+                .attr('opacity', '.75')
+                .style("stroke-width", "4px")
+        })
+        .on('mouseout', function (d, i) {
+            d3.select(this).transition()
+                .duration('50')
+                .attr('opacity', '1')
+                .style("stroke-width", "1px");
         })
 }
 
-barGraph(song_data, bar);
-
-
-function timelineGraph(data, svg) {
-
-    timelineHeight = 20;
-
-    // X axis
-    var x = d3.scaleBand()
-        .range([0, width])
-        .domain(data.map(function (d) { return d["index"] }))
-        .padding(0.2);
-
-    svg.append("g")
-        .attr("transform", "translate(0," + timelineHeight + ")")
-        .call(d3.axisBottom(x))
-        .selectAll("text")
-        .attr("transform", "translate(-10,0)rotate(-45)")
-        .style("text-anchor", "end");
-
-    // Add Y axis
-    var y = d3.scalePoint()
-        .domain([0, 0])
-        .range([timelineHeight, 0]);
-
-    var yAxis = d3.axisLeft(y)
-    yAxis.ticks(1)
-
-    svg.append("g")
-        .call(yAxis);
-
-    // Color Mapper
-    colors = {
-        "0": "grey",
-        "1": "blue",
-        "2": "green",
-        "3": "yellow",
-        "4": "orange",
-        "5": "red"
-    }
-
-    // Bars
-    svg.selectAll("mybar")
-        .data(data)
-        .enter()
-        .append("rect")
-        .attr("x", function (d) { return x(d["index"]) })
-        // .attr("y", function (d) { return 0; })
-        .attr("width", x.bandwidth())
-        .attr("height", function (d) { return timelineHeight })
-        .attr("fill", function (d) {
-            return colors[d["Tags"]["@Stars"] || "0"]
-        })
-
-}
-
-timelineGraph(song_data, timeline);
-
+timelineGraph(song_data, set_title)
