@@ -21,6 +21,12 @@ pip install -r requirements.in
 
 ## Develop
 
-Format JS with `npm run format`
+### Formatting
+
+JS is formatted following [StandardJS](https://standardjs.com/) style.
+
+Format JS with `npm run format`.
+
+Python is formatted with [Black](https://github.com/psf/black).
 
 Format Python with `python black .`
