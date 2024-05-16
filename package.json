@@ -1,0 +1,32 @@
+{
+  "name": "dj-analytics",
+  "version": "0.0.0",
+  "description": "Analytics and visualization for DJ sets",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "standard": "^17.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "npx standard --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nsprenkle/dj-analytics.git"
+  },
+  "keywords": [
+    "DJ",
+    "data-visualization"
+  ],
+  "author": "DJ Sprenk",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/nsprenkle/dj-analytics/issues"
+  },
+  "homepage": "https://github.com/nsprenkle/dj-analytics#readme"
+}
