@@ -196,3 +196,27 @@ song_data = [ { <song data> }, { <song data> }...]
 ![D3 Graph V1](./energy-graph-d3-v1.png)
 
 Next up I want to work on scaling and adding sub-plots as well as actually fetching the data (likely from a Flask backend?) to avoid hard-coding the source data.
+
+### Using Plotly?
+
+Chatting with my dad (also a software engineer and data nerd), he suggested looking at [Plotly](https://plotly.com/python/getting-started/) which has the ability to write graphs using a Python API and then export to HTML. Seems really cool!
+
+[I played with this a bit](../scripts/plotly-test.py) and found it was pretty easy to make really basic graphs but it made a lot of annoying assumptions about desired behavior which I had trouble figuring out how to override. One example was assuming I wanted to group bars by color, which *did* let me color the bars, but failed to preserve order:
+
+![Plotly graph attempt](./energy-graph-plotly-v1.png)
+
+### Using Pandas
+
+This did lead me to investigate using Pandas to ingest data (as it unlocked some cool, more advanced behaviors). It was powerful enough, I will probably [keep some of the data joining / ingest behavior going forward](../scripts/pandas-ingest.py), but I did end up abandoning Plotly.
+
+### Return to D3
+
+So, finally, I return to D3. I started trying to tweak some of the graph examples to look more like the horizontal timeline I desired:
+
+![D3 energy graph V2](./energy-graph-d3-v2.png)
+
+This got me closer, but I ended up abandoning D3's built in Graphing capabilities (again for the base assumptions built in that I didn't need) when I found I was able to build a timeline manually using colored rectangles to represent the songs.
+
+Here is an early example:
+
+![D3 energy graph V3](./energy-graph-d3-v3.png)
