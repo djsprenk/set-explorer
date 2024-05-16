@@ -1,39 +1,44 @@
+function mapColor(data, index) {
 
-// Colors for different energy values
-const colors = {
-    "0": "grey",
-    "1": "blue",
-    "2": "green",
-    "3": "yellow",
-    "4": "orange",
-    "5": "red"
+    // Colors for different energy values
+    const colors = {
+        "0": "grey",
+        "1": "blue",
+        "2": "green",
+        "3": "yellow",
+        "4": "orange",
+        "5": "red"
+    }
+
+    return colors[data["Tags"]["@Stars"] || "0"]
 }
 
-function timelineGraph(data, title) {
+function getSongMeta(data, index) {
+    var artist = data["Tags"]["@Author"] || "Unknown",
+        title = data["Tags"]["@Title"] || "Unknown";
 
-    var timelineMargin = { top: 20, right: 20, bottom: 20, left: 20 },
-        timelineWidth = 460 - timelineMargin.left - timelineMargin.right,
-        timelineHeight = 20,
-        elementWidth = 20;
+    return `${artist} - ${title}`;
+}
 
-    var timelineContainer = d3.select("#my_dataviz");
+function timelineGraph(timelineContainer, data, title) {
 
-    var timelineTitle = timelineContainer
+    var timelineHeight = 20,
+        timelineWidth = 500,
+        elementWidth = timelineWidth / data.length;
+
+    // Add title
+    timelineContainer
         .append("div")
         .text(title)
-
-        // Some sneaky to get this to align with the SVG
         .style("display", "inline-block")
-        .style("vertical-align", "top")
-        .style("padding-top", "24px");
+        .style("padding", "20px");
 
+    // Build the timeline group
     var timeline = timelineContainer
         .append("svg")
-        .attr("width", timelineWidth + timelineMargin.left + timelineMargin.right)
-        .attr("height", timelineHeight + timelineMargin.top + timelineMargin.bottom)
-        .append("g")
-        .attr("transform",
-            "translate(" + timelineMargin.left + "," + timelineMargin.top + ")");
+        .attr("width", timelineWidth)
+        .attr("height", timelineHeight)
+        .append("g");
 
     // Map data to rectangles
     timeline.selectAll("rect")
@@ -41,26 +46,22 @@ function timelineGraph(data, title) {
         .join("rect")
 
         // Block X values are just multiples of width
-        .attr("x", function(d, i) {
+        .attr("x", function (d, i) {
             return i * elementWidth
         })
 
         // Entry should display as a square, equal height / width
         .attr("width", elementWidth)
-        .attr("height", elementWidth)
+        .attr("height", timelineHeight)
 
         // Since this is a horizontal timeline, Y value is always 0
         .attr("y", 0)
 
         // Color the rectangles with their energies
-        .style("fill", function(d,i) {
-            return colors[d["Tags"]["@Stars"] || "0"]
-        })
+        .style("fill", mapColor)
         .style("stroke", "white")
         .style("stroke-width", "1px")
-        .text(function(d) {
-            return d["Tags"]["@Title"] || "UNKNOWN"
-        })
+        .text(getSongMeta)
 
         // Hover Effects
         // Source: https://medium.com/@kj_schmidt/show-data-on-mouse-over-with-d3-js-3bf598ff8fc2
@@ -78,4 +79,5 @@ function timelineGraph(data, title) {
         })
 }
 
-timelineGraph(song_data, set_title)
+timelineContainer = d3.select("#my_dataviz");
+timelineGraph(timelineContainer, song_data, set_title)
