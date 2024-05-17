@@ -1,14 +1,14 @@
+""" Test graphing energy using Plotly."""
 from pathlib import Path
 
 import plotly.express as px
 
-from constants import SONG_LISTS_DIR
-from utils import read_json_file
+from scripts.constants import SONG_LISTS_DIR
+from scripts.utils import read_json_file
 
 playlist_file = Path(SONG_LISTS_DIR, "20230113 - Interfusion Day Party.json")
 song_data = read_json_file(playlist_file)
 
-breakpoint()
 
 title = playlist_file.name
 song_indices = [*range(len(song_data))]
@@ -35,7 +35,7 @@ fig = px.bar(
     y=[1 for _ in range(len(song_data))],
     title=title,
     color=bar_colors,
-    orientation='h'
+    orientation="h",
 )
 print(fig)
 fig.show()

@@ -1,9 +1,12 @@
+"""
+Get songs for links in provided playlist(s)"""
 import json
+import sys
 from pathlib import Path
 
-import matplotlib.pyplot as plt  # type: ignore
-from constants import PROCESSED_FILES_DIR, SONG_LISTS_DIR, VDJ_EXPORT_DIR
-from utils import (
+from scripts.constants import SONG_LISTS_DIR, VDJ_EXPORT_DIR
+from scripts.convert import read_from_xml
+from scripts.utils import (
     command_args_flags,
     lookup_song_from_database,
     read_json_file,
@@ -23,13 +26,12 @@ PLAYLIST_SEARCH_ORDER = [
 ]
 
 
-def read_playlist(m3u_path):
+def read_m3u_playlist(m3u_path):
     """Get song paths from an M3U-style playlist."""
     song_paths = []
 
-    with open(m3u_path, "r") as file:
+    with open(m3u_path, "r", encoding="utf-8") as file:
         for line in file:
-
             # #EXTVDJ: is a directive with VDJ metadata, skip these
             if line.startswith("#EXTVDJ:"):
                 continue
@@ -39,92 +41,24 @@ def read_playlist(m3u_path):
     return song_paths
 
 
-def graph_energy(ax, song_list, playlist_name=None, x_limit=None):
-    """
-    Graph energy levels for an individual set using colored bars.
+def read_vdjfolder_xml_playlist(xml_path):
+    """Get song paths from a vdjfolder.xml-style playlist."""
+    song_paths = []
 
-    Args:
-    - ax: Matplotlib Axis object
-    - song_list: A list of song metadata from VirtualDJ database.
+    xml_data = read_from_xml(xml_path)
 
-    Kwargs:
-    - playlist_name: Playlist name, used as title of figure.
-    """
-    # X value is the song number
-    x_values = [*range(len(song_list))]
+    for song in xml_data["VirtualFolder"]["song"]:
+        song_paths.append(song["@path"])
 
-    # Y value is the energy (in @Stars) for each song
-    y_values = [int(song["Tags"].get("@Stars", 0)) for song in song_list]
-
-    # Get colors for each energy level (from https://xkcd.com/color/rgb/)
-    color_mappings = {
-        0: "xkcd:grey",
-        1: "xkcd:dark blue",
-        2: "xkcd:dark sky blue",
-        3: "xkcd:light green",
-        4: "xkcd:golden yellow",
-        5: "xkcd:red",
-    }
-    bar_colors = [color_mappings[energy] for energy in y_values]
-
-    # Plot a bar graph
-    ax.bar(x_values, y_values, color=bar_colors)
-
-    # Energies range from 1-5
-    ax.set_ylim(0, 5)
-
-    # If x_limit is set, set it here
-    if x_limit:
-        ax.set_xlim([0, x_limit])
-
-    # Label the axes
-    ax.set_xlabel("Song No.")
-    ax.set_ylabel("Energy (1-5)")
-
-    # Label the title
-    ax.set_title(playlist_name)
-
-
-def multi_graph_energy(song_lists, playlist_names=None, song_align=False):
-    """
-    Given a list of song_lists and matching playlist_names, plot the energy of several
-    sets using colored bar graphs.
-    """
-    # Create subplots for each playlist
-    fig, ax = plt.subplots(len(song_lists))
-
-    # Individual case
-    if len(song_lists) <= 1:
-        graph_energy(ax, song_lists[0], playlist_name=playlist_names[0])
-
-    # Multi set case
-    else:
-        # Set the overall title
-        fig.suptitle("DJ Sprenk - Energy Graphs")
-
-        # If song_align enabled, z-fill extra space
-        max_length = None
-        if song_align:
-            max_length = max([len(song_list) for song_list in song_lists])
-
-        for i, song_list in enumerate(song_lists):
-            subplot = ax[i]
-            graph_energy(
-                subplot, song_list, playlist_name=playlist_names[i], x_limit=max_length
-            )
-
-    # Fixes overlapping labels
-    plt.tight_layout()
-
-    plt.show()
+    return song_paths
 
 
 def get_song_list_for_playlist(playlist_path, use_cached=True, write_cache=True):
     """
-    Given an M3U-style playlist, poll the database for song data for those songs.
+    Given a VDJ-style or M3U-style playlist, poll the database for song data for those songs.
 
     Args:
-    - playlist_path: Path object pointing to an M3U file
+    - playlist_path: Path object pointing to an M3U or vdjfolder.xml playlist
 
     Kwargs:
     - use_cached: whether to look in the SONG_LISTS_DIR for a matching pre-fetched song list.
@@ -135,12 +69,11 @@ def get_song_list_for_playlist(playlist_path, use_cached=True, write_cache=True)
     playlist_name = Path(playlist_path).name
 
     # Cached version of song lookups
-    song_list_file_name = playlist_name.replace(playlist_path.suffix, ".json")
+    song_list_file_name = Path(playlist_name).with_suffix(".json")
     song_list_file_path = Path(SONG_LISTS_DIR, song_list_file_name)
 
     # Check to see if we have a cached mapping file for this playlist
     if use_cached and Path(song_list_file_path).is_file():
-
         print("Found cached song list, skipping database lookup.")
         return read_json_file(song_list_file_path)
 
@@ -148,8 +81,11 @@ def get_song_list_for_playlist(playlist_path, use_cached=True, write_cache=True)
     else:
         print("No song list file found, looking up songs from database.")
 
-        # Get song paths from playlist
-        song_paths = read_playlist(playlist_path)
+        if playlist_path.suffix.lower() == "m3u":
+            # Get song paths from playlist
+            song_paths = read_m3u_playlist(playlist_path)
+        else:
+            song_paths = read_vdjfolder_xml_playlist(playlist_path)
         print(f"Found {len(song_paths)} songs in playlist {playlist_path}")
 
         # Lookup these songs from the database by @FilePath attribute
@@ -170,12 +106,12 @@ def get_song_list_for_playlist(playlist_path, use_cached=True, write_cache=True)
     return song_list
 
 
-def search_playlist(name_or_path, search_order=None):
+def search_playlist(playlist_name_or_path, search_order=None):
     """
     Search for a playlist given a name or relative path to the playlist.
 
     Args:
-    - name_or_path: playlist name (with or without extension) or path to playlist
+    - playlist_name_or_path: playlist name (with or without extension) or path to playlist
         (M3U) file.
 
     Kwargs:
@@ -189,42 +125,41 @@ def search_playlist(name_or_path, search_order=None):
         search_order = PLAYLIST_SEARCH_ORDER
 
     for folder in search_order:
-        search_path = Path(folder, f"{playlist}{'.m3u' if not playlist.suffix else ''}")
+        search_path = Path(
+            folder,
+            f"{playlist_name_or_path}{'.m3u' if not playlist_name_or_path.suffix else ''}",
+        )
         if search_path.exists():
             return search_path
 
 
 if __name__ == "__main__":
-
     import time
 
     start_time = time.time()
 
     # Get arguments from command line
-    playlists, flags = command_args_flags()
+    playlists_args, flags = command_args_flags()
 
     # We expect only 1 arg, a playlist name
-    if len(playlists) < 1:
+    if len(playlists_args) < 1:
         print(
             "Expected at least 1 arg: path(s) to / name(s) of playlist(s) or to run in --file mode"
         )
-        exit()
+        sys.exit()
 
     if "--file" in flags:
-        if len(playlists) != 1:
+        if len(playlists_args) != 1:
             print(
                 "Expected exactly 1 arg when in --file mode, path to playlist.json file"
             )
-            exit()
+            sys.exit()
 
-        playlists_file = Path(playlists[0])
-        playlist_paths = Path(playlists_file).read_text()
+        playlists_file = Path(playlists_args[0])
+        playlist_paths = Path(playlists_file).read_text(encoding="utf-8")
         playlists = json.loads(playlist_paths)
-
-    # Handle flags
-    align = False
-    if "--align" in flags:
-        align = True
+    else:
+        playlists = playlists_args
 
     song_lists = []
     playlist_names = []
@@ -236,20 +171,16 @@ if __name__ == "__main__":
 
         if not playlist_file:
             print(f"Failed fo find match for {playlist}")
-            exit()
+            sys.exit()
         print(f"Found matched playlist: {playlist_file}")
 
         # Get the song list from that file (using cache or writing if new)
         print("Fetching song list...")
-        song_list = get_song_list_for_playlist(
+        song_list_for_playlist = get_song_list_for_playlist(
             playlist_file, use_cached=True, write_cache=True
         )
 
-        song_lists.append(song_list)
+        song_lists.append(song_list_for_playlist)
         playlist_names.append(playlist_file.stem)
 
     print(f"--- {round(time.time() - start_time, 4)} seconds ---")
-
-    # Chart the energies
-    print(f"Graphing energy...")
-    multi_graph_energy(song_lists, playlist_names=playlist_names, song_align=align)
