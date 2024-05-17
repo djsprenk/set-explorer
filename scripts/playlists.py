@@ -23,6 +23,7 @@ PLAYLIST_SEARCH_ORDER = [
     Path(VDJ_EXPORT_DIR, "Playlists/Past Events/2024"),
     Path(VDJ_EXPORT_DIR, "Playlists/Past Events/2023"),
     Path(VDJ_EXPORT_DIR, "Playlists/Past Events/2022"),
+    Path(VDJ_EXPORT_DIR, "MyLists/Past Events.subfolders"),
 ]
 
 
@@ -106,7 +107,7 @@ def get_song_list_for_playlist(playlist_path, use_cached=True, write_cache=True)
     return song_list
 
 
-def search_playlist(playlist_name_or_path, search_order=None):
+def search_playlist(playlist_path, search_order=None):
     """
     Search for a playlist given a name or relative path to the playlist.
 
@@ -125,10 +126,7 @@ def search_playlist(playlist_name_or_path, search_order=None):
         search_order = PLAYLIST_SEARCH_ORDER
 
     for folder in search_order:
-        search_path = Path(
-            folder,
-            f"{playlist_name_or_path}{'.m3u' if not playlist_name_or_path.suffix else ''}",
-        )
+        search_path = Path(folder, playlist_path)
         if search_path.exists():
             return search_path
 
