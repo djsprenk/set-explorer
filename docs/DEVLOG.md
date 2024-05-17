@@ -220,3 +220,28 @@ This got me closer, but I ended up abandoning D3's built in Graphing capabilitie
 Here is an early example:
 
 ![D3 energy graph V3](./energy-graph-d3-v3.png)
+
+### Multiple Charts
+
+Next I had to do a bunch of refactors to split out behaviors into more discrete components.
+This included splitting playlist data gathering and graphing, keeping around my tests
+using Matplotlib and Plotly just for posterity.
+
+This was largely inspired by moving to a different laptop, having to re-test earlier
+scripts and by the fact that the VDJ playlist format changed recently.
+
+New workflow looks like this:
+
+1. `python scripts/convert.py` - creates JSON database
+2. `ls vdj-database/MyLists/Past Events.subfolders > data/sets_list.json` - lists out
+  the playlists in the location I want to work with.
+3. Convert that list to a JSON array using some regex.
+4. `python scripts/playlists.py --file data/sets_list.json` - reads that list and
+  collects song metadata for the songs in each playlist.
+4. `python scripts/pandas_ingest.py` - formats the song data using Pandas for easier
+  unpacking. Outputs to `song_data.json`.
+5. Copy that file into `static/`, imported into `index.html` for use in `graph.js`
+
+This semi-convoluted workflow DOES result in a page full of graphs!
+
+![Energy Graph multi D3 v1](./energy-graph-d3-multi-v1.png)
