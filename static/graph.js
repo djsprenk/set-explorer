@@ -79,6 +79,8 @@ function timelineGraph (timelineContainer, data, title) {
   timelineContainer.append('br')
 }
 
-for (const i in song_data) {
-  timelineGraph(song_data[i].data, song_data[i].set_title)
+const container = d3.select('#my_dataviz')
+
+for (const i in songData) {
+  timelineGraph(container, songData[i].data, songData[i].title)
 }
