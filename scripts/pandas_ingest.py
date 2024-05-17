@@ -23,7 +23,7 @@ for playlist in sets_list:
     # Read and unpack nested data, renaming important columns
     song_data = pd.json_normalize(raw_song_data)
     song_data = song_data.rename(
-        columns={"Tags.@Title": "Title", "Tags.@Stars": "Energy"}
+        columns={"Tags.@Title": "Title", "Tags.@Author": "Artist", "Tags.@Stars": "Energy"}
     )
 
     song_data["index"] = [i for i in range(len(song_data))]

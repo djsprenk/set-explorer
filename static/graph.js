@@ -9,20 +9,19 @@ function mapColor (data, index) {
     5: 'red'
   }
 
-  return colors[data.Tags['@Stars'] || '0']
+  return colors[data.Energy || '0']
 }
 
 function getSongMeta (data, index) {
-  const artist = data.Tags['@Author'] || 'Unknown'
-  const title = data.Tags['@Title'] || 'Unknown'
-
+  const artist = data.Artist || 'Unknown'
+  const title = data.Title || 'Unknown'
   return `${artist} - ${title}`
 }
 
 function timelineGraph (timelineContainer, data, title) {
-  const timelineHeight = 20
   const timelineWidth = 500
-  const elementWidth = timelineWidth / data.length
+  const timelineHeight = 20
+  const elementWidth = Math.min(20, timelineWidth / data.length)
 
   // Add title
   timelineContainer
@@ -75,7 +74,11 @@ function timelineGraph (timelineContainer, data, title) {
         .attr('opacity', '1')
         .style('stroke-width', '1px')
     })
+
+  // Add break to give space between graphs
+  timelineContainer.append('br')
 }
 
-timelineContainer = d3.select('#my_dataviz')
-timelineGraph(timelineContainer, song_data, set_title)
+for (const i in song_data) {
+  timelineGraph(song_data[i].data, song_data[i].set_title)
+}
