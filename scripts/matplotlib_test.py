@@ -1,6 +1,7 @@
 """
 Graph song energy using Matplotlib
 """
+
 import json
 import sys
 from pathlib import Path

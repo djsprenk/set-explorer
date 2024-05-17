@@ -4,9 +4,9 @@ import json
 import sys
 from pathlib import Path
 
-from scripts.constants import SONG_LISTS_DIR, VDJ_EXPORT_DIR
-from scripts.convert import read_from_xml
-from scripts.utils import (
+from constants import SONG_LISTS_DIR, VDJ_EXPORT_DIR
+from convert import read_from_xml
+from utils import (
     command_args_flags,
     lookup_song_from_database,
     read_json_file,

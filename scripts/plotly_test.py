@@ -1,4 +1,5 @@
 """ Test graphing energy using Plotly."""
+
 from pathlib import Path
 
 import plotly.express as px

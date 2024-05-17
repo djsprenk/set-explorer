@@ -3,15 +3,15 @@ Use Pandas to do data transforms & joins of set data.
 
 Reads from sets_list.json and writes to data-processed-files/song-data.js.
 """
+
 import json
 from pathlib import Path
 
 import pandas as pd
+from constants import PROCESSED_FILES_DIR, SONG_LISTS_DIR
+from utils import read_json_file
 
-from scripts.constants import DATA_DIR, PROCESSED_FILES_DIR, SONG_LISTS_DIR
-from scripts.utils import read_json_file
-
-sets_list = read_json_file(Path(DATA_DIR, "sets_list.json"))
+sets_list = read_json_file(Path(PROCESSED_FILES_DIR, "sets-list.json"))
 OUTPUT_FILE_PATH = Path(PROCESSED_FILES_DIR, "song-data.js")
 
 sets_data = []
