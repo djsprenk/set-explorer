@@ -3,7 +3,8 @@
 import json
 
 import xmltodict
-from constants import JSON_DB_FILE, VDJ_DB_FILE
+
+from scripts.constants import JSON_DB_FILE, VDJ_DB_FILE
 
 
 def read_from_xml(xml_path):
@@ -11,8 +12,7 @@ def read_from_xml(xml_path):
     data_dict = {}
 
     # open the input xml file and read data in form of python dictionary using xmltodict module
-    with open(xml_path) as xml_file:
-
+    with open(xml_path, encoding="utf-8") as xml_file:
         data_dict = xmltodict.parse(xml_file.read())
         xml_file.close()
 
