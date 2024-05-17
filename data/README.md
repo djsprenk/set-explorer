@@ -11,3 +11,7 @@ In VirtualDJ, create a database backup ([example](https://drive.google.com/drive
 
 If done correctly, you should have a `database.xml` file as an immediate child of `data/vdj-database`.
 
+## Processed Files
+
+Scripts save a fair amount of intermediate / processed files in a separate child directory,
+`data/processed-files`. You may have to create this folder to allow scripts to work correctly.

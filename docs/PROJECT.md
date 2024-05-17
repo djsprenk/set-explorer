@@ -8,6 +8,7 @@
     - [x] Expand graphing to go through a list of playlists.
     - [x] Song-align energy.
     - [x] Read playlists from file.
+- [x] Split playlist meta separation from graph files
 
 ## Upcoming
 
