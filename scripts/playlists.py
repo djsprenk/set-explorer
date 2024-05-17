@@ -15,15 +15,21 @@ from scripts.utils import (
 
 # Default playlist path search order:
 # 1) Direct path
-# 2) VDJ/Playlists/Past Events
-# 3) VDJ/Playlist/Past Events/{year}
+# 2) Sub folders
 PLAYLIST_SEARCH_ORDER = [
     "",
-    Path(VDJ_EXPORT_DIR, "Playlists/Past Events"),
-    Path(VDJ_EXPORT_DIR, "Playlists/Past Events/2024"),
-    Path(VDJ_EXPORT_DIR, "Playlists/Past Events/2023"),
-    Path(VDJ_EXPORT_DIR, "Playlists/Past Events/2022"),
     Path(VDJ_EXPORT_DIR, "MyLists/Past Events.subfolders"),
+    Path(VDJ_EXPORT_DIR, "MYLists/Past Events.subfolders/2021.subfolders"),
+    Path(VDJ_EXPORT_DIR, "MYLists/Past Events.subfolders/2022.subfolders"),
+    Path(VDJ_EXPORT_DIR, "MYLists/Past Events.subfolders/2023.subfolders"),
+    Path(VDJ_EXPORT_DIR, "MYLists/Past Events.subfolders/2024 Alisson & Bryn.subfolders"),
+    Path(VDJ_EXPORT_DIR, "MYLists/Past Events.subfolders/2024 Eclipse.subfolders"),
+    Path(VDJ_EXPORT_DIR, "MYLists/Past Events.subfolders/2024 Interfusion.subfolders"),
+    Path(VDJ_EXPORT_DIR, "MYLists/Past Events.subfolders/2024 Marck and Melyssa.subfolders"),
+    Path(VDJ_EXPORT_DIR, "MYLists/Past Events.subfolders/2024 RVA.subfolders"),
+    Path(VDJ_EXPORT_DIR, "MYLists/Past Events.subfolders/2024 Shangri-La.subfolders"),
+    Path(VDJ_EXPORT_DIR, "MYLists/Past Events.subfolders/2024 SBKZ.subfolders"),
+    Path(VDJ_EXPORT_DIR, "MYLists/Past Events.subfolders/2024 Zouk Heat.subfolders"),
 ]
 
 
