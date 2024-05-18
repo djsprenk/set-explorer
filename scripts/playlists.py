@@ -1,5 +1,6 @@
 """
 Get songs for links in provided playlist(s)"""
+
 import json
 import sys
 from pathlib import Path
@@ -22,10 +23,15 @@ PLAYLIST_SEARCH_ORDER = [
     Path(VDJ_EXPORT_DIR, "MYLists/Past Events.subfolders/2021.subfolders"),
     Path(VDJ_EXPORT_DIR, "MYLists/Past Events.subfolders/2022.subfolders"),
     Path(VDJ_EXPORT_DIR, "MYLists/Past Events.subfolders/2023.subfolders"),
-    Path(VDJ_EXPORT_DIR, "MYLists/Past Events.subfolders/2024 Alisson & Bryn.subfolders"),
+    Path(
+        VDJ_EXPORT_DIR, "MYLists/Past Events.subfolders/2024 Alisson & Bryn.subfolders"
+    ),
     Path(VDJ_EXPORT_DIR, "MYLists/Past Events.subfolders/2024 Eclipse.subfolders"),
     Path(VDJ_EXPORT_DIR, "MYLists/Past Events.subfolders/2024 Interfusion.subfolders"),
-    Path(VDJ_EXPORT_DIR, "MYLists/Past Events.subfolders/2024 Marck and Melyssa.subfolders"),
+    Path(
+        VDJ_EXPORT_DIR,
+        "MYLists/Past Events.subfolders/2024 Marck and Melyssa.subfolders",
+    ),
     Path(VDJ_EXPORT_DIR, "MYLists/Past Events.subfolders/2024 RVA.subfolders"),
     Path(VDJ_EXPORT_DIR, "MYLists/Past Events.subfolders/2024 Shangri-La.subfolders"),
     Path(VDJ_EXPORT_DIR, "MYLists/Past Events.subfolders/2024 SBKZ.subfolders"),
