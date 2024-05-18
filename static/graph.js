@@ -1,19 +1,5 @@
-function mapColor (data, index) {
-  // Colors for different energy values
-  const colors = {
-    0: 'grey',
-    1: 'blue',
-    2: 'green',
-    3: 'yellow',
-    4: 'orange',
-    5: 'red'
-  }
-
-  return colors[data.Energy || '0']
-}
-
-function mapHeight (data, index) {
-  return `${Math.max(data.Energy, 1) * 4}px`
+function getEnergy (data, index) {
+  return data.Energy || 0
 }
 
 function getSongMeta (data, index) {
@@ -49,8 +35,7 @@ function timelineGraph (container, data, title) {
     .style('order', function (d, i) { return i })
 
   // Color the rectangles with their energies
-    .style('background-color', mapColor)
-    .style('height', mapHeight)
+    .attr('data-energy', getEnergy)
     .attr('title', getSongMeta)
 }
 

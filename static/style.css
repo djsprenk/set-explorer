@@ -43,3 +43,33 @@ main {
     filter: brightness(120%);
     transition-duration: .07s;
 }
+
+.song[data-energy="0"] {
+    background-color: grey;
+    height: 4px;
+}
+
+.song[data-energy="1"] {
+    background-color: blue;
+    height: 4px;
+}
+
+.song[data-energy="2"] {
+    background-color: green;
+    height: 8px;
+}
+
+.song[data-energy="3"] {
+    background-color: yellow;
+    height: 12px;
+}
+
+.song[data-energy="4"] {
+    background-color: orange;
+    height: 16px;
+}
+
+.song[data-energy="5"] {
+    background-color: red;
+    height: 20px;
+}
