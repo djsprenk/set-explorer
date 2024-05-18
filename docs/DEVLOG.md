@@ -245,3 +245,21 @@ New workflow looks like this:
 This semi-convoluted workflow DOES result in a page full of graphs!
 
 ![Energy Graph multi D3 v1](./energy-graph-d3-multi-v1.png)
+
+### Page layout with Flexbox & CSS Grid
+
+After some consideration, I decided it was probably better to just switch over to divs
+for displaying songs instead of drawing an SVG. This gets us better display wrap
+behavior with HTML page layout / styling options.
+
+This also allowed me to move most of the styling from D3 into a standalone stylesheet.
+
+To get everything to display correctly, I decided to use flexbox for dynamically resizing
+sets to the container when there are too many songs.
+
+I ended up coupling this with CSS grid to get a nice layout on the overall page, still
+relying on flexbox for the actual timelines.
+
+Result now:
+
+![Energy Graph multi D3 v2](./energy-graph-d3-multi-v2.png)
