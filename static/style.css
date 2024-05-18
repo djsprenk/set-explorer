@@ -4,38 +4,37 @@ body {
     font-family: "Lucida Console", "Courier New", monospace;
     max-width: 840px;
     margin: auto;
-}
-
-main {
     padding: 20px;
 }
 
-.timeline-container {
-    height: 30px;
-    padding: 10px;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
+main {
+    /* 4-column grid with 20px gutters */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px 20px;
 }
 
-.timeline-container .title {
-    order: -1;
-    flex-grow: 1;
-    width: 150px;
+#title {
+    grid-column: 1 / span 4;
 }
 
-.timeline-container .timeline {
+.set-title {
+    grid-column: 1 / span 1;
+}
+
+.timeline {
+    grid-column: 2 / span 3;
+
     display: flex;
-    flex-grow: 4;
-    justify-content: space-between;
+    justify-content: left;
     align-items: center;
 }
 
 .timeline .song {
-    flex-grow: 1;
     margin: 0px 1px;
     cursor: crosshair;
     min-height: 4px;
+    width: 20px;
 }
 
 .timeline .song:hover {

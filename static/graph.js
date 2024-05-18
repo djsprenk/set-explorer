@@ -9,19 +9,13 @@ function getSongMeta (data, index) {
 }
 
 function timelineGraph (container, data, title) {
-  // Add flexbox container for timeline
-  const timelineContainer = container
+  container
     .append('div')
-    .attr('class', 'timeline-container')
-
-  // Add set title
-  timelineContainer
-    .append('div')
-    .attr('class', 'title')
+    .attr('class', 'set-title')
     .text(title)
 
   // Build the timeline group
-  const timeline = timelineContainer
+  const timeline = container
     .append('div')
     .attr('class', 'timeline')
 
