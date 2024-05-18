@@ -11,13 +11,13 @@ import pandas as pd
 from constants import PROCESSED_FILES_DIR, SONG_LISTS_DIR
 from utils import read_json_file
 
-sets_list = read_json_file(Path(PROCESSED_FILES_DIR, "sets-list.json"))
+sets_data_file = read_json_file(Path(PROCESSED_FILES_DIR, "sets-data.json"))
 OUTPUT_FILE_PATH = Path(PROCESSED_FILES_DIR, "song-data.js")
 
 sets_data = []
 
-for playlist in sets_list:
-    playlist_file = Path(SONG_LISTS_DIR, playlist)
+for set_data in sets_data_file:
+    playlist_file = Path(SONG_LISTS_DIR, set_data["playlist"])
     raw_song_data = read_json_file(playlist_file.with_suffix(".json"))
 
     # Read and unpack nested data, renaming important columns
@@ -35,7 +35,11 @@ for playlist in sets_list:
     song_energy = song_data[["index", "Title", "Artist", "Energy"]]
 
     sets_data.append(
-        {"title": playlist_file.name, "data": song_energy.to_dict(orient="records")}
+        {
+            "title": set_data.get("name") or playlist_file.name,
+            "url": set_data.get("url"),
+            "data": song_energy.to_dict(orient="records"),
+        }
     )
 
 with open(OUTPUT_FILE_PATH, "w", encoding="utf-8") as output_file:
