@@ -8,11 +8,15 @@ function getSongMeta (data, index) {
   return `${artist} - ${title}`
 }
 
-function timelineGraph (container, data, title) {
-  container
-    .append('div')
+function timelineGraph (container, songs, setTitle, url) {
+  const title = container
+    .append('a')
     .attr('class', 'set-title')
-    .text(title)
+    .text(setTitle)
+
+  if (url !== '') {
+    title.attr('href', url)
+  }
 
   // Build the timeline group
   const timeline = container
@@ -21,7 +25,7 @@ function timelineGraph (container, data, title) {
 
   // Map data to divs
   timeline.selectAll('div')
-    .data(data)
+    .data(songs)
     .join('div')
     .attr('class', 'song')
 
@@ -36,5 +40,5 @@ function timelineGraph (container, data, title) {
 const container = d3.select('#my_dataviz')
 
 for (const i in songData) {
-  timelineGraph(container, songData[i].data, songData[i].title)
+  timelineGraph(container, songData[i].data, songData[i].title, songData[i].url)
 }

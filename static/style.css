@@ -20,6 +20,7 @@ main {
 
 .set-title {
     grid-column: 1 / span 1;
+    color: white;
 }
 
 .timeline {
