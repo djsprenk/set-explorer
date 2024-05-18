@@ -11,8 +11,8 @@
     - [x] D3 Multigraph
 - [x] Split playlist meta separation from graph files
 - [ ] Combine additional metadata
-    - [ ] Human-readable set name
-    - [ ] Mixcloud links
+    - [x] Human-readable set name
+    - [x] Mixcloud links
     - [ ] Album artwork?
 
 ## Upcoming
