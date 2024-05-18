@@ -1,0 +1,45 @@
+body {
+    background-color: rgb(30, 30, 30);
+    color: rgb(233, 233, 233);
+    font-family: "Lucida Console", "Courier New", monospace;
+    max-width: 840px;
+    margin: auto;
+}
+
+main {
+    padding: 20px;
+}
+
+.timeline-container {
+    height: 30px;
+    padding: 10px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
+.timeline-container .title {
+    order: -1;
+    flex-grow: 1;
+    width: 150px;
+}
+
+.timeline-container .timeline {
+    display: flex;
+    flex-grow: 4;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.timeline .song {
+    flex-grow: 1;
+    margin: 0px 1px;
+    cursor: crosshair;
+    min-height: 4px;
+}
+
+.timeline .song:hover {
+    height: 20px !important;
+    filter: brightness(120%);
+    transition-duration: .07s;
+}
