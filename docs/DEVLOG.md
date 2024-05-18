@@ -233,13 +233,13 @@ scripts and by the fact that the VDJ playlist format changed recently.
 New workflow looks like this:
 
 1. `python scripts/convert.py` - creates JSON database
-2. `ls vdj-database/MyLists/Past Events.subfolders > data/sets_list.json` - lists out
+2. `ls vdj-database/MyLists/Past Events.subfolders > data/processed-files/sets-list.json` - lists out
   the playlists in the location I want to work with.
 3. Convert that list to a JSON array using some regex.
-4. `python scripts/playlists.py --file data/sets_list.json` - reads that list and
+4. `python scripts/playlists.py --file data/processed-files/sets-list.json` - reads that list and
   collects song metadata for the songs in each playlist.
 4. `python scripts/pandas_ingest.py` - formats the song data using Pandas for easier
-  unpacking. Outputs to `song_data.json`.
+  unpacking. Outputs to `song-data.json`.
 5. Copy that file into `static/`, imported into `index.html` for use in `graph.js`
 
 This semi-convoluted workflow DOES result in a page full of graphs!
