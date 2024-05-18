@@ -32,7 +32,7 @@ for playlist in sets_list:
 
     song_data["index"] = [i for i in range(len(song_data))]
     song_data["set"] = playlist_file.name
-    song_energy = song_data[["index", "Title", "Energy"]]
+    song_energy = song_data[["index", "Title", "Artist", "Energy"]]
 
     sets_data.append(
         {"title": playlist_file.name, "data": song_energy.to_dict(orient="records")}
