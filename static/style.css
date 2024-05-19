@@ -10,21 +10,27 @@ body {
 main {
     /* 4-column grid with 20px gutters */
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 20px 20px;
 }
 
 #title {
-    grid-column: 1 / span 4;
+    grid-column: 1 / span 5;
+}
+
+.set-thumbnail {
+    width: 100%;
+    grid-column: 1 / span 1;
 }
 
 .set-title {
-    grid-column: 1 / span 1;
+    grid-column: 2 / span 1;
     color: white;
+    align-content: center;
 }
 
 .timeline {
-    grid-column: 2 / span 3;
+    grid-column: 3 / span 3;
 
     display: flex;
     justify-content: left;
