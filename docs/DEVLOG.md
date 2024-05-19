@@ -336,3 +336,7 @@ By tapping into this linked data, I could now mirror titles / URLS to the entrie
 graphs.
 
 ![Energy graphs with linked Mixcloud titles / URLs](./energy-graph-d3-multi-v3.png)
+
+Expanding this with just a lil bit of styling, we can add thumbnails:
+
+![Energy graphs with thumbnails](./energy-graph-d3-multi-v4.png)
