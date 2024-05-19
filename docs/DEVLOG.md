@@ -263,3 +263,76 @@ relying on flexbox for the actual timelines.
 Result now:
 
 ![Energy Graph multi D3 v2](./energy-graph-d3-multi-v2.png)
+
+### Linking Mixcloud Data
+
+The graphs above are a really good start, but I would like several improvements:
+
+1. Human-readable titles instead of folder paths.
+2. Links to Mixcloud.
+3. Album art?
+
+These would be trivial (if extremely time consuming) to manually link. First I started
+extending `sets-data.json` to look like below:
+
+```json
+[
+  {
+    "playlist": "20240211 - SBKZ 4.vdjfolder",
+    "name": "Crystalize | NY SBKZ Congress (Sunday Night)",
+    "url": "https://www.mixcloud.com/djsprenk/20240211-ny-sbkz-4/",
+    "img": "url"
+  }...
+]
+```
+
+However! I like automating things. Instead, going back to the Mixcloud API, I decided
+it would be good to poll those APIs for the relevant data and then join it to my
+existing data.
+
+Playing with this endpoint, testing different limits, I can get 100 sets at a time.
+
+```
+https://api.mixcloud.com/{username}/cloudcasts/?limit=200&metadata=1
+```
+
+Returning this format:
+
+```json
+{
+    "data": [
+        {
+            "key": "/{user}/{slug}/",
+            "url": "https://www.mixcloud.com/{user}/{slug}",
+            "name": "{name}",
+            "tags": [ ... ],
+            ...
+            "pictures": {
+                "{size}": "https://thumbnailer.mixcloud.com/unsafe/{w}x{h}/extaudio/{guid}",
+                ...
+            },
+            "slug": "{slug}",
+            ...
+            "audio_length": {seconds},
+        },
+```
+
+This did require a manual mapping of playlist path to Mixcloud slug.
+
+Here I modified `sets-data.json` to now have both a playlist and a slug:
+
+```json
+[
+    {
+        "playlist": "{playlist}.vdjfolder",
+        "slug": "{slug}"
+    }
+]
+```
+
+With that, I could update `pandas_ingest.py` to link Mixcloud title, URL, and thumbnail URL to the output `song-data.js`.
+
+By tapping into this linked data, I could now mirror titles / URLS to the entries in my
+graphs.
+
+![Energy graphs with linked Mixcloud titles / URLs](./energy-graph-d3-multi-v3.png)
