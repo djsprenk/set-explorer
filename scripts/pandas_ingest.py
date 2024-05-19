@@ -8,11 +8,11 @@ import json
 from pathlib import Path
 
 import pandas as pd
-from constants import PROCESSED_FILES_DIR, SONG_LISTS_DIR
+from constants import PROCESSED_FILES_DIR, SONG_LISTS_DIR, STATIC_DIR
 from utils import read_json_file
 
 sets_data_file = read_json_file(Path(PROCESSED_FILES_DIR, "sets-data.json"))
-OUTPUT_FILE_PATH = Path(PROCESSED_FILES_DIR, "song-data.js")
+OUTPUT_FILE_PATH = Path(STATIC_DIR, "song-data.js")
 
 sets_data = []
 
@@ -47,7 +47,7 @@ for set_data in sets_data_file:
         {
             "title": mixcloud_data.get("name") or playlist_file.name,
             "url": mixcloud_data.get("url"),
-            "img": mixcloud_data.get("pictures.medium"),
+            "img": mixcloud_data.get("pictures.large"),
             "data": song_energy.to_dict(orient="records"),
         }
     )
