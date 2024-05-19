@@ -11,9 +11,13 @@ function getSongMeta (data, index) {
 function timelineGraph (container, songs, setMetadata) {
   if (setMetadata.thumbnail) {
     const thumbnail = container
+      .append('a')
+      .attr('class', 'set-thumbnail-link')
+      .attr('href', setMetadata.url)
       .append('img')
       .attr('class', 'set-thumbnail')
       .attr('src', setMetadata.thumbnail)
+      .attr('title', setMetadata.title)
   }
 
   const title = container
