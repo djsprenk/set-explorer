@@ -340,3 +340,9 @@ graphs.
 Expanding this with just a lil bit of styling, we can add thumbnails:
 
 ![Energy graphs with thumbnails](./energy-graph-d3-multi-v4.png)
+
+And with just a few more tweaks, added a mobile responsive view:
+
+![Energy graphs responsive](./energy-graph-d3-multi-v5-responsive.png)
+
+![Energy graphs responsive](./energy-graph-d3-multi-v5-mobile.png)
