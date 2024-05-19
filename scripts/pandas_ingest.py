@@ -16,6 +16,9 @@ OUTPUT_FILE_PATH = Path(PROCESSED_FILES_DIR, "song-data.js")
 
 sets_data = []
 
+mixcloud_slugs_raw = read_json_file(Path(PROCESSED_FILES_DIR, "mixcloud-slugs.json"))
+mixcloud_slugs = pd.json_normalize(mixcloud_slugs_raw["data"])
+
 for set_data in sets_data_file:
     playlist_file = Path(SONG_LISTS_DIR, set_data["playlist"])
     raw_song_data = read_json_file(playlist_file.with_suffix(".json"))
@@ -30,14 +33,21 @@ for set_data in sets_data_file:
         }
     )
 
+    # Find match in mixcloud_slugs
+    matches = mixcloud_slugs.index[
+        mixcloud_slugs["slug"] == set_data.get("slug")
+    ].tolist()
+    mixcloud_data = mixcloud_slugs.iloc[matches[0]] if matches else {}
+
     song_data["index"] = [i for i in range(len(song_data))]
     song_data["set"] = playlist_file.name
     song_energy = song_data[["index", "Title", "Artist", "Energy"]]
 
     sets_data.append(
         {
-            "title": set_data.get("name") or playlist_file.name,
-            "url": set_data.get("url"),
+            "title": mixcloud_data.get("name") or playlist_file.name,
+            "url": mixcloud_data.get("url"),
+            "img": mixcloud_data.get("pictures.medium"),
             "data": song_energy.to_dict(orient="records"),
         }
     )
