@@ -73,8 +73,9 @@ body {
         gap: 20px 20px;
     }
 
+    /* One column for logo, the rest for title */
     #title {
-        grid-column: 1 / span 5;
+        grid-column: 1 / span 4;
     }
 
     #sort {
@@ -127,8 +128,9 @@ body {
         gap: 20px 20px;
     }
 
+    /* One column for logo, the rest for title */
     #title {
-        grid-column: 1 / span 5;
+        grid-column: 2 / span 4;
     }
 
     #sort {
@@ -170,11 +172,15 @@ body {
         filter: brightness(120%);
         transition-duration: .07s;
     }
+    }
+
+#title {
+    text-transform: uppercase;
 }
 
 #logo {
-    height: 1em;
-    vertical-align: text-top;
+    height: 2em;
+    align-self: center;
 }
 
 .legend {
