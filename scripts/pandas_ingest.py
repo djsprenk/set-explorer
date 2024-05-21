@@ -51,6 +51,7 @@ for set_data in sets_data_file:
         {
             "title": mixcloud_data.get("name") or playlist_file.name,
             "url": mixcloud_data.get("url"),
+            "uploadTimestamp": mixcloud_data.get("created_time"),
             "img": mixcloud_data.get("pictures.large"),
             "data": song_energy.to_dict(orient="records"),
         }
