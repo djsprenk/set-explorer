@@ -50,13 +50,32 @@ function timelineGraph (container, songs, setMetadata) {
 
 const container = d3.select('#my_dataviz')
 
-for (const i in songData) {
+function setSortOrder (order, data) {
+  // Default to newest first
+  if (order === null || order === 'newest') {
+    return data.sort((a, b) => Date.parse(b.uploadTimestamp) - Date.parse(a.uploadTimestamp))
+  } else if (order === 'oldest') {
+    return data.sort((a, b) => Date.parse(a.uploadTimestamp) - Date.parse(b.uploadTimestamp))
+  } else {
+    console.error(`Bad sort order: ${order}`)
+    return data
+  }
+}
+
+// Get Query Params
+const urlParams = new URLSearchParams(window.location.search)
+const sortOrder = urlParams.get('order')
+
+// Sort data
+const sortedData = setSortOrder(sortOrder, songData)
+
+for (const i in sortedData) {
   const setMetadata = {
-    title: songData[i].title,
-    thumbnail: songData[i].img,
-    url: songData[i].url
+    title: sortedData[i].title,
+    thumbnail: sortedData[i].img,
+    url: sortedData[i].url
   }
 
-  const songs = songData[i].data
+  const songs = sortedData[i].data
   timelineGraph(container, songs, setMetadata)
 }
