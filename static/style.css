@@ -172,6 +172,11 @@ body {
     }
 }
 
+#logo {
+    height: 1em;
+    vertical-align: text-top;
+}
+
 .legend {
     font-weight: bold;
 }
