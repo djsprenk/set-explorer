@@ -62,6 +62,30 @@ body {
     .timeline .song:hover {
         height: 20px !important;
     }
+
+    .song[data-energy="0"] {
+        height: 4px;
+    }
+
+    .song[data-energy="1"] {
+        height: 4px;
+    }
+
+    .song[data-energy="2"] {
+        height: 8px;
+    }
+
+    .song[data-energy="3"] {
+        height: 12px;
+    }
+
+    .song[data-energy="4"] {
+        height: 16px;
+    }
+
+    .song[data-energy="5"] {
+        height: 20px;
+    }
 }
 
 /* Small devices  and up (portrait tablets and large phones, 600px and up) */
@@ -117,6 +141,30 @@ body {
         filter: brightness(120%);
         transition-duration: .07s;
     }
+
+    .song[data-energy="0"] {
+        height: 4px;
+    }
+
+    .song[data-energy="1"] {
+        height: 4px;
+    }
+
+    .song[data-energy="2"] {
+        height: 8px;
+    }
+
+    .song[data-energy="3"] {
+        height: 12px;
+    }
+
+    .song[data-energy="4"] {
+        height: 16px;
+    }
+
+    .song[data-energy="5"] {
+        height: 20px;
+    }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -168,11 +216,40 @@ body {
     }
 
     .timeline .song:hover {
-        height: 20px !important;
+        height: 30px !important;
         filter: brightness(120%);
         transition-duration: .07s;
     }
+
+    .song[data-energy="0"] {
+        background-color: grey;
+        height: 5px;
     }
+
+    .song[data-energy="1"] {
+        background-color: blue;
+        height: 10px;
+    }
+
+    .song[data-energy="2"] {
+        background-color: green;
+        height: 15px;
+    }
+
+    .song[data-energy="3"] {
+        background-color: yellow;
+        height: 20px;
+    }
+
+    .song[data-energy="4"] {
+        background-color: orange;
+        height: 25px;
+    }
+
+    .song[data-energy="5"] {
+        height: 30px;
+    }
+}
 
 #title {
     text-transform: uppercase;
@@ -216,30 +293,24 @@ body {
 
 .song[data-energy="0"] {
     background-color: grey;
-    height: 4px;
 }
 
 .song[data-energy="1"] {
     background-color: blue;
-    height: 4px;
 }
 
 .song[data-energy="2"] {
     background-color: green;
-    height: 8px;
 }
 
 .song[data-energy="3"] {
     background-color: yellow;
-    height: 12px;
 }
 
 .song[data-energy="4"] {
     background-color: orange;
-    height: 16px;
 }
 
 .song[data-energy="5"] {
     background-color: red;
-    height: 20px;
 }
