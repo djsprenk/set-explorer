@@ -37,6 +37,10 @@ for set_data in sets_data_file:
     matches = mixcloud_slugs.index[
         mixcloud_slugs["slug"] == set_data.get("slug")
     ].tolist()
+
+    # For now, skip anything not published to mixcloud
+    if not matches:
+        continue
     mixcloud_data = mixcloud_slugs.iloc[matches[0]] if matches else {}
 
     song_data["index"] = [i for i in range(len(song_data))]
