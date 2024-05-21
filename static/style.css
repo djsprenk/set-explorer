@@ -21,6 +21,10 @@ body {
         grid-column: 1 / span 4;
     }
 
+    #sort {
+        grid-column: 1 / span 4;
+    }
+
     /* Thumbnail takes 2 rows */
     .set-thumbnail-link {
         grid-row-end: span 2;
@@ -70,6 +74,10 @@ body {
     }
 
     #title {
+        grid-column: 1 / span 5;
+    }
+
+    #sort {
         grid-column: 1 / span 5;
     }
 
@@ -123,6 +131,10 @@ body {
         grid-column: 1 / span 5;
     }
 
+    #sort {
+        grid-column: 1 / span 5;
+    }
+
     /* Use 1 row */
     .set-thumbnail-link {
         grid-row-end: span 1;
@@ -158,6 +170,10 @@ body {
         filter: brightness(120%);
         transition-duration: .07s;
     }
+}
+
+.legend {
+    font-weight: bold;
 }
 
 /* Thumbnail image fills cell */
