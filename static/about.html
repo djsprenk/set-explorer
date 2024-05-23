@@ -14,45 +14,138 @@
     <!-- Override some stylings -->
     <style>
         main {
-            display: block;
+            display: grid;
+            grid-template-columns: 1fr 4fr;
+        }
+
+        div {
+            grid-column: 2 / span 4;
+        }
+
+        a {
+            color: white;
+        }
+
+        .code {
+            font-family: 'Courier New', Courier, monospace;
+            background: #4d4d4d;
+            padding: 0em .2em;
+            border-radius: .2em;
+        }
+
+        /* Extra small devices (phones, 600px and down) */
+        @media only screen and (max-width: 600px) {
+            main {
+                display: block;
+            }
         }
     </style>
 </head>
 
 <body>
+
     <header>
         <a href="https://djsprenk.com"><img id="logo" src="assets/sprenk-logo-gradient-white.png" alt="DJ Sprenk"></a>
         <h1 id="title">
             Set Explorer
         </h1>
     </header>
+
     <main>
         <h2>
             About Set Explorer
         </h2>
-        <p>Set Explorer is a project about visualizing energy across DJ sets.</p>
-        <p>Inspired loosely by <a href="https://fathom.info/rocky/">Fathom's Rocky Morphology</a> project, it mines and
-            combines data stored in Virtual DJ's (VDJ) <a
-                href="https://www.virtualdj.com/manuals/virtualdj/interface/database.html">database</a>
-            as well as data stored in Mixcloud to make it easer to search, explore, and select sets to listen to.</p>
+        <div>
+            <p>Set Explorer is a project by about visualizing energy across DJ sets.</p>
+            <p>
+                Inspired loosely by <a href="https://fathom.info/rocky/">Fathom's Rocky Morphology</a> project, it mines
+                and combines data across multiple sources to make it easer to search, explore, and select sets to listen
+                to.
+            </p>
+        </div>
+
+        <h2>How it Works</h2>
+        <div>
+            <p>
+                I create mixes using <a href="https://www.virtualdj.com/">VirtualDJ</a> (VDJ) and upload them to <a
+                    href="https://mixcloud.com/djsprenk">my Mixcloud account</a>. I make it a point to be very organized
+                within VDJ, cataloguing playlists for each set I've recorded and tagging songs with lots of metadata,
+                like the energy and musical characteristics of each.
+            </p>
+            <p>
+                VDJ makes it really easy to export and view this data as XML, meaning it is trivial to query and operate
+                on that data programmatically. I initially learned this writing scripts to automate some of my more
+                repetitive DJ processes like updating cue sheet timestamps.
+            </p>
+            <p>
+                Initially, I was most interested in visualizing the change of energy across each mix. After playing with
+                several ideas for how to source that data (e.g. searching from cue point titles, reading cue sheets) and
+                how to display that data (e.g. <a href="https://matplotlib.org/">Matplotlib</a>, <a
+                    href="https://plotly.com/">Plotly</a>) I finally landed on an approach:
+            <p>
+                Since I have playlists for each set, I was able to use Python to get the songs for each playlist and
+                look up their metadata (including a tag for energy). I also used <a
+                    href="https://pandas.pydata.org/">Pandas</a> for some simple data cleaning / joining along the way.
+            </p>
+            <p>
+                For data display, I used <a href="https://d3js.org/">D3</a> to convert song data (in JSON format, output
+                from the prior scripts) into a timeline of colored <span class="code">&lt;div&gt;</span>s.
+            </p>
+            <p>
+                I wanted to also combine information from Mixcloud (particularly album art and titles) so, using <a
+                    href="https://www.postman.com/">Postman</a> and <a
+                    href="https://www.mixcloud.com/developers/">Mixcloud's developer documentation</a>, I was able to
+                find commands to source that data. Joining these two sources of data required creating a mapping file to
+                associate playlists with their respective Mixcloud uploads.
+            </p>
+            <p>
+                After all that, I'm left with:
+            <ol>
+                <li>A set of playlists and associated song metadata.</li>
+                <li>Mixcloud data for each uploaded mix.</li>
+                <li>A mapping file to link Mixcloud mixes and playlists.</li>
+                <li>Scripts to join and package this data for web.</li>
+                <li>Code to display this data on a webpage.</li>
+            </ol>
+            </p>
+        </div>
+
         <h2>
             Technologies
         </h2>
-        <ul>
-            <li><strong>Python</strong> for scripting and extracting data from VDJ.</li>
-            <li><strong>Pandas</strong> for data sanitization / joining.</li>
-            <li><strong>JS/D3</strong> for rendering sets & timelines.</li>
-            <li><strong>HTML/CSS</strong> for page content and styling.</li>
-            <li><strong>Postman</strong> for pulling data from <a href="https://mixcloud.com">Mixcloud</a>.</li>
-        </ul>
+        <div>
+            <p>
+                This project utilizes the following technologies:
+            </p>
+            <ul>
+                <li><strong>Python</strong> for scripting and extracting data from VDJ.</li>
+                <li><strong>Pandas</strong> for data sanitization / joining.</li>
+                <li><strong>D3 / JavaScript</strong> for rendering sets & timelines.</li>
+                <li><strong>HTML</strong> for page content and structure.</li>
+                <li><strong>CSS</strong> for page styling including <a
+                        hre="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout">CSS Grid</a> and <a
+                        href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout">Flexbox</a>.
+                </li>
+                <li><strong>Postman</strong> for pulling data from <a href="https://mixcloud.com">Mixcloud</a>.</li>
+            </ul>
+        </div>
 
         <h2>License</h2>
-        <p>The data in this project is copyright of DJ Sprenk.</p>
-        <p>The project, however, is licensed under GPL v3.0. You are welcome to adapt the underlying processes with your
-            own data under the terms in that license.</p>
-        <p>If you enjoy my work and want to support, you can subscribe on <a
-                href="https://patreon.com/djsprenk">Patreon</a> or tip me on <a
-                href="https://venmo.com/djsprenk">Venmo</a> / <a href="https://paypal.me/djsprenk">PayPal</a>.</p>
+        <div>
+            <p>The data in this project is copyright of DJ Sprenk.</p>
+            <p>
+                The project, however, is licensed under GPL v3.0. You are welcome to adapt the underlying processes with
+                your own data under the terms in that license.
+            </p>
+        </div>
+        <h2>Support</h2>
+        <div>
+            <p>
+                If you enjoy my work and want to support, you can subscribe on <a
+                    href="https://patreon.com/djsprenk">Patreon</a> or tip me on <a
+                    href="https://venmo.com/djsprenk">Venmo</a> / <a href="https://paypal.me/djsprenk">PayPal</a>.
+            </p>
+        </div>
     </main>
     <footer>© DJ Sprenk | <a href="index.html">Back to set explorer</footer>
 </body>
