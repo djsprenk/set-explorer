@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IM+Fell+Double+Pica+SC&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+        rel="stylesheet">
+
+    <!-- Load stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Override some stylings -->
+    <style>
+        main {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img id="logo" src="assets/sprenk-logo-gradient-white.png" alt="DJ Sprenk">
+        <h1 id="title">
+            Set Explorer
+        </h1>
+    </header>
+    <main>
+        <h2>
+            About Set Explorer
+        </h2>
+        <p>Set Explorer is a project about visualizing energy across DJ sets.</p>
+        <p>Inspired loosely by <a href="https://fathom.info/rocky/">Fathom's Rocky Morphology</a> project, it mines and
+            combines data stored in Virtual DJ's (VDJ) <a
+                href="https://www.virtualdj.com/manuals/virtualdj/interface/database.html">database</a>
+            as well as data stored in Mixcloud to make it easer to search, explore, and select sets to listen to.</p>
+        <h2>
+            Technologies
+        </h2>
+        <ul>
+            <li><strong>Python</strong> for scripting and extracting data from VDJ.</li>
+            <li><strong>Pandas</strong> for data sanitization / joining.</li>
+            <li><strong>JS/D3</strong> for rendering sets & timelines.</li>
+            <li><strong>HTML/CSS</strong> for page content and styling.</li>
+            <li><strong>Postman</strong> for pulling data from <a href="https://mixcloud.com">Mixcloud</a></li>
+        </ul>
+
+        <h2>License</h2>
+        <p>The data in this project is copyright of DJ Sprenk.</p>
+        <p>The project, however, is licensed under GPL v3.0. You are welcome to adapt the underlying processes with your
+            own data under the terms in that license.</p>
+        <p>If you enjoy my work and want to support, you can subscribe on <a
+                href="https://patreon.com/djsprenk">Patreon</a> or tip me on <a
+                href="https://venmo.com/djsprenk">Venmo</a> / <a href="https://paypal.me/djsprenk">PayPal</a>.</p>
+    </main>
+    <footer>© DJ Sprenk | <a href="index.html">Back to set explorer</footer>
+</body>
