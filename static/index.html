@@ -17,20 +17,26 @@
 
 <body>
     <!-- Create a div where the graph will take place -->
-    <main id="my_dataviz">
+    <header>
         <img id="logo" src="assets/sprenk-logo-gradient-white.png" alt="DJ Sprenk">
         <h1 id="title">
             Set Explorer
         </h1>
+    </header>
+    <aside id="controls">
         <div id="sort">
             Sort:
             <a href="?order=newest">Newest</a>
             <a href="?order=oldest">Oldest</a>
         </div>
+    </aside>
+    <main id="my_dataviz">
+
         <div class="legend set-thumbnail">Set</div>
         <div class="legend set-title">Title</div>
         <div class="legend timeline">Energy</div>
     </main>
+    <footer>© DJ Sprenk | <a href="about.html">About this project</footer>
 </body>
 
 <!-- Hack in some song data, to by dynamically loaded later -->

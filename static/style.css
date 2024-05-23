@@ -5,6 +5,56 @@ body {
     max-width: 840px;
     margin: auto;
     padding: 20px;
+
+    /* Display page elements as a grid */
+    display: grid;
+
+    /* Header, controls, and footer take necessary space, remaining fills the viewport */
+    grid-template-rows: max-content max-content 1fr max-content;
+
+    /* Limit the body to the viewport height */
+    height: 100vh;
+
+    /* Adjust for padding of the body */
+    box-sizing: border-box;
+}
+
+header {
+    display: flex;
+    align-items: center;
+
+    border-bottom: 1px solid white;
+}
+
+#title {
+    margin: .5em;
+}
+
+#controls {
+    padding: .5em;
+    border-bottom: 1px solid white;
+
+    /* Add slight shadow effect as a scrolling signifier */
+    z-index: 1;
+    box-shadow: 0px 10px 20px black;
+}
+
+main {
+    overflow: scroll;
+    padding: 20px;
+}
+
+footer {
+    border-top: 1px solid white;
+    padding: .5em;
+
+    /* Add slight shadow effect as a scrolling signifier */
+    z-index: 1;
+    box-shadow: 0px -10px 20px black;
+}
+
+footer a {
+    color: white;
 }
 
 /* Extra small devices (phones, 600px and down) */
@@ -14,6 +64,10 @@ body {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 20px 20px;
+    }
+
+    header {
+        font-size: small;
     }
 
     /* Title takes whole row */
