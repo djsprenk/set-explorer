@@ -1,5 +1,3 @@
-from pathlib import Path
-
 import requests
 from constants import MIXCLOUD_ACCOUNT_NAME, MIXCLOUD_DATA_FILE, PROCESSED_FILES_DIR
 from utils import write_json_file
