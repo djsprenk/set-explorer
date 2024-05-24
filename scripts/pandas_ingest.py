@@ -17,7 +17,7 @@ OUTPUT_FILE_PATH = Path(STATIC_DIR, "song-data.js")
 
 sets_data = []
 
-mixcloud_slugs_raw = read_json_file(Path(PROCESSED_FILES_DIR, "mixcloud-slugs.json"))
+mixcloud_slugs_raw = read_json_file(Path(PROCESSED_FILES_DIR, "mixcloud-data.json"))
 mixcloud_slugs = pd.json_normalize(mixcloud_slugs_raw["data"])
 
 
