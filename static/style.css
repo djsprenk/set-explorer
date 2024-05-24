@@ -140,6 +140,11 @@ footer a {
     .song[data-energy="5"] {
         height: 20px;
     }
+
+    .song-tooltip {
+        grid-column: 2 / span 3;
+        padding: 0.2em;
+    }
 }
 
 /* Small devices  and up (portrait tablets and large phones, 600px and up) */
@@ -218,6 +223,11 @@ footer a {
 
     .song[data-energy="5"] {
         height: 20px;
+    }
+
+    .song-tooltip {
+        grid-column: 2 / span 4;
+        padding: 0.2em;
     }
 }
 
@@ -345,26 +355,43 @@ footer a {
     transition-duration: .07s;
 }
 
-.song[data-energy="0"] {
+.song[data-energy="0"],
+.song-tooltip[data-energy="0"] {
     background-color: grey;
+    color: black;
 }
 
-.song[data-energy="1"] {
+.song[data-energy="1"],
+.song-tooltip[data-energy="1"] {
     background-color: blue;
+    color: white;
 }
 
-.song[data-energy="2"] {
+.song[data-energy="2"],
+.song-tooltip[data-energy="2"] {
     background-color: green;
+    color: white;
 }
 
-.song[data-energy="3"] {
+.song[data-energy="3"],
+.song-tooltip[data-energy="3"] {
     background-color: yellow;
+    color: black;
 }
 
-.song[data-energy="4"] {
+.song[data-energy="4"],
+.song-tooltip[data-energy="4"] {
     background-color: orange;
+    color: black;
 }
 
-.song[data-energy="5"] {
+.song[data-energy="5"],
+.song-tooltip[data-energy="5"] {
     background-color: red;
+    color: white;
+}
+
+.song-tooltip {
+    border: 1px solid white;
+    transition: 0.5s;
 }

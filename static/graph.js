@@ -35,7 +35,7 @@ function timelineGraph (container, songs, setMetadata) {
     .attr('class', 'timeline')
 
   // Map data to divs
-  timeline.selectAll('div')
+  const song = timeline.selectAll('div')
     .data(songs)
     .join('div')
     .attr('class', 'song')
@@ -46,6 +46,28 @@ function timelineGraph (container, songs, setMetadata) {
   // Color the rectangles with their energies
     .attr('data-energy', getEnergy)
     .attr('title', getSongMeta)
+
+  // Add tooltip section
+  const tooltip = container
+    .append('div')
+    .attr('class', 'song-tooltip hidden')
+
+  song.on('mouseover click', function (d, i) {
+    // Mark the song as selected
+    container.selectAll('.song')
+      .attr('class', 'song')
+
+    song.attr('class', 'song selected')
+
+    // Hide all other tooltips
+    container.selectAll('.song-tooltip')
+      .attr('class', 'song-tooltip hidden')
+
+    // Show this tooltip
+    tooltip.attr('data-energy', getEnergy(d, i))
+      .text(`${d.Title || 'Unknown'} by ${d.Artist || 'Unknown'}`)
+      .attr('class', 'song-tooltip')
+  })
 }
 
 const container = d3.select('#my_dataviz')
