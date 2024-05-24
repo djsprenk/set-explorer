@@ -63,6 +63,12 @@ main {
     color: grey;
 }
 
+.invisible {
+    visibility: hidden;
+
+    /* Makes transition smoother */
+    opacity: 0;
+}
 
 footer {
     border-top: 1px solid white;
@@ -163,6 +169,7 @@ footer a {
     .song-tooltip {
         grid-column: 2 / span 3;
         padding: 0.2em;
+        align-self: end;
     }
 }
 
@@ -244,6 +251,7 @@ footer a {
     .song-tooltip {
         grid-column: 2 / span 4;
         padding: 0.2em;
+        align-self: end;
     }
 }
 
@@ -325,6 +333,12 @@ footer a {
 
     .song[data-energy="5"] {
         height: 30px;
+    }
+
+    .song-tooltip {
+        grid-column: 3 / span 3;
+        padding: 0.2em;
+        align-self: end;
     }
 }
 

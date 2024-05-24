@@ -61,17 +61,20 @@ function timelineGraph (container, songs, setMetadata) {
     .join('div')
     .attr('class', 'song')
 
-  // Block order is the index
+    // Block order is the index
     .style('order', function (d, i) { return i })
 
-  // Color the rectangles with their energies
+    // Color the rectangles with their energies
     .attr('data-energy', getEnergy)
     .attr('title', getSongMeta)
 
   // Add tooltip section
   const tooltip = container
     .append('div')
-    .attr('class', 'song-tooltip hidden')
+    .attr('class', 'song-tooltip invisible')
+
+    // Placeholder text to avoid layout shift
+    .text('---')
 
   song.on('mouseover click', function (d, i) {
     // Mark the song as selected
@@ -82,7 +85,7 @@ function timelineGraph (container, songs, setMetadata) {
 
     // Hide all other tooltips
     container.selectAll('.song-tooltip')
-      .attr('class', 'song-tooltip hidden')
+      .attr('class', 'song-tooltip invisible')
 
     // Show this tooltip
     tooltip.attr('data-energy', getEnergy(d, i))
