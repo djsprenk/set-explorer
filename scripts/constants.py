@@ -14,3 +14,7 @@ STATIC_DIR = Path("static")
 # Files
 VDJ_DB_FILE = Path(VDJ_EXPORT_DIR, "database.xml")
 JSON_DB_FILE = Path(PROCESSED_FILES_DIR, "database.json")
+
+# Constants
+
+MIXCLOUD_ACCOUNT_NAME = "djsprenk"
