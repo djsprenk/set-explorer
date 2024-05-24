@@ -47,6 +47,6 @@ def database_to_json():
 
 
 if __name__ == "__main__":
-    print(f"Converting VDJ database to JSON...")
+    print("Converting VDJ database to JSON...")
     database_to_json()
-    print(f"DONE")
+    print("DONE")
