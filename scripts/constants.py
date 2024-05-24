@@ -6,7 +6,6 @@ from pathlib import Path
 
 DATA_DIR = Path("data")
 VDJ_EXPORT_DIR = Path(DATA_DIR, "vdj-database")
-MIXCLOUD_EXPORT_DIR = Path(DATA_DIR, "mixcloud-export")
 PROCESSED_FILES_DIR = Path(DATA_DIR, "processed-files")
 SONG_LISTS_DIR = Path(PROCESSED_FILES_DIR, "song-lists")
 STATIC_DIR = Path("static")
