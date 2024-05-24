@@ -1,7 +1,7 @@
 from pathlib import Path
 
 import requests
-from constants import MIXCLOUD_ACCOUNT_NAME, PROCESSED_FILES_DIR
+from constants import MIXCLOUD_ACCOUNT_NAME, MIXCLOUD_DATA_FILE, PROCESSED_FILES_DIR
 from utils import write_json_file
 
 
@@ -9,8 +9,6 @@ def get_cloudcasts():
     """Get cloudcasts for a given mixcloud account, paging where required."""
     cloudcast_slugs = set()
     cloudcasts = {"data": []}
-    iterator = 0
-    next_page = True
 
     # Max available page size on Mixcloud
     request_url = (
@@ -48,7 +46,6 @@ if __name__ == "__main__":
     # Get set info from Mixcloud
     cloudcasts = get_cloudcasts()
 
-    mixcloud_slugs_file = Path(PROCESSED_FILES_DIR, "mixcloud-data.json")
-    print(f"Writing cloudcasts to file: {mixcloud_slugs_file}")
-    write_json_file(cloudcasts, mixcloud_slugs_file)
+    print(f"Writing cloudcasts to file: {MIXCLOUD_DATA_FILE}")
+    write_json_file(cloudcasts, MIXCLOUD_DATA_FILE)
     print("DONE")
