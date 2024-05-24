@@ -3,6 +3,10 @@ SHELL=/bin/bash
 help:  # Help
 	@echo "Available options: format, database, playlists, update-mixcloud-data, compile-data, update-all"
 
+install:  # Install requirements
+	pip install -r requirements.in
+	npm i
+
 format:  # Format Python and JS files
 	black .
 	isort .
