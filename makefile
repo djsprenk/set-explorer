@@ -3,6 +3,11 @@ SHELL=/bin/bash
 help:  # Help
 	@echo "Available options: convert, playlists, update-mixcloud-data, compile-data, update-all"
 
+format:  # Format Python and JS files
+	black .
+	isort .
+	npm run format
+
 database:  # Converts XML database from data/vdj-database inot data/processed-files/database.json
 	python scripts/database.py
 
