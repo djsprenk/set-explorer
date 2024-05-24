@@ -4,6 +4,7 @@ import json
 import os
 import sys
 
+import xmltodict
 from constants import JSON_DB_FILE
 
 
@@ -34,32 +35,16 @@ def command_args_flags():
     return command_args, command_flags
 
 
-def lookup_song_from_database(tag, value, database=None):
-    """
-    Look up a value in the JSON database
+def read_from_xml(xml_path):
+    """Read data from XML file"""
+    data_dict = {}
 
-    Returns: First matched database entry for query
+    # open the input xml file and read data in form of python dictionary using xmltodict module
+    with open(xml_path, encoding="utf-8") as xml_file:
+        data_dict = xmltodict.parse(xml_file.read())
+        xml_file.close()
 
-    Raises: ValueError if not found
-    """
-
-    if database is None:
-        database = read_json_file(JSON_DB_FILE)
-
-    song_list = database["VirtualDJ_Database"]["Song"]
-
-    for song in song_list:
-        if song[tag] == value:
-            return song
-
-    raise ValueError
-
-
-def file_in_directory(filename, directory):
-    """Check for a file in a directory."""
-    files = os.listdir(directory)
-
-    return filename in files
+    return data_dict
 
 
 def read_json_file(file_path):
@@ -78,3 +63,10 @@ def write_json_file(data, output_json_path):
     with open(output_json_path, "w") as json_file:
         json_file.write(json_data)
         json_file.close()
+
+
+def file_in_directory(filename, directory):
+    """Check for a file in a directory."""
+    files = os.listdir(directory)
+
+    return filename in files

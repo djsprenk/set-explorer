@@ -6,13 +6,8 @@ import sys
 from pathlib import Path
 
 from constants import SONG_LISTS_DIR, VDJ_EXPORT_DIR
-from convert import read_from_xml
-from utils import (
-    command_args_flags,
-    lookup_song_from_database,
-    read_json_file,
-    write_json_file,
-)
+from database import lookup_song_from_database
+from utils import command_args_flags, read_from_xml, read_json_file, write_json_file
 
 # Default playlist path search order:
 # 1) Direct path
@@ -194,3 +189,4 @@ if __name__ == "__main__":
         playlist_names.append(playlist_file.stem)
 
     print(f"--- {round(time.time() - start_time, 4)} seconds ---")
+    print("DONE")
