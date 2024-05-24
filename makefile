@@ -1,7 +1,7 @@
 SHELL=/bin/bash
 
 help:  # Help
-	@echo "Available options: convert, playlists, update-mixcloud-data, compile-data, update-all"
+	@echo "Available options: format, database, playlists, update-mixcloud-data, compile-data, update-all"
 
 format:  # Format Python and JS files
 	black .
