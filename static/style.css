@@ -39,6 +39,10 @@ header {
     box-shadow: 0px 10px 20px black;
 }
 
+.hidden {
+    display: none !important;
+}
+
 main {
     overflow: scroll;
     padding: 20px;
