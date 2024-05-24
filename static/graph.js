@@ -8,6 +8,16 @@ function getSongMeta (data, index) {
   return `${artist} - ${title}`
 }
 
+function getSetTitleSubtitle (longformTitle) {
+  titleParts = longformTitle.split(' | ')
+
+  if (titleParts.length >= 2) {
+    return [titleParts[0], titleParts[1]]
+  } else {
+    return [longformTitle, '']
+  }
+}
+
 function timelineGraph (container, songs, setMetadata) {
   if (setMetadata.thumbnail) {
     const thumbnail = container
@@ -23,7 +33,18 @@ function timelineGraph (container, songs, setMetadata) {
   const title = container
     .append('a')
     .attr('class', 'set-title')
-    .text(setMetadata.title)
+
+  // Split title into name and subtitle
+  let setName, setSubtitle;
+  [setName, setSubtitle] = getSetTitleSubtitle(setMetadata.title)
+
+  title.append('div')
+    .attr('class', 'set-name')
+    .text(setName)
+
+  title.append('div')
+    .attr('class', 'set-subtitle')
+    .text(setSubtitle)
 
   if (setMetadata.url !== '') {
     title.attr('href', setMetadata.url)
