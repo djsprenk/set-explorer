@@ -8,17 +8,13 @@ import json
 from pathlib import Path
 
 import pandas as pd
-from constants import PROCESSED_FILES_DIR, SONG_LISTS_DIR, STATIC_DIR
+from constants import (
+    MIXCLOUD_DATA_FILE,
+    SET_MAPPER_FILE,
+    SONG_DATA_FILE,
+    SONG_LISTS_DIR,
+)
 from utils import read_json_file
-
-live_sets = read_json_file(Path(PROCESSED_FILES_DIR, "live-sets-data.json"))
-produced_sets = read_json_file(Path(PROCESSED_FILES_DIR, "produced-sets-data.json"))
-OUTPUT_FILE_PATH = Path(STATIC_DIR, "song-data.js")
-
-sets_data = []
-
-mixcloud_slugs_raw = read_json_file(Path(PROCESSED_FILES_DIR, "mixcloud-data.json"))
-mixcloud_slugs = pd.json_normalize(mixcloud_slugs_raw["data"])
 
 
 def extract_song_data_for_playlist(set_data, additional_meta):
@@ -26,7 +22,7 @@ def extract_song_data_for_playlist(set_data, additional_meta):
 
     Returns dict of cleaned and formatted data.
     """
-    playlist_file = Path(SONG_LISTS_DIR, set_data["playlist"])
+    playlist_file = Path(SONG_LISTS_DIR, Path(set_data["playlist"]).name)
     raw_song_data = read_json_file(playlist_file.with_suffix(".json"))
 
     # Read and unpack nested data, renaming important columns
@@ -70,21 +66,27 @@ def extract_song_data_for_playlist(set_data, additional_meta):
     }
 
 
-for set_data in live_sets:
-    extracted_data = extract_song_data_for_playlist(set_data, {"type": "live"})
-    if not extracted_data:
-        continue
-    sets_data.append(extracted_data)
+if __name__ == "__main__":
 
-for set_data in produced_sets:
-    extracted_data = extract_song_data_for_playlist(set_data, {"type": "produced"})
-    if not extracted_data:
-        continue
-    sets_data.append(extracted_data)
+    # Load set mapper
+    set_mapper = read_json_file(SET_MAPPER_FILE)
 
-with open(OUTPUT_FILE_PATH, "w", encoding="utf-8") as output_file:
-    print(f"Writing compiled set data to {OUTPUT_FILE_PATH}")
-    output_file.write("const songData = ")
-    output_file.write(json.dumps(sets_data))
-    output_file.close()
-    print("DONE")
+    sets_data = []
+
+    mixcloud_slugs_raw = read_json_file(MIXCLOUD_DATA_FILE)
+    mixcloud_slugs = pd.json_normalize(mixcloud_slugs_raw["data"])
+
+    for set_data in set_mapper:
+        additional_meta = {"type": set_data["type"]}
+        playlist_file = set_data["playlist"]
+        extracted_data = extract_song_data_for_playlist(set_data, additional_meta)
+        if not extracted_data:
+            continue
+        sets_data.append(extracted_data)
+
+    with open(SONG_DATA_FILE, "w", encoding="utf-8") as output_file:
+        print(f"Writing compiled set data to {SONG_DATA_FILE}")
+        output_file.write("const songData = ")
+        output_file.write(json.dumps(sets_data))
+        output_file.close()
+        print("DONE")

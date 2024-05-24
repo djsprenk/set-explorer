@@ -13,7 +13,9 @@ STATIC_DIR = Path("static")
 # Files
 VDJ_DB_FILE = Path(VDJ_EXPORT_DIR, "database.xml")
 JSON_DB_FILE = Path(PROCESSED_FILES_DIR, "database.json")
+SET_MAPPER_FILE = Path(DATA_DIR, "set-mapper.json")
 MIXCLOUD_DATA_FILE = Path(PROCESSED_FILES_DIR, "mixcloud-data.json")
+SONG_DATA_FILE = Path(STATIC_DIR, "song-data.js")
 
 # Constants
 MIXCLOUD_ACCOUNT_NAME = "djsprenk"

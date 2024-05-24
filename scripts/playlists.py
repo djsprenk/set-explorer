@@ -2,43 +2,22 @@
 Get songs for links in provided playlist(s)"""
 
 import json
-import sys
 from pathlib import Path
 
-from constants import SONG_LISTS_DIR, VDJ_EXPORT_DIR
+from constants import SET_MAPPER_FILE, SONG_LISTS_DIR, VDJ_EXPORT_DIR
 from database import lookup_song_from_database
-from utils import command_args_flags, read_from_xml, read_json_file, write_json_file
+from utils import read_from_xml, read_json_file, write_json_file
 
-# Default playlist path search order:
-# 1) Direct path
-# 2) Sub folders
-PLAYLIST_SEARCH_ORDER = [
-    "",
-    Path(VDJ_EXPORT_DIR, "MyLists/Past Events.subfolders"),
-    Path(VDJ_EXPORT_DIR, "MYLists/Past Events.subfolders/2021.subfolders"),
-    Path(VDJ_EXPORT_DIR, "MYLists/Past Events.subfolders/2022.subfolders"),
-    Path(VDJ_EXPORT_DIR, "MYLists/Past Events.subfolders/2023.subfolders"),
-    Path(
-        VDJ_EXPORT_DIR, "MYLists/Past Events.subfolders/2024 Alisson & Bryn.subfolders"
-    ),
-    Path(VDJ_EXPORT_DIR, "MYLists/Past Events.subfolders/2024 Eclipse.subfolders"),
-    Path(VDJ_EXPORT_DIR, "MYLists/Past Events.subfolders/2024 Interfusion.subfolders"),
-    Path(
-        VDJ_EXPORT_DIR,
-        "MYLists/Past Events.subfolders/2024 Marck and Melyssa.subfolders",
-    ),
-    Path(VDJ_EXPORT_DIR, "MYLists/Past Events.subfolders/2024 RVA.subfolders"),
-    Path(VDJ_EXPORT_DIR, "MYLists/Past Events.subfolders/2024 Shangri-La.subfolders"),
-    Path(VDJ_EXPORT_DIR, "MYLists/Past Events.subfolders/2024 SBKZ.subfolders"),
-    Path(VDJ_EXPORT_DIR, "MYLists/Past Events.subfolders/2024 Zouk Heat.subfolders"),
-]
+DEBUG = False
 
 
-def read_m3u_playlist(m3u_path):
-    """Get song paths from an M3U-style playlist."""
+def read_m3u_playlist(playlist_path):
+    """
+    Get song paths from an M3U-style playlist.
+    Assumes relative path to VDJ_EXPORT_DIR."""
     song_paths = []
 
-    with open(m3u_path, "r", encoding="utf-8") as file:
+    with open(Path(VDJ_EXPORT_DIR, playlist_path), "r", encoding="utf-8") as file:
         for line in file:
             # #EXTVDJ: is a directive with VDJ metadata, skip these
             if line.startswith("#EXTVDJ:"):
@@ -49,11 +28,13 @@ def read_m3u_playlist(m3u_path):
     return song_paths
 
 
-def read_vdjfolder_xml_playlist(xml_path):
-    """Get song paths from a vdjfolder.xml-style playlist."""
+def read_vdjfolder_xml_playlist(playlist_path):
+    """
+    Get song paths from a vdjfolder.xml-style playlist.
+    Assumes relative path to VDJ_EXPORT_DIR."""
     song_paths = []
 
-    xml_data = read_from_xml(xml_path)
+    xml_data = read_from_xml(Path(VDJ_EXPORT_DIR, playlist_path))
 
     for song in xml_data["VirtualFolder"]["song"]:
         song_paths.append(song["@path"])
@@ -82,7 +63,8 @@ def get_song_list_for_playlist(playlist_path, use_cached=True, write_cache=True)
 
     # Check to see if we have a cached mapping file for this playlist
     if use_cached and Path(song_list_file_path).is_file():
-        print("Found cached song list, skipping database lookup.")
+        if DEBUG:
+            print("Found cached song list, skipping database lookup.")
         return read_json_file(song_list_file_path)
 
     #  Otherwise, lookup the songs from the database
@@ -114,73 +96,22 @@ def get_song_list_for_playlist(playlist_path, use_cached=True, write_cache=True)
     return song_list
 
 
-def search_playlist(playlist_path, search_order=None):
-    """
-    Search for a playlist given a name or relative path to the playlist.
-
-    Args:
-    - playlist_name_or_path: playlist name (with or without extension) or path to playlist
-        (M3U) file.
-
-    Kwargs:
-    - search_order: override for search order (list of paths).
-
-    Returns:
-    - Path or None
-    """
-
-    if not search_order:
-        search_order = PLAYLIST_SEARCH_ORDER
-
-    for folder in search_order:
-        search_path = Path(folder, playlist_path)
-        if search_path.exists():
-            return search_path
-
-
 if __name__ == "__main__":
     import time
 
     start_time = time.time()
 
-    # Get arguments from command line
-    playlists_args, flags = command_args_flags()
-
-    # We expect only 1 arg, a playlist name
-    if len(playlists_args) < 1:
-        print(
-            "Expected at least 1 arg: path(s) to / name(s) of playlist(s) or to run in --file mode"
-        )
-        sys.exit()
-
-    if "--file" in flags:
-        if len(playlists_args) != 1:
-            print(
-                "Expected exactly 1 arg when in --file mode, path to playlist.json file"
-            )
-            sys.exit()
-
-        playlists_file = Path(playlists_args[0])
-        playlist_paths = Path(playlists_file).read_text(encoding="utf-8")
-        playlists = json.loads(playlist_paths)
-    else:
-        playlists = playlists_args
+    print(f"Loading playlists to scan from {Path(SET_MAPPER_FILE)}")
+    set_mapper_file = Path(SET_MAPPER_FILE).read_text(encoding="utf-8")
+    set_mapper = json.loads(set_mapper_file)
 
     song_lists = []
     playlist_names = []
 
-    # Search for that playlist file
-    for playlist in playlists:
-        playlist = Path(playlist)
-        playlist_file = search_playlist(playlist)
+    # Find or create playlist files for sets in the set mapper
+    for set_data in set_mapper:
+        playlist_file = Path(set_data["playlist"])
 
-        if not playlist_file:
-            print(f"Failed fo find match for {playlist}")
-            sys.exit()
-        print(f"Found matched playlist: {playlist_file}")
-
-        # Get the song list from that file (using cache or writing if new)
-        print("Fetching song list...")
         song_list_for_playlist = get_song_list_for_playlist(
             playlist_file, use_cached=True, write_cache=True
         )
@@ -188,5 +119,7 @@ if __name__ == "__main__":
         song_lists.append(song_list_for_playlist)
         playlist_names.append(playlist_file.stem)
 
-    print(f"--- {round(time.time() - start_time, 4)} seconds ---")
+    print(
+        f"Scanned {len(set_mapper)} playlists in {round(time.time() - start_time, 4)} seconds"
+    )
     print("DONE")
