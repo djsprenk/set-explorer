@@ -83,6 +83,8 @@ for set_data in produced_sets:
     sets_data.append(extracted_data)
 
 with open(OUTPUT_FILE_PATH, "w", encoding="utf-8") as output_file:
+    print(f"Writing compiled set data to {OUTPUT_FILE_PATH}")
     output_file.write("const songData = ")
     output_file.write(json.dumps(sets_data))
     output_file.close()
+    print("DONE")

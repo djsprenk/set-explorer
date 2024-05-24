@@ -1,6 +1,6 @@
 from pathlib import Path
-import requests
 
+import requests
 from constants import MIXCLOUD_ACCOUNT_NAME, PROCESSED_FILES_DIR
 from utils import write_json_file
 
@@ -51,3 +51,4 @@ if __name__ == "__main__":
     mixcloud_slugs_file = Path(PROCESSED_FILES_DIR, "mixcloud-data.json")
     print(f"Writing cloudcasts to file: {mixcloud_slugs_file}")
     write_json_file(cloudcasts, mixcloud_slugs_file)
+    print("DONE")
