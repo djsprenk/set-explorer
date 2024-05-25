@@ -3,11 +3,7 @@ Get songs for links in provided playlist(s)"""
 
 from pathlib import Path
 
-from constants import (
-    JSON_DB_FILE,
-    RECORDINGS_DATA_DIR,
-    SET_MAPPER_FILE,
-)
+from constants import JSON_DB_FILE, RECORDINGS_DATA_DIR, SET_MAPPER_FILE
 from database import lookup_song_from_database
 from utils import read_json_file, write_json_file
 
