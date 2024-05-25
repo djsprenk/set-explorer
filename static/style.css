@@ -105,9 +105,9 @@ footer a {
         grid-column: 1 / span 4;
     }
 
-    /* Thumbnail takes 2 rows */
+    /* Thumbnail takes 3 rows */
     .set-thumbnail-link {
-        grid-row-end: span 2;
+        grid-row-end: span 3;
         grid-column: 1;
     }
 
@@ -118,6 +118,10 @@ footer a {
 
     /* Title gets its own line */
     .set-title {
+        grid-column: 2 / span 3;
+    }
+
+    .bpm {
         grid-column: 2 / span 3;
     }
 
@@ -191,13 +195,17 @@ footer a {
         grid-column: 1 / span 5;
     }
 
-    /* Use 2 rows, this lets us use one each for title / waveform */
+    /* Use 3 rows, this lets us use one each for title, waveform, and BPM */
     .set-thumbnail-link {
-        grid-row-end: span 2;
+        grid-row-end: span 3;
         grid-column: 1;
     }
 
     .set-title {
+        grid-column: 2 / span 4;
+    }
+
+    .bpm {
         grid-column: 2 / span 4;
     }
 
@@ -280,6 +288,10 @@ footer a {
     }
 
     .set-title {
+        grid-column: 2 / span 1;
+    }
+
+    .bpm {
         grid-column: 2 / span 1;
     }
 

@@ -19,14 +19,14 @@ function getSetTitleSubtitle (longformTitle) {
 }
 
 function timelineGraph (container, songs, setMetadata) {
-  if (setMetadata.thumbnail) {
+  if (setMetadata.img) {
     const thumbnail = container
       .append('a')
       .attr('class', 'set-thumbnail-link')
       .attr('href', setMetadata.url)
       .append('img')
       .attr('class', 'set-thumbnail')
-      .attr('src', setMetadata.thumbnail)
+      .attr('src', setMetadata.img)
       .attr('title', setMetadata.title)
   }
 
@@ -48,6 +48,15 @@ function timelineGraph (container, songs, setMetadata) {
 
   if (setMetadata.url !== '') {
     title.attr('href', setMetadata.url)
+  }
+
+  // Add set BPM
+  const bpm = container
+    .append('div')
+    .attr('class', 'bpm')
+
+  if (setMetadata.bpmMin && setMetadata.bpmMax) {
+    bpm.text(`${Math.round(setMetadata.bpmMin)} - ${Math.round(setMetadata.bpmMax)} BPM`)
   }
 
   // Build the timeline group
@@ -116,12 +125,9 @@ const sortOrder = urlParams.get('order')
 const sortedData = setSortOrder(sortOrder, songData)
 
 for (const i in sortedData) {
-  const setMetadata = {
-    title: sortedData[i].title,
-    thumbnail: sortedData[i].img,
-    url: sortedData[i].url
-  }
-
   const songs = sortedData[i].data
+  const setMetadata = sortedData[i]
+  delete setMetadata.data
+
   timelineGraph(container, songs, setMetadata)
 }
