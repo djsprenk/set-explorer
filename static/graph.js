@@ -31,7 +31,7 @@ function timelineGraph (container, songs, setMetadata) {
   }
 
   const title = container
-    .append('a')
+    .append('div')
     .attr('class', 'set-title')
 
   // Split title into name and subtitle
