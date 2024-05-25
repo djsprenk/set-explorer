@@ -28,3 +28,6 @@ compile-data:  # Rewrite data without doing any additional data pulls
 	python scripts/data.py
 
 update-all: playlists recording-scans update-mixcloud-data compile-data  # Combines song data and mixcloud data into song-data.js
+
+publish:  # Copy files over to another project
+	cp -R static/. ../nsprenkle.github.io/projects/dj-analytics
