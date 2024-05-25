@@ -10,11 +10,37 @@ from pathlib import Path
 import pandas as pd
 from constants import (
     MIXCLOUD_DATA_FILE,
+    RECORDINGS_DATA_DIR,
     SET_MAPPER_FILE,
     SONG_DATA_FILE,
     SONG_LISTS_DIR,
 )
 from utils import read_json_file
+
+
+def get_recording_data(set_data):
+    """
+    Get recording data for joining.
+    """
+    if not set_data.get("recording"):
+        print(
+            f"No recording data for set {Path(set_data['playlist']).name}, skipping data join."
+        )
+        return
+
+    recording_data_file = Path(RECORDINGS_DATA_DIR, Path(set_data["recording"]).name)
+    recording_data = read_json_file(recording_data_file.with_suffix(".json"))
+
+    # Read and unpack nested data, renaming important columns
+    recording_data_frame = pd.json_normalize(recording_data)
+
+    # Expand POIs
+    pois = recording_data_frame["Poi"].explode(ignore_index=True)
+    pois_expanded = pd.json_normalize(pois)
+
+    bpm_markers = pois_expanded["@Bpm"].dropna()
+
+    return {"bpmMin": bpm_markers.min(), "bpmMax": bpm_markers.max()}
 
 
 def extract_song_data_for_playlist(set_data, additional_meta):
@@ -52,6 +78,9 @@ def extract_song_data_for_playlist(set_data, additional_meta):
         return
     mixcloud_data = mixcloud_slugs.iloc[matches[0]] if matches else {}
 
+    # Join recording data
+    recording_data = get_recording_data(set_data) or {}
+
     song_data["index"] = [i for i in range(len(song_data))]
     song_data["set"] = playlist_file.name
     song_energy = song_data[["index", "Title", "Artist", "Energy"]]
@@ -62,6 +91,7 @@ def extract_song_data_for_playlist(set_data, additional_meta):
         "uploadTimestamp": mixcloud_data.get("created_time"),
         "img": mixcloud_data.get("pictures.large"),
         "data": song_energy.to_dict(orient="records"),
+        **recording_data,
         **additional_meta,
     }
 

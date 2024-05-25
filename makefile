@@ -1,7 +1,7 @@
 SHELL=/bin/bash
 
 help:  # Help
-	@echo "Available options: format, database, playlists, update-mixcloud-data, compile-data, update-all"
+	@echo "Available options: format, database, playlists, recording-scans, update-mixcloud-data, compile-data, update-all"
 
 install:  # Install requirements
 	pip install -r requirements.in
@@ -16,13 +16,15 @@ database:  # Converts XML database from data/vdj-database inot data/processed-fi
 	python scripts/database.py
 
 playlists: database  # Gets song metadata for playlists
-	python scripts/playlists.py --file data/produced-sets.json
-	python scripts/playlists.py --file data/live-sets.json
+	python scripts/playlists.py
 
-update-mixcloud-data: playlists  # Get updated data from Mixcloud
+recording-scans: database  # Gets data for recordings including POIs
+	python scripts/recordings.py
+
+update-mixcloud-data: database  # Get updated data from Mixcloud
 	python scripts/mixcloud.py
 
 compile-data:  # Rewrite data without doing any additional data pulls
 	python scripts/data.py
 
-update-all: playlists update-mixcloud-data compile-data  # Combines song data and mixcloud data into song-data.js
+update-all: playlists recording-scans update-mixcloud-data compile-data  # Combines song data and mixcloud data into song-data.js

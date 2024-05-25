@@ -8,6 +8,7 @@ DATA_DIR = Path("data")
 VDJ_EXPORT_DIR = Path(DATA_DIR, "vdj-database")
 PROCESSED_FILES_DIR = Path(DATA_DIR, "processed-files")
 SONG_LISTS_DIR = Path(PROCESSED_FILES_DIR, "song-lists")
+RECORDINGS_DATA_DIR = Path(PROCESSED_FILES_DIR, "recording-scans")
 STATIC_DIR = Path("static")
 
 # Files
