@@ -370,13 +370,14 @@ footer a {
 /* Thumbnail image fills cell */
 .set-thumbnail {
     width: 100%;
-    filter: drop-shadow(0px 0px 1px rgb(233, 233, 233));
+    border-radius: 4px;
+    filter: drop-shadow(0px 2px 3px rgb(233, 233, 233));
 }
 
 /* Thumbnail collapses on hover */
 .set-thumbnail:hover {
-    filter: drop-shadow(-1px 1px 2px rgb(233, 233, 233)) brightness(125%);
-    transform: translate3d(1px, -1px, 0);
+    filter: drop-shadow(0px 0px 2px rgb(233, 233, 233)) brightness(125%);
+    transform: translate3d(0px, 2px, 0);
     transition-duration: 0.07s;
 }
 
