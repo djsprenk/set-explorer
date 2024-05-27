@@ -38,9 +38,15 @@ def get_recording_data(set_data):
     pois = recording_data_frame["Poi"].explode(ignore_index=True)
     pois_expanded = pd.json_normalize(pois)
 
-    bpm_markers = pois_expanded["@Bpm"].dropna()
+    # Try to get BPM columns
+    if pois_expanded.get("@Bpm") is not None:
+        bpm_markers = pois_expanded["@Bpm"].dropna().astype(float)
+        return {
+            "bpmMin": bpm_markers.min().round(),
+            "bpmMax": bpm_markers.max().round(),
+        }
 
-    return {"bpmMin": bpm_markers.min(), "bpmMax": bpm_markers.max()}
+    return {"bpmMin": "n/a", "bpmMax": "n/a"}
 
 
 def extract_song_data_for_playlist(set_data, additional_meta):
