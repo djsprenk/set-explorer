@@ -10,10 +10,14 @@
     - [x] Read playlists from file.
     - [x] D3 Multigraph
 - [x] Split playlist meta separation from graph files
-- [ ] Combine additional metadata
+- [x] Combine additional metadata
     - [x] Human-readable set name
     - [x] Mixcloud links
-    - [ ] Album artwork?
+    - [x] Album artwork
+- [x] Add song hover tooltip.
+- [ ] Add BPM data
+    - [x] Min / max
+    - [ ] Running BPM?
 
 ## Upcoming
 

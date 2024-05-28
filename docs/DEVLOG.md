@@ -346,3 +346,39 @@ And with just a few more tweaks, added a mobile responsive view:
 ![Energy graphs responsive](./energy-graph-d3-multi-v5-responsive.png)
 
 ![Energy graphs responsive](./energy-graph-d3-multi-v5-mobile.png)
+
+### Linking Recording Data
+
+The next piece of data I'd like to link is BPM.
+
+This is (most) canonically stored as metadata in VDJ associated with the recorded mixes.
+
+To access this, I need to link the recordings which does require another mapping.
+
+I added a `recording` field to my `song-mapper.json` as a first step:
+
+```json
+    {
+        "playlist": "<playlist-path>",
+        "slug": "<mixcloud-slug>",
+        "recording": "<recording-path>",
+        "type": "<produced-set | live-set>"
+    },
+```
+
+Next I created a `recordings.py` script which acts very similarly to looking up song data
+for playlists, except it looks for a single recorded file and gets the metadata
+associated with it.
+
+VDJ usually generates this metadata but I started (sometime in 2022) to manually add my
+own BPM grids and cues. This means I should be able to rely on that data and just extract
+all the POIs (which include BPM markers) from that data.
+
+The easiest first step was to calculate min/max BPM (which also helps point out
+recordings where I haven't updated the BPM, since the VDJ defaults are outside the range
+we use for Zouk.)
+
+This leaves me with my sets entries looking like this (with some additional styling
+tweaks lumped in):
+
+![Adding min/max BPM](./set-meta-bpm-min-max.png)
