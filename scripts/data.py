@@ -29,24 +29,46 @@ def get_recording_data(set_data):
         return
 
     recording_data_file = Path(RECORDINGS_DATA_DIR, Path(set_data["recording"]).name)
-    recording_data = read_json_file(recording_data_file.with_suffix(".json"))
+    recording_data_raw = read_json_file(recording_data_file.with_suffix(".json"))
 
     # Read and unpack nested data, renaming important columns
-    recording_data_frame = pd.json_normalize(recording_data)
+    recording_data_frame = pd.json_normalize(recording_data_raw)
 
     # Expand POIs
-    pois = recording_data_frame["Poi"].explode(ignore_index=True)
-    pois_expanded = pd.json_normalize(pois)
+    pois_data_frame = pd.json_normalize(
+        recording_data_frame["Poi"].explode(ignore_index=True)
+    )
 
-    # Try to get BPM columns
-    if pois_expanded.get("@Bpm") is not None:
-        bpm_markers = pois_expanded["@Bpm"].dropna().astype(float)
-        return {
-            "bpmMin": bpm_markers.min().round(),
-            "bpmMax": bpm_markers.max().round(),
-        }
+    # Get POIs
+    pois = pois_data_frame[["@Pos", "@Name", "@Bpm", "@Type"]]
 
-    return {"bpmMin": "n/a", "bpmMax": "n/a"}
+    # Limit to just beatgrid & cues
+    pois = pois.loc[(pois["@Type"] == "beatgrid") | (pois["@Type"] == "cue")]
+
+    # BPM is left blank if it is the same as set BPM
+    # Fill this in with set BPM (stored confusingly as seconds per beat)
+    # i.e. VDJ BPM of 0.857143 correlates to 70 BPM
+    set_bpm = (60 / recording_data_frame["Scan.@Bpm"].astype(float)[0]).round()
+    beatgrid = pois["@Type"] == "beatgrid"
+    pois.loc[beatgrid, "@Bpm"] = pois.loc[beatgrid, "@Bpm"].fillna(
+        set_bpm
+    )  # , inplace=True)
+
+    # Sort by position
+    pois = pois.sort_values(by="@Pos")
+
+    # Rename the columns
+    pois = pois.rename(
+        columns={"@Pos": "timestamp", "@Name": "song", "@Bpm": "bpm", "@Type": "type"}
+    )
+
+    recording_data = {
+        "bpmMin": pois["bpm"].astype(float).min(),
+        "bpmMax": pois["bpm"].astype(float).max(),
+        "pois": pois[["timestamp", "song", "bpm", "type"]].to_dict(orient="records"),
+    }
+
+    return recording_data
 
 
 def extract_song_data_for_playlist(set_data, additional_meta):
