@@ -18,9 +18,11 @@ function getSetTitleSubtitle (longformTitle) {
   }
 }
 
-function timelineGraph (container, songs, setMetadata) {
+function createThumbnail (container, setMetadata) {
+  let thumbnail
+
   if (setMetadata.img) {
-    const thumbnail = container
+    thumbnail = container
       .append('a')
       .attr('class', 'set-thumbnail-link')
       .attr('href', setMetadata.url)
@@ -30,6 +32,10 @@ function timelineGraph (container, songs, setMetadata) {
       .attr('title', setMetadata.title)
   }
 
+  return thumbnail
+}
+
+function createTitle (container, setMetadata) {
   const title = container
     .append('div')
     .attr('class', 'set-title')
@@ -50,7 +56,10 @@ function timelineGraph (container, songs, setMetadata) {
     title.attr('href', setMetadata.url)
   }
 
-  // Add set BPM
+  return title
+}
+
+function createBpmLabel (container, setMetadata) {
   const bpm = container
     .append('div')
     .attr('class', 'bpm')
@@ -58,6 +67,13 @@ function timelineGraph (container, songs, setMetadata) {
   if (setMetadata.bpmMin && setMetadata.bpmMax) {
     bpm.text(`${Math.round(setMetadata.bpmMin)} - ${Math.round(setMetadata.bpmMax)} BPM`)
   }
+
+  return bpm
+}
+function timelineGraph (container, songs, setMetadata) {
+  const thumbnail = createThumbnail(container, setMetadata)
+  const title = createTitle(container, setMetadata)
+  const bpm = createBpmLabel(container, setMetadata)
 
   // Build the timeline group
   const timeline = container
@@ -103,6 +119,70 @@ function timelineGraph (container, songs, setMetadata) {
   })
 }
 
+function poisGraph (container, songs, pois, setMetadata) {
+  const thumbnail = createThumbnail(container, setMetadata)
+  const title = createTitle(container, setMetadata)
+  const bpm = createBpmLabel(container, setMetadata)
+
+  // Dimensions / constant
+  const graphHeight = 50
+  const graphWidth = 400
+  const graphMinBpm = 60
+  const graphMaxBpm = 90
+
+  // Create scales
+  const xScale = d3.scaleLinear()
+    .domain([0, setMetadata.length])
+    .range([0, graphWidth])
+
+  const yScale = d3.scaleLinear()
+    .domain([graphMinBpm, graphMaxBpm])
+    .range([graphHeight, 0])
+
+  function getXPos (d, i) {
+    const timestamp = parseFloat(d.timestamp)
+    console.log(`${timestamp}: to x coordinate: ${xScale(timestamp)}`)
+    if (isNaN(timestamp)) {
+      console.log(`NOT A NUMBER: ${JSON.stringify(d)}`)
+    }
+    return xScale(timestamp)
+  }
+
+  function getYPos (d, i) {
+    const effectiveBpm = d.bpm
+    if (isNaN(effectiveBpm)) {
+      console.warn(`BPM is NaN: ${d.stringify()}`)
+    }
+    console.log(`${effectiveBpm}: to y coordinate: ${yScale(effectiveBpm)}`)
+    return yScale(effectiveBpm)
+  }
+
+  // Build the timeline group
+  const timeline = container
+    .append('svg')
+    .attr('class', 'poi-timeline')
+    .attr('width', 500)
+    .attr('height', 50)
+
+  console.log(`Drawing set: ${setMetadata.title}`)
+  const line = d3.line()
+    .x((d, i) => getXPos(d, i))
+    .y((d, i) => getYPos(d, i))
+    .curve(d3.curveLinearClosed)
+
+  const bottomLeftPoint = { timestamp: 0, bpm: graphMinBpm }
+  const finalBpm = { timestamp: setMetadata.length, bpm: pois[pois.length - 1].bpm }
+  const bottomRightPoint = { timestamp: setMetadata.length, bpm: graphMinBpm }
+  const poisPoints = [bottomLeftPoint, ...pois, finalBpm, bottomRightPoint]
+
+  const path = timeline.append('path')
+    .datum(poisPoints) // Binds data to the path element
+    .attr('d', line) // Calls the line generator with the data
+    .attr('fill', 'red')
+    .attr('stroke', 'white')
+    .attr('stroke-width', 2)
+}
+
 const container = d3.select('#my_dataviz')
 
 function setSortOrder (order, data) {
@@ -126,8 +206,14 @@ const sortedData = setSortOrder(sortOrder, songData)
 
 for (const i in sortedData) {
   const songs = sortedData[i].data
+  const pois = sortedData[i].pois
   const setMetadata = sortedData[i]
   delete setMetadata.data
+  delete setMetadata.pois
 
-  timelineGraph(container, songs, setMetadata)
+  if (pois !== undefined) {
+    poisGraph(container, songs, pois, setMetadata)
+  } else {
+    timelineGraph(container, songs, setMetadata)
+  }
 }
