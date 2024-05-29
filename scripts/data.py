@@ -50,14 +50,20 @@ def get_recording_data(set_data):
     # i.e. VDJ BPM of 0.857143 correlates to 70 BPM
     set_bpm = (60 / recording_data_frame["Scan.@Bpm"].astype(float)[0]).round()
     beatgrid = pois["@Type"] == "beatgrid"
-    pois.loc[beatgrid, "@Bpm"] = pois.loc[beatgrid, "@Bpm"].fillna(
-        set_bpm
-    )  # , inplace=True)
+    pois.loc[beatgrid, "@Bpm"] = pois.loc[beatgrid, "@Bpm"].fillna(set_bpm)
 
-    # Sort by position
+    # Fill in missing timestamps with zeroes
+    pois["@Pos"].fillna("0", inplace=True)
+
+    # Sort by position (treating as floats)
+    pois["@Pos"] = pois["@Pos"].astype(float)
     pois = pois.sort_values(by="@Pos")
 
-    # Rename the columns
+    # Fill in missing BPMs from songs, starting with backfill, then forward fill
+    pois["@Bpm"] = pois["@Bpm"].fillna(method="bfill")
+    pois["@Bpm"] = pois["@Bpm"].fillna(method="ffill")
+
+    # Rename the columns for export
     pois = pois.rename(
         columns={"@Pos": "timestamp", "@Name": "song", "@Bpm": "bpm", "@Type": "type"}
     )
