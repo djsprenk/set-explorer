@@ -15,9 +15,10 @@
     - [x] Mixcloud links
     - [x] Album artwork
 - [x] Add song hover tooltip.
-- [ ] Add BPM data
+- [x] Add BPM data
     - [x] Min / max
-    - [ ] Running BPM?
+    - [x] Running BPM
+- [ ] Link BPM to energy
 
 ## Upcoming
 

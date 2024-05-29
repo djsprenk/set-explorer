@@ -93,7 +93,7 @@ And produces graphs like this:
 
 ### Multi Graph
 
-Next up I wanted the abliity to show multiple sets at the same time. I refactored the
+Next up I wanted the ability to show multiple sets at the same time. I refactored the
 script to take multiple input arguments and convert into subplots in the graph.
 
 This required a few tweaks to the initial graphing function, but now works for both
@@ -382,3 +382,76 @@ This leaves me with my sets entries looking like this (with some additional styl
 tweaks lumped in):
 
 ![Adding min/max BPM](./set-meta-bpm-min-max.png)
+
+### Running BPM data
+
+Next I want to add running BPM data. That is, I want to be able to see how BPM moves
+throughout the course of a mix.
+
+On its own, this isn't too bad. For all of the sets I record I make it a point to fix the
+beatgrid and add cues for all the songs.
+
+A trick will be figuring out how to tie this with the energy of the songs because it may
+be hard to canonically map song position to song metadata.
+
+But we can deal with that later.
+
+The initial quest is just to chart the BPM of a set which came with a bunch of pitfalls.
+
+First, VDJ just randomly leaves out some BPM data, it will have a timestamp but no value.
+
+Here I thought it might just be the first beatgrid entry, so I came up with this lil
+snippet to fill in that data:
+
+```python
+    # Often there's not a value for the first beatgrid marker.
+    # Fill that with the first available BPM value
+    first_valid_bpm = beatgrid['bpm'].dropna().iloc[0]
+    beatgrid['bpm'].fillna(set_bpm, inplace=True)
+```
+
+But it looks like, on further inspection, it just leaves these out when the value is
+equal to the set computed BPM (`Scan.@Bpm`). So I updated it to:
+
+```python
+     # BPM is left blank if it is the same as set BPM
+    # Fill this in with set BPM (stored confusingly as seconds per beat)
+    # i.e. VDJ BPM of 0.857143 correlates to 70 BPM
+    set_bpm = (60 / recording_data_frame["Scan.@Bpm"].astype(float)[0]).round()
+    beatgrid['bpm'].fillna(set_bpm, inplace=True)
+```
+
+Next it was important to learn to sort these values. This is done easily enough by using
+this snippet.
+
+```python
+    pois["@Pos"] = pois["@Pos"].astype(float)
+    pois = pois.sort_values(by="@Pos")
+```
+
+The first line is important or these timestamps (e.g. "123.456") get treated as strings
+and get ordered incorrectly.
+
+Another challenge is that Cue POIs (as differentiated from beatgrid POIs) don't have BPMs
+associated with them. To fix that, I found a way to fill in missing values first by
+backfilling then by forward filling missing values:
+
+```python
+    pois["@Bpm"] = pois["@Bpm"].fillna(method="bfill")
+    pois["@Bpm"] = pois["@Bpm"].fillna(method="ffill")
+```
+
+Technically, a lot of this is out of discovery order. I found a lot of issues by getting
+weird graphs and having to figure out why they were breaking.
+
+But, at the end of the day, it was relatively trivial to graph, with a few caveats:
+
+1. Had to play with X/Y scales to make it easier to scale data to a fixed box.
+2. Learned that SVG graphs from top right to bottom left, had to flip order in the scale.
+3. Manually added extra points to the data set to close the path in a nice way.
+
+At the end of that, I end up with a simple graph that looks like this:
+
+![BPM Graph V1](./bpm-graph-v1.png)
+
+Next up, figure out how to color this correctly to match energy.
