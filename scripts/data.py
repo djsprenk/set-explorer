@@ -65,6 +65,7 @@ def get_recording_data(set_data):
     recording_data = {
         "bpmMin": pois["bpm"].astype(float).min(),
         "bpmMax": pois["bpm"].astype(float).max(),
+        "length": recording_data_frame["Infos.@SongLength"].astype(float).round()[0],
         "pois": pois[["timestamp", "song", "bpm", "type"]].to_dict(orient="records"),
     }
 
