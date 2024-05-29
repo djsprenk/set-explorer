@@ -125,6 +125,10 @@ footer a {
         grid-column: 2 / span 3;
     }
 
+    .poi-timeline {
+        grid-column: 2 / span 3;
+    }
+
     /* Timeline gets its own line */
     .timeline {
         grid-column: 2 / span 3;
@@ -206,6 +210,11 @@ footer a {
     }
 
     .bpm {
+        grid-column: 2 / span 4;
+    }
+
+
+    .poi-timeline {
         grid-column: 2 / span 4;
     }
 
@@ -295,6 +304,11 @@ footer a {
         grid-column: 2 / span 1;
     }
 
+
+    .poi-timeline {
+        grid-column: 3 / span 3;
+    }
+
     .timeline {
         grid-column: 3 / span 3;
 
@@ -379,6 +393,10 @@ footer a {
     filter: drop-shadow(0px 0px 2px rgb(233, 233, 233)) brightness(125%);
     transform: translate3d(0px, 2px, 0);
     transition-duration: 0.07s;
+}
+
+.poi-timeline {
+    height: 50px;
 }
 
 .timeline {
