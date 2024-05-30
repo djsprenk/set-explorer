@@ -20,9 +20,11 @@
     - [x] Min / max
     - [x] Running BPM
 - [x] Time-align energy / BPM using set cue points.
+- [x] Make SVGs responsive
 
 ## Upcoming
 
+- [ ] Add override data folder for hand-edits
 - [ ] Add hover / click behavior to graphs
 - [ ] Combine Mixcloud stats and VirtualDJ data
 
