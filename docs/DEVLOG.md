@@ -455,3 +455,44 @@ At the end of that, I end up with a simple graph that looks like this:
 ![BPM Graph V1](./bpm-graph-v1.png)
 
 Next up, figure out how to color this correctly to match energy.
+
+### BPM, time, and energy joins
+
+I don't really have a good way to map song position to song data. This is because, while
+POI timing (cues & BPMs) are easily read from the recording metadata, those cues for song
+locations are just strings. This is differentiated from playlists which have direct
+references to songs and their metadata.
+
+I *could* try to match songs based on either CUE sheet or cue position on the recorded 
+track by some sort of text match, but there are often typos / incongruities which make it
+hard to canonically map.
+
+Instead, the best approach I could think of is simple but makes a lot of assumptions.
+
+Basically, for each cue point referring to a song in the recording, I make the assumption
+that the playlist is exactly matched and ordered with the recording cues.
+
+Thus, when I iterate through cues in the recording, I can look up the similar index from
+the playlist and do a mapping of energy to the position / BPM of the cue in the
+recording.
+
+To aid with data cleanup, I added some warning logs that note when there is a length 
+mismatch between these two but gracefully continues (cutting off at the end of the 
+shorter of the two lists).
+
+This pointed out about 2 dozen playlists where this is an issue. Not terrible, but not
+great. Places I see issues in particular:
+
+1. Places I accidentally left out cues / songs from playlist.
+2. Sets with extra placehoder tracks (e.g. breaks) which I mostly took out in the
+  original graphing steps.
+3. Sets with live remixes (2 playlist entries, 1 cue point).
+
+Still, all told, I ended up with a workable set of graphs as below:
+
+(Note that I've left the old playlist graphs nearby for sanity checking.)
+
+![BPM and energy graph V1](./bpm-energy-graph-v1.png)
+
+Next up is to fix this data and investigate better click / hover behavior. I would love
+to get these charts back to the point where you can hover and get song meta.

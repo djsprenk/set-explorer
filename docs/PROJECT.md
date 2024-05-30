@@ -14,20 +14,16 @@
     - [x] Human-readable set name
     - [x] Mixcloud links
     - [x] Album artwork
+- [x] Investigate using Pandas for data analytics.
 - [x] Add song hover tooltip.
 - [x] Add BPM data
     - [x] Min / max
     - [x] Running BPM
-- [ ] Link BPM to energy
+- [x] Time-align energy / BPM using set cue points.
 
 ## Upcoming
 
-- [ ] Create BPM graph of sets from VDJ.
-- [ ] Time-align energy / BPM using set cue points.
-- [ ] Investigate using Pandas for data analytics.
+- [ ] Add hover / click behavior to graphs
+- [ ] Combine Mixcloud stats and VirtualDJ data
 
 ## Defer
-
-- [ ] Combine Mixcloud stats and VirtualDJ data
-- [ ] Web-based graphics.
-- [ ] Graphics interactivity.
