@@ -9,7 +9,7 @@ function getSongMeta (data, index) {
 }
 
 function getSetTitleSubtitle (longformTitle) {
-  titleParts = longformTitle.split(' | ')
+  const titleParts = longformTitle.split(' | ')
 
   if (titleParts.length >= 2) {
     return [titleParts[0], titleParts[1]]
