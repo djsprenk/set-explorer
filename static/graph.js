@@ -119,7 +119,7 @@ function timelineGraph (container, songs, setMetadata) {
 function poisGraph (container, songs, pois, setMetadata, index) {
   // Dimensions / constant
   const graphHeight = 50
-  const graphWidth = 400
+  const graphWidth = 500
   const graphMinBpm = 52
   const graphMaxBpm = 90
 
@@ -155,9 +155,10 @@ function poisGraph (container, songs, pois, setMetadata, index) {
   // Build the timeline group
   const timeline = container
     .append('svg')
-    .attr('class', 'poi-timeline')
-    .attr('width', graphWidth)
-    .attr('height', graphHeight)
+    .attr('class', 'poi-timeline svg-content-responsive')
+    // Responsive SVG needs these 2 attributes and no width and height attr.
+    .attr('preserveAspectRatio', 'xMinYMin meet')
+    .attr('viewBox', `0 0 ${graphWidth} ${graphHeight}`)
 
   // Create gradient
   const gradientId = `gradient-${index}`
