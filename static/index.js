@@ -75,6 +75,24 @@ function setSortOrder (order, data) {
   }
 }
 
+function updatePath (param, value) {
+  const urlParams = new URLSearchParams(window.location.search)
+  if (value !== '') { urlParams.set(param, value) } else { urlParams.delete(value) }
+  window.location.search = urlParams.toString()
+}
+
+function controlClick (event) {
+  const param = event.target.dataset.control
+  const value = event.target.dataset.value
+  updatePath(param, value)
+}
+
+const controls = document.getElementById('controls').getElementsByTagName('span')
+
+for (let i = 0; i < controls.length; i++) {
+  controls[i].addEventListener('click', controlClick)
+}
+
 // Get Query Params
 const urlParams = new URLSearchParams(window.location.search)
 const sortOrder = urlParams.get('order')
