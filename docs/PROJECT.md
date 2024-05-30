@@ -21,6 +21,7 @@
     - [x] Running BPM
 - [x] Time-align energy / BPM using set cue points.
 - [x] Make SVGs responsive
+- [x] Make graph types selectable
 
 ## Upcoming
 

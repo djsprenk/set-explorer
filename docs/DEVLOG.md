@@ -494,5 +494,16 @@ Still, all told, I ended up with a workable set of graphs as below:
 
 ![BPM and energy graph V1](./bpm-energy-graph-v1.png)
 
-Next up is to fix this data and investigate better click / hover behavior. I would love
-to get these charts back to the point where you can hover and get song meta.
+Eventually, I would love to fix this data and investigate better click / hover behavior.
+It would be very cool to get these charts back to the point where you can hover and get song meta.
+
+### Selectable graph types
+
+An easier temp option is to just split out graph displays: Allow selecting of either
+graph type. I did this with query params as I did with sort. To make the code less
+cluttered, I also split out the graphs into separate JS files. Results below:
+
+![Selectable graph types](./graph-types-v1.png)
+
+I further tweaked from the image above to turn the link-based controls to JS-based
+controls to allow setting / resetting of multiple query params.
