@@ -78,6 +78,7 @@ function setSortOrder (order, data) {
 // Get Query Params
 const urlParams = new URLSearchParams(window.location.search)
 const sortOrder = urlParams.get('order')
+const graphType = urlParams.get('graph')
 
 // Sort data
 const sortedData = setSortOrder(sortOrder, songData)
@@ -94,8 +95,13 @@ for (const i in sortedData) {
   createTitle(container, setMetadata)
   createBpmLabel(container, setMetadata)
 
-  if (pois !== undefined) {
-    timelineGraph(container, songs, pois, setMetadata, i)
+  if (graphType === 'timeline') {
+    if (pois !== undefined) {
+      timelineGraph(container, songs, pois, setMetadata, i)
+    } else {
+      // Fallback to playlist graph
+      playlistGraph(container, songs, setMetadata)
+    }
   } else {
     playlistGraph(container, songs, setMetadata)
   }
