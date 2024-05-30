@@ -120,7 +120,7 @@ function poisGraph (container, songs, pois, setMetadata, index) {
   // Dimensions / constant
   const graphHeight = 50
   const graphWidth = 400
-  const graphMinBpm = 60
+  const graphMinBpm = 52
   const graphMaxBpm = 90
 
   // Create scales
