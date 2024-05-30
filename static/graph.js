@@ -70,11 +70,8 @@ function createBpmLabel (container, setMetadata) {
 
   return bpm
 }
-function timelineGraph (container, songs, setMetadata) {
-  const thumbnail = createThumbnail(container, setMetadata)
-  const title = createTitle(container, setMetadata)
-  const bpm = createBpmLabel(container, setMetadata)
 
+function timelineGraph (container, songs, setMetadata) {
   // Build the timeline group
   const timeline = container
     .append('div')
@@ -120,10 +117,6 @@ function timelineGraph (container, songs, setMetadata) {
 }
 
 function poisGraph (container, songs, pois, setMetadata) {
-  const thumbnail = createThumbnail(container, setMetadata)
-  const title = createTitle(container, setMetadata)
-  const bpm = createBpmLabel(container, setMetadata)
-
   // Dimensions / constant
   const graphHeight = 50
   const graphWidth = 400
@@ -210,6 +203,11 @@ for (const i in sortedData) {
   const setMetadata = sortedData[i]
   delete setMetadata.data
   delete setMetadata.pois
+
+  // Create set header
+  createThumbnail(container, setMetadata)
+  createTitle(container, setMetadata)
+  createBpmLabel(container, setMetadata)
 
   if (pois !== undefined) {
     poisGraph(container, songs, pois, setMetadata)
