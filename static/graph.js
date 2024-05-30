@@ -116,7 +116,7 @@ function timelineGraph (container, songs, setMetadata) {
   })
 }
 
-function poisGraph (container, songs, pois, setMetadata) {
+function poisGraph (container, songs, pois, setMetadata, index) {
   // Dimensions / constant
   const graphHeight = 50
   const graphWidth = 400
@@ -132,11 +132,14 @@ function poisGraph (container, songs, pois, setMetadata) {
     .domain([graphMinBpm, graphMaxBpm])
     .range([graphHeight, 0])
 
+  const gradientScale = d3.scaleLinear()
+    .domain([0, setMetadata.length])
+    .range([0, 100])
+
   function getXPos (d, i) {
     const timestamp = parseFloat(d.timestamp)
-    console.log(`${timestamp}: to x coordinate: ${xScale(timestamp)}`)
     if (isNaN(timestamp)) {
-      console.log(`NOT A NUMBER: ${JSON.stringify(d)}`)
+      console.warn(`NOT A NUMBER: ${JSON.stringify(d)}`)
     }
     return xScale(timestamp)
   }
@@ -154,8 +157,56 @@ function poisGraph (container, songs, pois, setMetadata) {
   const timeline = container
     .append('svg')
     .attr('class', 'poi-timeline')
-    .attr('width', 500)
-    .attr('height', 50)
+    .attr('width', graphWidth)
+    .attr('height', graphHeight)
+
+  // Create gradient
+  const gradientId = `gradient-${index}`
+  const gradient = timeline.append('defs')
+    .append('linearGradient')
+    .attr('id', gradientId)
+    .attr('gradientUnits', 'userSpaceOnUse')
+    .attr('x1', 0)
+    .attr('y1', 0)
+    .attr('x2', graphWidth)
+    .attr('y2', 0)
+
+  // Add stops
+  function addColorStop (pos, energy) {
+    const mapper = {
+      0: 'grey',
+      1: 'blue',
+      2: 'green',
+      3: 'yellow',
+      4: 'orange',
+      5: 'red'
+    }
+    gradient.append('stop')
+      // .attr('offset', xScale(pos))
+      .attr('offset', gradientScale(pos) + '%')
+      .attr('stop-color', mapper[energy])
+  }
+
+  // Get just cue points from list
+  function filterCues (list) {
+    return list.filter(item => item.type === 'cue')
+  }
+
+  const cuePoints = filterCues(pois)
+
+  if (cuePoints.length !== songs.length) {
+    console.warn(`Mismatched song / cue length for ${setMetadata.title}`)
+  }
+  for (let i = 0; i < Math.min(cuePoints.length, songs.length); i++) {
+    cuePoints[i].energy = songs[i].Energy
+  }
+
+  // Add energy stops for each cue point
+  cuePoints.forEach((d, i) => {
+    const energy = d.energy
+    const pos = d.timestamp
+    addColorStop(pos, energy)
+  })
 
   console.log(`Drawing set: ${setMetadata.title}`)
   const line = d3.line()
@@ -171,7 +222,7 @@ function poisGraph (container, songs, pois, setMetadata) {
   const path = timeline.append('path')
     .datum(poisPoints) // Binds data to the path element
     .attr('d', line) // Calls the line generator with the data
-    .attr('fill', 'red')
+    .attr('fill', `url(#${gradientId})`)
     .attr('stroke', 'white')
     .attr('stroke-width', 2)
 }
@@ -210,7 +261,7 @@ for (const i in sortedData) {
   createBpmLabel(container, setMetadata)
 
   if (pois !== undefined) {
-    poisGraph(container, songs, pois, setMetadata)
+    poisGraph(container, songs, pois, setMetadata, i)
   } else {
     timelineGraph(container, songs, setMetadata)
   }
