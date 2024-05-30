@@ -149,8 +149,7 @@ function poisGraph (container, songs, pois, setMetadata, index) {
     if (isNaN(effectiveBpm)) {
       console.warn(`BPM is NaN: ${d.stringify()}`)
     }
-    console.log(`${effectiveBpm}: to y coordinate: ${yScale(effectiveBpm)}`)
-    return yScale(effectiveBpm)
+        return yScale(effectiveBpm)
   }
 
   // Build the timeline group
