@@ -164,49 +164,49 @@
     {
         "playlist": "MyLists/Produced Sets.subfolders/20211210 - This is Not a Sex Playlist.vdjfolder",
         "slug": "not-a-sex-playlist",
-        "recording": "",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Produced Sets/20211210 - This is Not a Sex Playlist.mp3",
         "type": "produced-set"
     },
     {
         "playlist": "MyLists/Produced Sets.subfolders/20211222 - Do Androids Dream of Electric Zouk.vdjfolder",
         "slug": "do-androids-dream-of-electric-zouk",
-        "recording": "",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Produced Sets/20211222 - Do Androids Dream of Electric Zouk.mp3",
         "type": "produced-set"
     },
     {
         "playlist": "MyLists/Produced Sets.subfolders/20220110 - Hit Shuffle.vdjfolder",
         "slug": "hit-shuffle",
-        "recording": "",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Produced Sets/20220110 - Hit Shuffle.mp3",
         "type": "produced-set"
     },
     {
         "playlist": "MyLists/Produced Sets.subfolders/20220111 - A Love That Flows (Rini's Set).vdjfolder",
         "slug": "rinis-set",
-        "recording": "",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Produced Sets/20220111 - Rini's Set.mp3",
         "type": "produced-set"
     },
     {
         "playlist": "MyLists/Produced Sets.subfolders/20220113 - Blend.vdjfolder",
         "slug": "blend",
-        "recording": "",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Produced Sets/20220113 - Blend.mp3",
         "type": "produced-set"
     },
     {
         "playlist": "MyLists/Produced Sets.subfolders/20220215 - Valentine's Funk.vdjfolder",
         "slug": "valentines-funk",
-        "recording": "",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Produced Sets/20220215 - Valentine.mp3",
         "type": "produced-set"
     },
     {
         "playlist": "MyLists/Produced Sets.subfolders/20220305 - System Collapse.vdjfolder",
         "slug": "system-collapse",
-        "recording": "",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Produced Sets/20220305 - System Collapse.mp3",
         "type": "produced-set"
     },
     {
         "playlist": "MyLists/Produced Sets.subfolders/20220313 - En el Aire.vdjfolder",
         "slug": "en-el-aire",
-        "recording": "",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Produced Sets/20220313 - En el Aire.mp3",
         "type": "produced-set"
     },
     {
@@ -290,7 +290,7 @@
     {
         "playlist": "MyLists/Produced Sets.subfolders/All Rise in the Church of Zouk (Nate & Dani).vdjfolder",
         "slug": "20230826-danielle-and-nate",
-        "recording": "",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Commissioned Music/Sprenk - Dani & Nate.mp3",
         "type": "produced-set"
     },
     {
@@ -320,7 +320,7 @@
     {
         "playlist": "MyLists/Produced Sets.subfolders/Echoes & Embers.vdjfolder",
         "slug": "20230726-e2e",
-        "recording": "",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Commissioned Music/Sprenk - Echoes & Embers (E2E).mp3",
         "type": "produced-set"
     },
     {
@@ -342,7 +342,7 @@
         "type": "live-set"
     },
     {
-        "playlist": "MyLists/Past Events.subfolders/2021.subfolders/20220122 - Kakah & Julissa.vdjfolder",
+        "playlist": "MyLists/Past Events.subfolders/2022.subfolders/20220122 - Kakah & Julissa.vdjfolder",
         "slug": "kakah-and-julissa-weekender",
         "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20220122 - Kakah and Julissa Weekender.mp3",
         "type": "live-set"
@@ -913,7 +913,7 @@
     },
     {
         "playlist": "MyLists/Past Events.subfolders/2024 Eclipse.subfolders/20240303 - Eclipse 4.vdjfolder",
-        "slug": "",
+        "slug": "20240303-eclipse-4",
         "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20240303 - Eclipse 4.mp3",
         "type": "live-set"
     },
@@ -922,6 +922,12 @@
         "slug": "",
         "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20240303 - Eclipse 5.mp3",
         "type": "live-set"
+    },
+    {
+        "playlist": "MyLists/Produced Sets.subfolders/20240502 - Morocco.vdjfolder",
+        "slug": "20240502-morocco",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Produced Sets/20240502 - Morocco.mp3",
+        "type": "produced-set"
     },
     {
         "playlist": "MyLists/Past Events.subfolders/2024 Zouk Heat.subfolders/20240404 - Zouk Heat 0.vdjfolder",
