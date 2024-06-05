@@ -2,8 +2,8 @@ function timelineGraph (container, songs, pois, setMetadata, index) {
   // Dimensions / constant
   const graphHeight = 50
   const graphWidth = 500
-  const graphMinBpm = 52
-  const graphMaxBpm = 90
+  const graphMinBpm = 50
+  const graphMaxBpm = 100
 
   // Create scales
   const xScale = d3.scaleLinear()
