@@ -23,10 +23,10 @@
 - [x] Make SVGs responsive
 - [x] Make graph types selectable
 - [x] Add song dividers on timelines
+- [x] Fix gradient coloring to center on song, not dividing lines
 
 ## Upcoming
 
-- [ ] Fix gradient coloring to center on song, not dividing lines
 - [ ] Add override data folder for hand-edits
 - [ ] Add hover / click behavior to graphs
 - [ ] Combine Mixcloud stats and VirtualDJ data
