@@ -23,6 +23,15 @@
         width: 100%;
     }
 
+    .set-title .set-name {
+        display: block;
+    }
+
+    .set-title .set-subtitle {
+        display: block;
+        font-size: x-small;
+    }
+
     .timeline {
         display: flex;
         justify-content: left;

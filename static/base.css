@@ -115,14 +115,13 @@ main {
 
 .set-title .set-name {
     font-weight: bold;
-    display: inline-block;
-    padding-right: 1em;
+    padding-bottom: .4em;
 }
 
 .set-title .set-subtitle {
     font-style: italic;
     color: grey;
-    display: inline-block;
+    padding-bottom: 0.4em;
 }
 
 /* Playlist graph */
