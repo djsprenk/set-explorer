@@ -171,7 +171,6 @@ main {
 /* Timeline graph */
 
 .poi-timeline {
-    height: 50px;
     display: inline-block;
     width: 100%;
 }
