@@ -26,6 +26,12 @@ function timelineGraph (container, songs, pois, setMetadata, index) {
     return xScale(timestamp)
   }
 
+  function getXMidpoint (d, i) {
+    const thisTimestamp = parseFloat(cuePoints[i].timestamp)
+    const nextTimestamp = i + 1 < cuePoints.length ? parseFloat(cuePoints[i + 1].timestamp) : parseFloat(setMetadata.length)
+    return thisTimestamp + ((nextTimestamp - thisTimestamp) / 2)
+  }
+
   function getYPos (d, i) {
     const effectiveBpm = d.bpm
     if (isNaN(effectiveBpm)) {
@@ -86,7 +92,7 @@ function timelineGraph (container, songs, pois, setMetadata, index) {
   // Add energy stops for each cue point
   cuePoints.forEach((d, i) => {
     const energy = d.energy
-    const pos = d.timestamp
+    const pos = getXMidpoint(d, i)
     addColorStop(pos, energy)
   })
 
