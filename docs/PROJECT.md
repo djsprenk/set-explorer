@@ -22,9 +22,11 @@
 - [x] Time-align energy / BPM using set cue points.
 - [x] Make SVGs responsive
 - [x] Make graph types selectable
+- [x] Add song dividers on timelines
 
 ## Upcoming
 
+- [ ] Fix gradient coloring to center on song, not dividing lines
 - [ ] Add override data folder for hand-edits
 - [ ] Add hover / click behavior to graphs
 - [ ] Combine Mixcloud stats and VirtualDJ data

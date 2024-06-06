@@ -507,3 +507,20 @@ cluttered, I also split out the graphs into separate JS files. Results below:
 
 I further tweaked from the image above to turn the link-based controls to JS-based
 controls to allow setting / resetting of multiple query params.
+
+## Layout Tweaks
+
+After all this, I tweaked a bit the layout of the page. While I liked the idea of CSS
+grid, it wasn't really working for lining things up appropriately. I ended up using a mix
+of CSS grid (for the thumbnail positioning on the left) and then a flexbox for the set
+info. This made it easier to nicely snap beginning / end content to the bounding height
+of the thumbnail and space out everything else nicely in between.
+
+I also ended up changing text size and positioning of the subtitles on smaller screens to
+help everything fit nicely and split up my CSS documents into their respective responsive
+viewports.
+
+I also added vertical lines for cue points in the sets to help visualize where the song
+changes were.
+
+![Updated page layout with song dividers](./timeline-dividers.png)
