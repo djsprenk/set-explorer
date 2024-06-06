@@ -1,29 +1,21 @@
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-    main {
-        /* 4-column grid with 20px gutters */
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px 20px;
-    }
 
     header {
         font-size: small;
     }
 
-    /* Title takes whole row */
-    #title {
-        grid-column: 1 / span 4;
+    .set-container {
+        display: grid;
+        grid-template-columns: 100px 1fr;
+        gap: 1.5em;
+        padding-bottom: 1.5em;
     }
 
-    #sort {
-        grid-column: 1 / span 4;
-    }
-
-    /* Thumbnail takes 3 rows */
-    .set-thumbnail-link {
-        grid-row-end: span 3;
-        grid-column: 1;
+    .set-info-container {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-between;
     }
 
     /* Thumbnail image fills cell */
@@ -31,23 +23,7 @@
         width: 100%;
     }
 
-    /* Title gets its own line */
-    .set-title {
-        grid-column: 2 / span 3;
-    }
-
-    .bpm {
-        grid-column: 2 / span 3;
-    }
-
-    .poi-timeline {
-        grid-column: 2 / span 3;
-    }
-
-    /* Timeline gets its own line */
     .timeline {
-        grid-column: 2 / span 3;
-
         display: flex;
         justify-content: left;
         align-items: center;
@@ -90,8 +66,6 @@
     }
 
     .song-tooltip {
-        grid-column: 2 / span 3;
         padding: 0.2em;
-        align-self: end;
     }
 }

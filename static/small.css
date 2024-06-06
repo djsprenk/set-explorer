@@ -1,12 +1,6 @@
-
 /* Small devices  and up (portrait tablets and large phones, 600px and up) */
+
 @media only screen and (min-width: 600px) {
-    main {
-        /* 5-column grid with 20px gutters */
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 20px 20px;
-    }
 
     /* One column for logo, the rest for title */
     #title {
@@ -17,32 +11,23 @@
         grid-column: 1 / span 5;
     }
 
-    /* Use 3 rows, this lets us use one each for title, waveform, and BPM */
-    .set-thumbnail-link {
-        grid-row-end: span 3;
-        grid-column: 1;
+    .set-container {
+        display: grid;
+        grid-template-columns: 150px 1fr;
+        gap: 2em;
+        padding-bottom: 2em;
     }
 
-    .set-title {
-        grid-column: 2 / span 4;
-    }
-
-    .bpm {
-        grid-column: 2 / span 4;
-    }
-
-
-    .poi-timeline {
-        grid-column: 2 / span 4;
+    .set-info-container {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-between;
     }
 
     .timeline {
-        grid-column: 2 / span 4;
-
         display: flex;
         justify-content: left;
         align-items: center;
-        align-self: start;
     }
 
     .timeline .song {
@@ -84,8 +69,6 @@
     }
 
     .song-tooltip {
-        grid-column: 2 / span 4;
         padding: 0.2em;
-        align-self: end;
     }
 }

@@ -74,6 +74,24 @@ main {
     padding: 20px;
 }
 
+/* Set container */
+
+.set-container {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 2em;
+    padding-bottom: 2em;
+}
+
+.set-info-container {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+
+    /* Needed to keep sizing */
+    overflow: auto;
+}
+
 /* Thumbnail */
 
 .set-thumbnail {
@@ -97,12 +115,14 @@ main {
 
 .set-title .set-name {
     font-weight: bold;
-    padding-bottom: 0.3em;
+    display: inline-block;
+    padding-right: 1em;
 }
 
 .set-title .set-subtitle {
     font-style: italic;
     color: grey;
+    display: inline-block;
 }
 
 /* Playlist graph */

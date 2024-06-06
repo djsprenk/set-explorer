@@ -61,7 +61,7 @@ function createBpmLabel (container, setMetadata) {
   return bpm
 }
 
-const container = d3.select('#my_dataviz')
+const main = d3.select('#my_dataviz')
 
 function setSortOrder (order, data) {
   // Default to newest first
@@ -108,19 +108,28 @@ for (const i in sortedData) {
   delete setMetadata.data
   delete setMetadata.pois
 
-  // Create set header
+  // Each set gets its own container
+  const container = main
+    .append('div')
+    .attr('class', 'set-container')
+
+  // Create thumbnail / link
   createThumbnail(container, setMetadata)
-  createTitle(container, setMetadata)
-  createBpmLabel(container, setMetadata)
+
+  // Add set information
+  const setInfoContainer = container.append('div').attr('class', 'set-info-container')
+
+  createTitle(setInfoContainer, setMetadata)
+  createBpmLabel(setInfoContainer, setMetadata)
 
   if (graphType === 'timeline') {
     if (pois !== undefined) {
-      timelineGraph(container, songs, pois, setMetadata, i)
+      timelineGraph(setInfoContainer, songs, pois, setMetadata, i)
     } else {
       // Fallback to playlist graph
-      playlistGraph(container, songs, setMetadata)
+      playlistGraph(setInfoContainer, songs, setMetadata)
     }
   } else {
-    playlistGraph(container, songs, setMetadata)
+    playlistGraph(setInfoContainer, songs, setMetadata)
   }
 }
