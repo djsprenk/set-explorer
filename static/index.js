@@ -81,17 +81,27 @@ function updatePath (param, value) {
   window.location.search = urlParams.toString()
 }
 
+// Handle view controls actions
 function controlClick (event) {
   const param = event.target.dataset.control
   const value = event.target.dataset.value
   updatePath(param, value)
 }
 
-const controls = document.getElementById('controls').getElementsByTagName('span')
+const controlMenu = document.getElementById('controls')
+const controls = controlMenu.getElementsByTagName('span')
 
 for (let i = 0; i < controls.length; i++) {
   controls[i].addEventListener('click', controlClick)
 }
+
+// Handle settings menu open / close
+function handleSettingsMenuClick (event) {
+  controlMenu.classList.toggle('hidden')
+}
+
+const settingsMenu = document.getElementById('settings')
+settingsMenu.addEventListener('click', handleSettingsMenuClick)
 
 // Get Query Params
 const urlParams = new URLSearchParams(window.location.search)

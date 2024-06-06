@@ -2,15 +2,6 @@
 
 @media only screen and (min-width: 992px) {
 
-    /* One column for logo, the rest for title */
-    #title {
-        grid-column: 2 / span 4;
-    }
-
-    #sort {
-        grid-column: 1 / span 5;
-    }
-
     .set-container {
         display: grid;
         grid-template-columns: 150px 1fr;
