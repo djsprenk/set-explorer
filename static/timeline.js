@@ -91,20 +91,36 @@ function timelineGraph (container, songs, pois, setMetadata, index) {
   })
 
   console.log(`Drawing set: ${setMetadata.title}`)
+
+  // Create the path for the timeline graph
   const line = d3.line()
     .x((d, i) => getXPos(d, i))
     .y((d, i) => getYPos(d, i))
     .curve(d3.curveLinearClosed)
 
+  // Close the path by filling in the corners
   const bottomLeftPoint = { timestamp: 0, bpm: graphMinBpm }
   const finalBpm = { timestamp: setMetadata.length, bpm: pois[pois.length - 1].bpm }
   const bottomRightPoint = { timestamp: setMetadata.length, bpm: graphMinBpm }
   const poisPoints = [bottomLeftPoint, ...pois, finalBpm, bottomRightPoint]
 
-  const path = timeline.append('path')
-    .datum(poisPoints) // Binds data to the path element
-    .attr('d', line) // Calls the line generator with the data
+  // Draw the path and add fill
+  timeline.append('path')
+    .datum(poisPoints)
+    .attr('d', line)
     .attr('fill', `url(#${gradientId})`)
-    .attr('stroke', 'white')
-    .attr('stroke-width', 2)
+
+  // Add cue point lines for each cue point
+  cuePoints.forEach((d, i) => {
+    const x = getXPos(d, i)
+    const y1 = getYPos(d, i)
+    const y2 = yScale(graphMinBpm)
+
+    timeline.append('line')
+      .attr('x1', x)
+      .attr('y1', y1)
+      .attr('x2', x)
+      .attr('y2', y2)
+      .attr('class', 'cue-point')
+  })
 }
