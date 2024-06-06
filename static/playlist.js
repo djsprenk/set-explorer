@@ -35,20 +35,15 @@ function playlistGraph (container, songs, setMetadata) {
     // Placeholder text to avoid layout shift
     .text('---')
 
-  song.on('mouseover click', function (d, i) {
-    // Mark the song as selected
-    container.selectAll('.song')
-      .attr('class', 'song')
-
-    song.attr('class', 'song selected')
-
-    // Hide all other tooltips
-    container.selectAll('.song-tooltip')
-      .attr('class', 'song-tooltip invisible')
-
+  song.on('mouseover', function (d, i) {
     // Show this tooltip
+    tooltip.classed('invisible', false)
+
     tooltip.attr('data-energy', getEnergy(d, i))
       .text(`${d.Title || 'Unknown'} by ${d.Artist || 'Unknown'}`)
-      .attr('class', 'song-tooltip')
+  })
+
+  song.on('mouseout', function (d, i) {
+    tooltip.classed('invisible', true)
   })
 }
