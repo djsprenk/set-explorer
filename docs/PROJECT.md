@@ -24,6 +24,7 @@
 - [x] Make graph types selectable
 - [x] Add song dividers on timelines
 - [x] Fix gradient coloring to center on song, not dividing lines
+- [x] Add run length
 
 ## Upcoming
 

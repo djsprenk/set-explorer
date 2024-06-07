@@ -524,3 +524,35 @@ I also added vertical lines for cue points in the sets to help visualize where t
 changes were.
 
 ![Updated page layout with song dividers](./timeline-dividers.png)
+
+### Settings Menu
+
+Next, I wanted a way to show / hide the settings menu. This was done with basic JS / CSS,
+on click of the settings menu icon toggling the show / hide styling on settings bar.
+
+The gotchas here were:
+
+1. I had to make the settings bar invisible instead of setting display to none. This
+   makes it easier to preserve the grid layout of the page.
+2. To keep the drop shadow behavior of a hidden bar I ended up copying the styling to the
+   header as well, but ordering it behind the settings bar so there's actually a drop
+   shadow on both elements, you just can't tell with the black-on-black styling.
+
+## More precise. timelines
+
+I took some shortcuts with the original timelines and set the color stops for gradients
+at the beginning of each song. This is not incorrect but it is not, strictly speaking,
+precise. What I ended up doing was calculating the color stop positions by finding the
+midpoint between any two cue points and setting that.
+
+This means the song center is the correct color (from the gradient color stop) and bleeds
+towards the color of adjacent songs on the boundaries which is closer to the actual
+behavior in most sets.
+
+![Timelines and playlists compared for accuracy](./timeline-playlist-comparision.png)
+
+## Adding additional data
+
+I wanted to start adding some more data, an obvious one was run length of each set.
+
+![Page with added run lengths](./added-run-length-info.png)
