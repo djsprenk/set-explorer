@@ -119,6 +119,7 @@ settingsMenu.addEventListener('click', handleSettingsMenuClick)
 const urlParams = new URLSearchParams(window.location.search)
 const sortOrder = urlParams.get('order')
 const graphType = urlParams.get('graph')
+const scaleType = urlParams.get('scale')
 
 // Sort data
 const sortedData = setSortOrder(sortOrder, songData)
@@ -148,7 +149,7 @@ for (const i in sortedData) {
 
   if (graphType === 'timeline') {
     if (pois !== undefined) {
-      timelineGraph(setInfoContainer, songs, pois, setMetadata, i)
+      timelineGraph(setInfoContainer, songs, pois, setMetadata, i, relativeLength = scaleType === 'relative')
     } else {
       // Fallback to playlist graph
       playlistGraph(setInfoContainer, songs, setMetadata)

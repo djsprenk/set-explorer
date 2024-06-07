@@ -1,13 +1,17 @@
-function timelineGraph (container, songs, pois, setMetadata, index) {
+function timelineGraph (container, songs, pois, setMetadata, index, relativeLength = false) {
   // Dimensions / constant
   const graphHeight = 50
   const graphWidth = 500
   const graphMinBpm = 50
   const graphMaxBpm = 100
 
+  // If we are in relative length mode, scale to the length below as max
+  const maxSetLengthMinutes = 140
+  const domainMax = relativeLength ? Math.max(maxSetLengthMinutes * 60, setMetadata.length) : setMetadata.length
+
   // Create scales
   const xScale = d3.scaleLinear()
-    .domain([0, setMetadata.length])
+    .domain([0, domainMax])
     .range([0, graphWidth])
 
   const yScale = d3.scaleLinear()
@@ -15,7 +19,7 @@ function timelineGraph (container, songs, pois, setMetadata, index) {
     .range([graphHeight, 0])
 
   const gradientScale = d3.scaleLinear()
-    .domain([0, setMetadata.length])
+    .domain([0, domainMax])
     .range([0, 100])
 
   function getXPos (d, i) {
