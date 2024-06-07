@@ -150,6 +150,11 @@ main {
     padding-bottom: 0.4em;
 }
 
+/* Set details */
+
+.set-details span {
+    padding-right: 1em;
+}
 /* Playlist graph */
 
 .song[data-energy="0"],

@@ -51,7 +51,7 @@ function createTitle (container, setMetadata) {
 
 function createBpmLabel (container, setMetadata) {
   const bpm = container
-    .append('div')
+    .append('span')
     .attr('class', 'bpm')
 
   if (setMetadata.bpmMin && setMetadata.bpmMax) {
@@ -59,6 +59,18 @@ function createBpmLabel (container, setMetadata) {
   }
 
   return bpm
+}
+
+function createRuntimeLabel (container, setMetadata) {
+  const runtimeLabel = container
+    .append('span')
+    .attr('class', 'runtime')
+
+  if (setMetadata.length) {
+    runtimeLabel.text(`${Math.round(setMetadata.length / 60)} minutes`)
+  }
+
+  return runtimeLabel
 }
 
 const main = d3.select('#my_dataviz')
@@ -130,7 +142,9 @@ for (const i in sortedData) {
   const setInfoContainer = container.append('div').attr('class', 'set-info-container')
 
   createTitle(setInfoContainer, setMetadata)
-  createBpmLabel(setInfoContainer, setMetadata)
+  const setDetails = setInfoContainer.append('div').attr('class', 'set-details')
+  createBpmLabel(setDetails, setMetadata)
+  createRuntimeLabel(setDetails, setMetadata)
 
   if (graphType === 'timeline') {
     if (pois !== undefined) {
