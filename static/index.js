@@ -108,12 +108,23 @@ for (let i = 0; i < controls.length; i++) {
 }
 
 // Handle settings menu open / close
-function handleSettingsMenuClick (event) {
+function handleSettingsMenuToggleClick (event) {
   controlMenu.classList.toggle('hidden')
+  const isHidden = controlMenu.classList.contains('hidden')
+
+  if (isHidden) {
+    setCookie('settingsMenu', 'closed')
+  } else {
+    setCookie('settingsMenu', 'open')
+  }
 }
 
-const settingsMenu = document.getElementById('settings')
-settingsMenu.addEventListener('click', handleSettingsMenuClick)
+const settingsMenuToggle = document.getElementById('settings')
+settingsMenuToggle.addEventListener('click', handleSettingsMenuToggleClick)
+
+if (getCookie('settingsMenu') === 'open') {
+  controlMenu.classList.toggle('hidden', false)
+}
 
 // Get Query Params
 const urlParams = new URLSearchParams(window.location.search)
