@@ -557,7 +557,9 @@ I wanted to start adding some more data, an obvious one was run length of each s
 
 ![Page with added run lengths](./added-run-length-info.png)
 
-## QOL Improvement - Automatically fetch Database from backup
+## QOL Improvements
+
+### Automatically fetch Database from backup
 
 Previously, whenever I wanted new data from VDJ, I had to follow the steps below:
 
@@ -573,3 +575,24 @@ Now I only have to do:
 
 1. Create a database backup from VDJ.
 2. Run `database.py` to fetch that data and copy it into the project.
+
+### Add overrides capabilities
+
+There are some times that I want to manually correct data for display but don't want to
+modify the source data. For this, I added the concept of overrides.
+
+These are extra folders in the `processed-files` and `song-lists` folders which can
+contain files that are read with precedence over their generated counterparts.
+
+If I want to make tweaks to any of these files, I can:
+
+1. Copy the file from the directory into the child `overrides` directory.
+2. Make tweaks.
+
+That will now be the data that displays on the page.
+
+Ideally, this is used infrequently, but I use it do do things like:
+
+1. Remove samples from the cue points lists.
+2. Remove unnecessary or incorrect BPM points.
+3. Fix incorrect song titles / formats that I don't want to correct in the source data.

@@ -27,11 +27,12 @@
 - [x] Add run length
 - [x] Add scaling options
 - [x] Use cookie to keep settings bar value
-- [ ] Add automated fetching of database from backup
+- [x] Add automated fetching of database from backup
+- [x] Add override data folder for hand-edits
 
 ## Upcoming
 
-- [ ] Add override data folder for hand-edits
+- [ ] Add search function to find sets instead of having to provide a fully-qualified path.
 - [ ] Add hover / click behavior to graphs
 - [ ] Combine Mixcloud stats and VirtualDJ data
 
