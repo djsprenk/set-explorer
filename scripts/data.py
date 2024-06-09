@@ -11,9 +11,11 @@ import pandas as pd
 from constants import (
     MIXCLOUD_DATA_FILE,
     RECORDINGS_DATA_DIR,
+    RECORDINGS_DATA_OVERRIDE_DIR,
     SET_MAPPER_FILE,
     SONG_DATA_FILE,
     SONG_LISTS_DIR,
+    SONGS_LIST_OVERRIDE_DIR,
 )
 from utils import read_json_file
 
@@ -28,8 +30,16 @@ def get_recording_data(set_data):
         )
         return
 
-    recording_data_file = Path(RECORDINGS_DATA_DIR, Path(set_data["recording"]).name)
-    recording_data_raw = read_json_file(recording_data_file.with_suffix(".json"))
+    # Check to see if we have an override first
+    recording_file_name = Path(set_data["recording"]).with_suffix(".json").name
+    recording_override_path = Path(RECORDINGS_DATA_OVERRIDE_DIR, recording_file_name)
+    if recording_override_path.exists():
+        recording_data_raw = read_json_file(recording_override_path)
+
+    # Otherwise, get the existing recording file
+    else:
+        recording_data_file = Path(RECORDINGS_DATA_DIR, recording_file_name)
+        recording_data_raw = read_json_file(recording_data_file)
 
     # Read and unpack nested data, renaming important columns
     recording_data_frame = pd.json_normalize(recording_data_raw)
@@ -83,8 +93,17 @@ def extract_song_data_for_playlist(set_data, additional_meta):
 
     Returns dict of cleaned and formatted data.
     """
-    playlist_file = Path(SONG_LISTS_DIR, Path(set_data["playlist"]).name)
-    raw_song_data = read_json_file(playlist_file.with_suffix(".json"))
+
+    # Check to see if we have an override first
+    playlist_file_name = Path(set_data["playlist"]).with_suffix(".json").name
+    playlist_override_file_path = Path(SONGS_LIST_OVERRIDE_DIR, playlist_file_name)
+    if playlist_override_file_path.exists():
+        raw_song_data = read_json_file(playlist_override_file_path)
+
+    # Otherwise, get the existing recording file
+    else:
+        playlist_file_path = Path(SONG_LISTS_DIR, playlist_file_name)
+        raw_song_data = read_json_file(playlist_file_path)
 
     # Read and unpack nested data, renaming important columns
     song_data = pd.json_normalize(raw_song_data)
@@ -143,7 +162,7 @@ if __name__ == "__main__":
 
     for set_data in set_mapper:
         additional_meta = {"type": set_data["type"]}
-        playlist_file = set_data["playlist"]
+        playlist_file = Path(set_data["playlist"])
         extracted_data = extract_song_data_for_playlist(set_data, additional_meta)
         if not extracted_data:
             continue
