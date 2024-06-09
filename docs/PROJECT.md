@@ -25,6 +25,9 @@
 - [x] Add song dividers on timelines
 - [x] Fix gradient coloring to center on song, not dividing lines
 - [x] Add run length
+- [x] Add scaling options
+- [x] Use cookie to keep settings bar value
+- [ ] Add automated fetching of database from backup
 
 ## Upcoming
 

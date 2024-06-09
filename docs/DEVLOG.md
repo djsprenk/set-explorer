@@ -556,3 +556,20 @@ behavior in most sets.
 I wanted to start adding some more data, an obvious one was run length of each set.
 
 ![Page with added run lengths](./added-run-length-info.png)
+
+## QOL Improvement - Automatically fetch Database from backup
+
+Previously, whenever I wanted new data from VDJ, I had to follow the steps below:
+
+1. Create a database backup from VDJ.
+2. Unzip that backup.
+3. Manually copy / paste the contents into the data directory.
+4. Run the `database.py` script to convert it into a JSON format.
+
+I wanted to be able to trim out some of these steps, so I created a script that combines
+steps 2-4 within the same `database.py` script.
+
+Now I only have to do:
+
+1. Create a database backup from VDJ.
+2. Run `database.py` to fetch that data and copy it into the project.
