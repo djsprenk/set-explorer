@@ -296,25 +296,25 @@
     {
         "playlist": "MyLists/Produced Sets.subfolders/All Stars.subfolders/All Stars 01 - Tempo Challenge 1 (70 - 120 bpm).vdjfolder",
         "slug": "challenge-tempo-change-1",
-        "recording": "",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/All Stars/01 Tempo Challenge 70-120.mp3",
         "type": "produced-set"
     },
     {
         "playlist": "MyLists/Produced Sets.subfolders/All Stars.subfolders/All Stars 02 - Zouk Mood (Falling Out of Love).vdjfolder",
         "slug": "mood-falling-out-of-love",
-        "recording": "",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/All Stars/02 Zouk Mood - Falling Out of Love.mp3",
         "type": "produced-set"
     },
     {
         "playlist": "MyLists/Produced Sets.subfolders/All Stars.subfolders/All Stars 03 - All around player.vdjfolder",
         "slug": "all-around-player",
-        "recording": "",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/All Stars/03 All Around Player.mp3",
         "type": "produced-set"
     },
     {
         "playlist": "MyLists/Produced Sets.subfolders/All Stars.subfolders/All Stars 05 - The Pool.vdjfolder",
         "slug": "the-pool",
-        "recording": "",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/All Stars/The Pool.mp3",
         "type": "produced-set"
     },
     {
@@ -931,8 +931,8 @@
     },
     {
         "playlist": "MyLists/Past Events.subfolders/2024 Zouk Heat.subfolders/20240404 - Zouk Heat 0.vdjfolder",
-        "slug": "",
-        "recording": "",
+        "slug": "20240404-zouk-heat-0",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20240404 - Zouk Heat 0.mp3",
         "type": "live-set"
     },
     {
