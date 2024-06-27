@@ -154,7 +154,9 @@ main {
 
 .set-details span {
     padding-right: 1em;
+    display: inline-block;
 }
+
 /* Playlist graph */
 
 .song[data-energy="0"],
