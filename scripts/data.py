@@ -5,6 +5,7 @@ Reads from sets_list.json and writes to data-processed-files/song-data.js.
 """
 
 import json
+from math import nan
 from pathlib import Path
 
 import pandas as pd
@@ -48,6 +49,10 @@ def get_recording_data(set_data):
     pois_data_frame = pd.json_normalize(
         recording_data_frame["Poi"].explode(ignore_index=True)
     )
+
+    # If a set has constant BPM, none of the POIs will include a BPM. Seed it:
+    if "@Bpm" not in pois_data_frame.columns:
+        pois_data_frame["@Bpm"] = nan
 
     # Get POIs
     pois = pois_data_frame[["@Pos", "@Name", "@Bpm", "@Type"]]
