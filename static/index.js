@@ -55,7 +55,11 @@ function createBpmLabel (container, setMetadata) {
     .attr('class', 'bpm')
 
   if (setMetadata.bpmMin && setMetadata.bpmMax) {
-    bpm.text(`${Math.round(setMetadata.bpmMin)} - ${Math.round(setMetadata.bpmMax)} BPM`)
+    if (Math.round(setMetadata.bpmMin) === Math.round(setMetadata.bpmMax)) {
+      bpm.text(`${Math.round(setMetadata.bpmMin)} BPM`)
+    } else {
+      bpm.text(`${Math.round(setMetadata.bpmMin)} - ${Math.round(setMetadata.bpmMax)} BPM`)
+    }
   }
 
   return bpm
