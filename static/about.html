@@ -37,6 +37,16 @@
             border-radius: .2em;
         }
 
+        #example-timeline {
+            width: 100%;
+        }
+
+        #example-playlist {
+            width: 100%;
+            padding: 10px 0;
+            height: 70px;
+        }
+
         /* Extra small devices (phones, 600px and down) */
         @media only screen and (max-width: 600px) {
             main {
@@ -66,6 +76,37 @@
                 and combines data across multiple sources to make it easer to search, explore, and select sets to listen
                 to.
             </p>
+            <p>
+                For each set I have two styles of graph:
+            <ol>
+                <li>Timeilne</li>
+                <li>Playlist</li>
+            </ol>
+            </p>
+            <p>
+                In the <strong>Timeline</strong> graph, height (↑↓) represents BPM, from about 50 BPM to 100 BPM, higher
+                being faster.
+                The horizontal (→) represents time, with bars (|) representing song changes.
+            </p>
+            <p>
+                The color represents energy, as follows.
+            <ul>
+                <li><span class="song" data-energy="1">Lowest</span></li>
+                <li><span class="song" data-energy="2">Low</span></li>
+                <li><span class="song" data-energy="3">Medium</span></li>
+                <li><span class="song" data-energy="4">High</span></li>
+                <li><span class="song" data-energy="5">Highest</span></li>
+            </ul>
+            </p>
+            <img id="example-timeline" src="assets/sample-timeline.svg">
+            <p>
+                So, in the above "timeline" graph, the BPM is relatively flat in the first half with an increase and
+                then decrease in energy. In the second half there is a steady increase in BPM and energy before slowing
+                down and dropping energy in the last few songs.
+            </p>
+            <p>In the <strong>Playlist</strong> graph, time and BPM are not shown. Instead, songs are shown with their
+                energy</p>
+            <embed id="example-playlist" src="assets/sample-playlist.html" />
         </div>
 
         <h2>How it Works</h2>
