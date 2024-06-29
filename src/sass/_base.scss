@@ -195,14 +195,22 @@ main {
     &[data-energy="0"] {
         background-color: grey;
         color: black;
+
+        height: 4px;
+
+        @include respond-to('large') {
+            height: 5px;
+        }
     }
 
     &[data-energy="1"] {
         background-color: blue;
         color: white;
 
-        @include respond-to('small') {
-            height: 4px;
+        height: 4px;
+
+        @include respond-to('large') {
+            height: 10px;
         }
     }
 
@@ -210,8 +218,10 @@ main {
         background-color: green;
         color: white;
 
-        @include respond-to('small') {
-            height: 8px;
+        height: 8px;
+
+        @include respond-to('large') {
+            height: 15px;
         }
     }
 
@@ -219,8 +229,10 @@ main {
         background-color: yellow;
         color: black;
 
-        @include respond-to('small') {
-            height: 12px;
+        height: 12px;
+
+        @include respond-to('large') {
+            height: 20px;
         }
     }
 
@@ -228,8 +240,10 @@ main {
         background-color: orange;
         color: black;
 
-        @include respond-to('small') {
-            height: 16px;
+        height: 16px;
+
+        @include respond-to('large') {
+            height: 25px;
         }
     }
 
@@ -237,8 +251,10 @@ main {
         background-color: red;
         color: white;
 
-        @include respond-to('small') {
-            height: 20px;
+        height: 20px;
+
+        @include respond-to('large') {
+            height: 30px;
         }
     }
 }
@@ -246,10 +262,10 @@ main {
 .song-tooltip {
     border: 1px solid white;
     transition: 0.5s;
+    padding: 0.2em;
 
-    @include respond-to('small') {
-        padding: 0.2em;
-    }
+    /* Allows us to set color in one place but unset height here */
+    height: unset !important;
 }
 
 /* Timeline graph */
@@ -274,31 +290,27 @@ main {
 }
 
 .timeline {
+    display: flex;
+    align-items: center;
     height: 20px;
-
-    @include respond-to('small') {
-        display: flex;
-        align-items: center;
-    }
 
     .song {
         cursor: crosshair;
+
+        min-height: 4px;
+        width: 20px;
+        margin: 0px 1px;
         border: 1px solid white;
 
         &:hover {
             filter: brightness(120%);
             transition-duration: .07s;
+            height: 20px !important;
         }
 
-        @include respond-to('small') {
-            margin: 0px 1px;
-            cursor: crosshair;
-            min-height: 4px;
-            width: 20px;
-            border: 1px solid white;
-
+        @include respond-to('large') {
             &:hover {
-                height: 20px !important;
+                height: 30px !important;
             }
         }
     }
