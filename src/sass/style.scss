@@ -1,8 +1,6 @@
 @charset 'utf-8';
 
 @import 'base';
-@import 'pages/about';
 
-@import 'components/settings';
-@import 'components/playlists';
-@import 'components/timelines';
+@import 'pages';
+@import 'components';
