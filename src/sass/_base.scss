@@ -1,13 +1,6 @@
 @import 'abstracts/colors';
 @import 'abstracts/media-query';
-
-$font: "Rubik", sans-serif;
-
-@mixin theme {
-    background: $background-color;
-    color: $primary-color;
-    font-family: $font;
-}
+@import 'theme';
 
 .hidden {
     display: none !important;
@@ -46,8 +39,8 @@ header {
     justify-content: space-between;
     z-index: 1;
 
-    border-bottom: 1px solid white;
-    box-shadow: 0px 10px 20px black;
+    border-bottom: 1px solid $ui-primary-color;
+    box-shadow: 0px 10px 20px $background-color;
 
     @include respond-to('small') {
         font-size: small;
@@ -71,12 +64,12 @@ main {
 }
 
 footer {
-    border-top: 1px solid white;
+    border-top: 1px solid $ui-primary-color;
     padding: .5em;
 
     /* Add slight shadow effect as a scrolling signifier */
     z-index: 1;
-    box-shadow: 0px -10px 20px black;
+    box-shadow: 0px -10px 20px $background-color;
 
     a {
         color: $primary-color;
