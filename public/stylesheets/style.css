@@ -1,3 +1,4 @@
+/* Colors */
 /* From https://sass-guidelin.es/#architecture */
 .hidden {
   display: none !important;
@@ -64,67 +65,6 @@ header {
 main {
   overflow: scroll;
   padding: 20px;
-}
-
-/* Set container */
-.set-container {
-  display: grid;
-  grid-template-columns: 150px 1fr;
-  gap: 2em;
-  padding-bottom: 2em;
-}
-@media (max-width: 600px) {
-  .set-container {
-    grid-template-columns: 100px 1fr;
-    gap: 1.5em;
-    padding-bottom: 1.5em;
-  }
-}
-
-.set-info-container {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: space-between;
-  /* Needed to keep sizing */
-  overflow: auto;
-}
-
-/* Thumbnail */
-.set-thumbnail {
-  width: 100%;
-  border-radius: 4px;
-  filter: drop-shadow(0px 2px 3px rgb(233, 233, 233));
-}
-.set-thumbnail:hover {
-  filter: drop-shadow(0px 0px 2px rgb(233, 233, 233)) brightness(125%);
-  transform: translate3d(0px, 2px, 0);
-  transition-duration: 0.07s;
-}
-
-/* Set title & subtitle */
-.set-title {
-  color: rgb(233, 233, 233);
-  text-decoration: none;
-}
-.set-title .set-name {
-  font-weight: bold;
-  padding-bottom: 0.4em;
-}
-.set-title .set-subtitle {
-  font-style: italic;
-  color: grey;
-  padding-bottom: 0.4em;
-}
-@media (max-width: 600px) {
-  .set-title .set-subtitle {
-    font-size: x-small;
-  }
-}
-
-/* Set details */
-.set-details span {
-  padding-right: 1em;
-  display: inline-block;
 }
 
 footer {
@@ -138,6 +78,7 @@ footer a {
   color: rgb(233, 233, 233);
 }
 
+/* Colors */
 /* From https://sass-guidelin.es/#architecture */
 .hidden {
   display: none !important;
@@ -205,70 +146,6 @@ header {
 main {
   overflow: scroll;
   padding: 20px;
-}
-
-/* Set container */
-.set-container {
-  display: grid;
-  grid-template-columns: 150px 1fr;
-  gap: 2em;
-  padding-bottom: 2em;
-}
-
-@media (max-width: 600px) {
-  .set-container {
-    grid-template-columns: 100px 1fr;
-    gap: 1.5em;
-    padding-bottom: 1.5em;
-  }
-}
-.set-info-container {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: space-between;
-  /* Needed to keep sizing */
-  overflow: auto;
-}
-
-/* Thumbnail */
-.set-thumbnail {
-  width: 100%;
-  border-radius: 4px;
-  filter: drop-shadow(0px 2px 3px rgb(233, 233, 233));
-}
-
-.set-thumbnail:hover {
-  filter: drop-shadow(0px 0px 2px rgb(233, 233, 233)) brightness(125%);
-  transform: translate3d(0px, 2px, 0);
-  transition-duration: 0.07s;
-}
-
-/* Set title & subtitle */
-.set-title {
-  color: rgb(233, 233, 233);
-  text-decoration: none;
-}
-
-.set-title .set-name {
-  font-weight: bold;
-  padding-bottom: 0.4em;
-}
-
-.set-title .set-subtitle {
-  font-style: italic;
-  color: grey;
-  padding-bottom: 0.4em;
-}
-
-@media (max-width: 600px) {
-  .set-title .set-subtitle {
-    font-size: x-small;
-  }
-}
-/* Set details */
-.set-details span {
-  padding-right: 1em;
-  display: inline-block;
 }
 
 footer {
@@ -315,30 +192,6 @@ footer a {
   #about-page main {
     display: block;
   }
-}
-
-/* Settings / controls menu */
-#controls {
-  padding: 0.5em;
-  border-bottom: 1px solid white;
-  /* Add slight shadow effect as a scrolling signifier */
-  z-index: 2;
-  box-shadow: 0px 10px 20px black;
-}
-#controls.hidden {
-  display: block !important;
-  padding: 0;
-  border: 0;
-}
-#controls.hidden div {
-  display: none;
-}
-#controls div {
-  display: inline-block;
-  padding-right: 1em;
-}
-#controls .control {
-  cursor: pointer;
 }
 
 /* Playlist graph */
@@ -444,6 +297,91 @@ footer a {
   padding: 0.2em;
   /* Allows us to set color in one place but unset height here */
   height: unset !important;
+}
+
+/* Set container */
+.set-container {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 2em;
+  padding-bottom: 2em;
+}
+@media (max-width: 600px) {
+  .set-container {
+    grid-template-columns: 100px 1fr;
+    gap: 1.5em;
+    padding-bottom: 1.5em;
+  }
+}
+
+.set-info-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  /* Needed to keep sizing */
+  overflow: auto;
+}
+
+/* Thumbnail */
+.set-thumbnail {
+  width: 100%;
+  border-radius: 4px;
+  filter: drop-shadow(0px 2px 3px rgb(233, 233, 233));
+}
+.set-thumbnail:hover {
+  filter: drop-shadow(0px 0px 2px rgb(233, 233, 233)) brightness(125%);
+  transform: translate3d(0px, 2px, 0);
+  transition-duration: 0.07s;
+}
+
+/* Set title & subtitle */
+.set-title {
+  color: rgb(233, 233, 233);
+  text-decoration: none;
+}
+.set-title .set-name {
+  font-weight: bold;
+  padding-bottom: 0.4em;
+}
+.set-title .set-subtitle {
+  font-style: italic;
+  color: grey;
+  padding-bottom: 0.4em;
+}
+@media (max-width: 600px) {
+  .set-title .set-subtitle {
+    font-size: x-small;
+  }
+}
+
+/* Set details */
+.set-details span {
+  padding-right: 1em;
+  display: inline-block;
+}
+
+/* Settings / controls menu */
+#controls {
+  padding: 0.5em;
+  border-bottom: 1px solid white;
+  /* Add slight shadow effect as a scrolling signifier */
+  z-index: 2;
+  box-shadow: 0px 10px 20px black;
+}
+#controls.hidden {
+  display: block !important;
+  padding: 0;
+  border: 0;
+}
+#controls.hidden div {
+  display: none;
+}
+#controls div {
+  display: inline-block;
+  padding-right: 1em;
+}
+#controls .control {
+  cursor: pointer;
 }
 
 /* Timeline graph */
