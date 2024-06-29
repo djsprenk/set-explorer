@@ -65,17 +65,6 @@ header {
     align-self: center;
 }
 
-#settings {
-    height: 2em;
-    align-self: center;
-    transition: .4s;
-    cursor: pointer;
-
-    &:hover {
-        transform: rotate(60deg)
-    }
-}
-
 main {
     overflow: scroll;
     padding: 20px;
