@@ -12,7 +12,7 @@ function playlistGraph (container, songs, setMetadata) {
   // Build the playlist group
   const playlist = container
     .append('div')
-    .attr('class', 'timeline')
+    .attr('class', 'playlist')
 
   // Map data to divs
   const song = playlist.selectAll('div')

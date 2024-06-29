@@ -1,0 +1,7 @@
+$font: "Rubik", sans-serif;
+
+@mixin theme {
+    background: $background-color;
+    color: $primary-color;
+    font-family: $font;
+}

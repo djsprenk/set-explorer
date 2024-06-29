@@ -1,0 +1,40 @@
+/* Settings / controls menu */
+
+#settings {
+    height: 2em;
+    align-self: center;
+    transition: .4s;
+    cursor: pointer;
+
+    &:hover {
+        transform: rotate(60deg)
+    }
+}
+
+#controls {
+    padding: .5em;
+    border-bottom: 1px solid white;
+
+    /* Add slight shadow effect as a scrolling signifier */
+    z-index: 2;
+    box-shadow: 0px 10px 20px black;
+
+    &.hidden {
+        display: block !important;
+        padding: 0;
+        border: 0;
+
+        div {
+            display: none;
+        }
+    }
+
+    div {
+        display: inline-block;
+        padding-right: 1em;
+    }
+
+    .control {
+        cursor: pointer;
+    }
+}

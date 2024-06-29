@@ -9,54 +9,10 @@
         rel="stylesheet">
 
     <!-- Load stylesheets -->
-    <link rel="stylesheet" href="base.css">
-    <link rel="stylesheet" href="mobile.css">
-    <link rel="stylesheet" href="small.css">
-    <link rel="stylesheet" href="large.css">
-
-    <!-- Override some stylings -->
-    <style>
-        main {
-            display: grid;
-            grid-template-columns: 1fr 4fr;
-            gap: 1em;
-        }
-
-        div {
-            grid-column: 2 / span 4;
-        }
-
-        a {
-            color: white;
-        }
-
-        .code {
-            font-family: 'Courier New', Courier, monospace;
-            background: #4d4d4d;
-            padding: 0em .2em;
-            border-radius: .2em;
-        }
-
-        #example-timeline {
-            width: 100%;
-        }
-
-        #example-playlist {
-            width: 100%;
-            padding: 10px 0;
-            height: 70px;
-        }
-
-        /* Extra small devices (phones, 600px and down) */
-        @media only screen and (max-width: 600px) {
-            main {
-                display: block;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="stylesheets/style.css">
 </head>
 
-<body>
+<body id="about-page">
 
     <header>
         <a href="https://djsprenk.com"><img id="logo" src="assets/sprenk-logo-gradient-white.png" alt="DJ Sprenk"></a>
@@ -163,15 +119,19 @@
                 This project utilizes the following technologies:
             </p>
             <ul>
-                <li><strong>Python</strong> for scripting and extracting data from VDJ.</li>
-                <li><strong>Pandas</strong> for data sanitization / joining.</li>
-                <li><strong>D3 / JavaScript</strong> for rendering sets & timelines.</li>
+                <li><strong><a href="https://www.python.org/">Python</a></strong> for scripting and extracting data from
+                    VDJ.</li>
+                <li><strong><a href="https://pandas.pydata.org/">Pandas</a></strong> for data sanitization / joining.
+                </li>
+                <li><strong><a href="https://d3js.org/">D3</a> / JavaScript</strong> for rendering sets & timelines.
+                </li>
                 <li><strong>HTML</strong> for page content and structure.</li>
-                <li><strong>CSS</strong> for page styling including <a
-                        hre="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout">CSS Grid</a> and <a
+                <li><strong><a href="https://sass-lang.com/">SASS</a></strong> for page styling including <a
+                        href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout">CSS Grid</a> and <a
                         href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout">Flexbox</a>.
                 </li>
-                <li><strong>Postman</strong> for pulling data from <a href="https://mixcloud.com">Mixcloud</a>.</li>
+                <li><strong><a href="https://www.postman.com/">Postman</a></strong> for pulling data from <a
+                        href="https://mixcloud.com">Mixcloud</a>.</li>
             </ul>
         </div>
 

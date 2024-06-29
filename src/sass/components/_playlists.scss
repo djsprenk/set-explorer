@@ -1,0 +1,108 @@
+/* Playlist graph */
+
+.playlist {
+    display: flex;
+    align-items: center;
+    height: 20px;
+
+    .song {
+        cursor: crosshair;
+
+        min-height: 4px;
+        width: 20px;
+        margin: 0px 1px;
+        border: 1px solid white;
+
+        &:hover {
+            filter: brightness(120%);
+            transition-duration: .07s;
+            height: 20px !important;
+        }
+
+        @include respond-to('large') {
+            &:hover {
+                height: 30px !important;
+            }
+        }
+    }
+}
+
+
+.song,
+.song-tooltip {
+
+    &[data-energy="0"] {
+        background-color: grey;
+        color: black;
+
+        height: 4px;
+
+        @include respond-to('large') {
+            height: 5px;
+        }
+    }
+
+    &[data-energy="1"] {
+        background-color: blue;
+        color: white;
+
+        height: 4px;
+
+        @include respond-to('large') {
+            height: 10px;
+        }
+    }
+
+    &[data-energy="2"] {
+        background-color: green;
+        color: white;
+
+        height: 8px;
+
+        @include respond-to('large') {
+            height: 15px;
+        }
+    }
+
+    &[data-energy="3"] {
+        background-color: yellow;
+        color: black;
+
+        height: 12px;
+
+        @include respond-to('large') {
+            height: 20px;
+        }
+    }
+
+    &[data-energy="4"] {
+        background-color: orange;
+        color: black;
+
+        height: 16px;
+
+        @include respond-to('large') {
+            height: 25px;
+        }
+    }
+
+    &[data-energy="5"] {
+        background-color: red;
+        color: white;
+
+        height: 20px;
+
+        @include respond-to('large') {
+            height: 30px;
+        }
+    }
+}
+
+.song-tooltip {
+    border: 1px solid white;
+    transition: 0.5s;
+    padding: 0.2em;
+
+    /* Allows us to set color in one place but unset height here */
+    height: unset !important;
+}
