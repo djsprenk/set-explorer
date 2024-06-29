@@ -1,7 +1,31 @@
+@charset 'utf-8';
+
+$font: "Rubik", sans-serif;
+
+$primary-color: rgb(233, 233, 233);
+$secondary-color: grey;
+$background-color: rgb(10, 10, 10);
+
+@mixin theme {
+    background: $background-color;
+    color: $primary-color;
+    font-family: $font;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.invisible {
+    visibility: hidden;
+
+    /* Makes transition smoother */
+    opacity: 0;
+}
+
 body {
-    background-color: rgb(10, 10, 10);
-    color: rgb(233, 233, 233);
-    font-family: "Rubik", sans-serif;
+    @include theme;
+
     max-width: 840px;
     margin: auto;
     padding: 20px;
@@ -19,17 +43,6 @@ body {
     box-sizing: border-box;
 }
 
-.hidden {
-    display: none !important;
-}
-
-.invisible {
-    visibility: hidden;
-
-    /* Makes transition smoother */
-    opacity: 0;
-}
-
 header {
     display: flex;
     align-items: center;
@@ -38,17 +51,6 @@ header {
 
     border-bottom: 1px solid white;
     box-shadow: 0px 10px 20px black;
-}
-
-/* Hidden controls menu */
-#controls.hidden {
-    display: block !important;
-    padding: 0;
-    border: 0;
-}
-
-#controls.hidden div {
-    display: none;
 }
 
 #title {
@@ -67,11 +69,14 @@ header {
     align-self: center;
     transition: .4s;
     cursor: pointer;
+
+    &:hover {
+        transform: rotate(60deg)
+    }
 }
 
-#settings:hover {
-    transform: rotate(60deg)
-}
+
+/* Settings / controls menu */
 
 #controls {
     padding: .5em;
@@ -80,15 +85,25 @@ header {
     /* Add slight shadow effect as a scrolling signifier */
     z-index: 2;
     box-shadow: 0px 10px 20px black;
-}
 
-#controls div {
-    display: inline-block;
-    padding-right: 1em;
-}
+    &.hidden {
+        display: block !important;
+        padding: 0;
+        border: 0;
 
-#controls .control {
-    cursor: pointer;
+        div {
+            display: none;
+        }
+    }
+
+    div {
+        display: inline-block;
+        padding-right: 1em;
+    }
+
+    .control {
+        cursor: pointer;
+    }
 }
 
 .legend {
@@ -124,30 +139,31 @@ main {
     width: 100%;
     border-radius: 4px;
     filter: drop-shadow(0px 2px 3px rgb(233, 233, 233));
+
+    &:hover {
+        filter: drop-shadow(0px 0px 2px rgb(233, 233, 233)) brightness(125%);
+        transform: translate3d(0px, 2px, 0);
+        transition-duration: 0.07s;
+    }
 }
 
-.set-thumbnail:hover {
-    filter: drop-shadow(0px 0px 2px rgb(233, 233, 233)) brightness(125%);
-    transform: translate3d(0px, 2px, 0);
-    transition-duration: 0.07s;
-}
 
 /* Set title & subtitle */
 
 .set-title {
-    color: white;
+    color: $primary-color;
     text-decoration: none;
-}
 
-.set-title .set-name {
-    font-weight: bold;
-    padding-bottom: .4em;
-}
+    .set-name {
+        font-weight: bold;
+        padding-bottom: .4em;
+    }
 
-.set-title .set-subtitle {
-    font-style: italic;
-    color: grey;
-    padding-bottom: 0.4em;
+    .set-subtitle {
+        font-style: italic;
+        color: $secondary-color;
+        padding-bottom: 0.4em;
+    }
 }
 
 /* Set details */
@@ -159,40 +175,38 @@ main {
 
 /* Playlist graph */
 
-.song[data-energy="0"],
-.song-tooltip[data-energy="0"] {
-    background-color: grey;
-    color: black;
-}
+.song,
+.song-tooltip {
 
-.song[data-energy="1"],
-.song-tooltip[data-energy="1"] {
-    background-color: blue;
-    color: white;
-}
+    &[data-energy="0"] {
+        background-color: grey;
+        color: black;
+    }
 
-.song[data-energy="2"],
-.song-tooltip[data-energy="2"] {
-    background-color: green;
-    color: white;
-}
+    &[data-energy="1"] {
+        background-color: blue;
+        color: white;
+    }
 
-.song[data-energy="3"],
-.song-tooltip[data-energy="3"] {
-    background-color: yellow;
-    color: black;
-}
+    &[data-energy="2"] {
+        background-color: green;
+        color: white;
+    }
 
-.song[data-energy="4"],
-.song-tooltip[data-energy="4"] {
-    background-color: orange;
-    color: black;
-}
+    &[data-energy="3"] {
+        background-color: yellow;
+        color: black;
+    }
 
-.song[data-energy="5"],
-.song-tooltip[data-energy="5"] {
-    background-color: red;
-    color: white;
+    &[data-energy="4"] {
+        background-color: orange;
+        color: black;
+    }
+
+    &[data-energy="5"] {
+        background-color: red;
+        color: white;
+    }
 }
 
 .song-tooltip {
@@ -205,16 +219,16 @@ main {
 .poi-timeline {
     display: inline-block;
     width: 100%;
-}
 
-.poi-timeline path {
-    stroke: white;
-    stroke-width: 2px;
-}
+    path {
+        stroke: white;
+        stroke-width: 2px;
+    }
 
-.poi-timeline .cue-point {
-    stroke: white;
-    stroke-width: 2px;
+    .cue-point {
+        stroke: white;
+        stroke-width: 2px;
+    }
 }
 
 .svg-content-responsive {
@@ -223,17 +237,18 @@ main {
 
 .timeline {
     height: 20px;
+
+    .song {
+        cursor: crosshair;
+        border: 1px solid white;
+
+        &:hover {
+            filter: brightness(120%);
+            transition-duration: .07s;
+        }
+    }
 }
 
-.timeline .song {
-    cursor: crosshair;
-    border: 1px solid white;
-}
-
-.timeline .song:hover {
-    filter: brightness(120%);
-    transition-duration: .07s;
-}
 
 footer {
     border-top: 1px solid white;
@@ -242,8 +257,8 @@ footer {
     /* Add slight shadow effect as a scrolling signifier */
     z-index: 1;
     box-shadow: 0px -10px 20px black;
-}
 
-footer a {
-    color: white;
+    a {
+        color: $primary-color;
+    }
 }
