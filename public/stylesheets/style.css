@@ -32,8 +32,8 @@ header {
   align-items: center;
   justify-content: space-between;
   z-index: 1;
-  border-bottom: 1px solid white;
-  box-shadow: 0px 10px 20px black;
+  border-bottom: 1px solid rgb(233, 233, 233);
+  box-shadow: 0px 10px 20px rgb(10, 10, 10);
 }
 @media (max-width: 600px) {
   header {
@@ -52,27 +52,17 @@ header {
   align-self: center;
 }
 
-#settings {
-  height: 2em;
-  align-self: center;
-  transition: 0.4s;
-  cursor: pointer;
-}
-#settings:hover {
-  transform: rotate(60deg);
-}
-
 main {
   overflow: scroll;
   padding: 20px;
 }
 
 footer {
-  border-top: 1px solid white;
+  border-top: 1px solid rgb(233, 233, 233);
   padding: 0.5em;
   /* Add slight shadow effect as a scrolling signifier */
   z-index: 1;
-  box-shadow: 0px -10px 20px black;
+  box-shadow: 0px -10px 20px rgb(10, 10, 10);
 }
 footer a {
   color: rgb(233, 233, 233);
@@ -112,8 +102,8 @@ header {
   align-items: center;
   justify-content: space-between;
   z-index: 1;
-  border-bottom: 1px solid white;
-  box-shadow: 0px 10px 20px black;
+  border-bottom: 1px solid rgb(233, 233, 233);
+  box-shadow: 0px 10px 20px rgb(10, 10, 10);
 }
 
 @media (max-width: 600px) {
@@ -132,28 +122,17 @@ header {
   align-self: center;
 }
 
-#settings {
-  height: 2em;
-  align-self: center;
-  transition: 0.4s;
-  cursor: pointer;
-}
-
-#settings:hover {
-  transform: rotate(60deg);
-}
-
 main {
   overflow: scroll;
   padding: 20px;
 }
 
 footer {
-  border-top: 1px solid white;
+  border-top: 1px solid rgb(233, 233, 233);
   padding: 0.5em;
   /* Add slight shadow effect as a scrolling signifier */
   z-index: 1;
-  box-shadow: 0px -10px 20px black;
+  box-shadow: 0px -10px 20px rgb(10, 10, 10);
 }
 
 footer a {
@@ -195,25 +174,25 @@ footer a {
 }
 
 /* Playlist graph */
-.timeline {
+.playlist {
   display: flex;
   align-items: center;
   height: 20px;
 }
-.timeline .song {
+.playlist .song {
   cursor: crosshair;
   min-height: 4px;
   width: 20px;
   margin: 0px 1px;
   border: 1px solid white;
 }
-.timeline .song:hover {
+.playlist .song:hover {
   filter: brightness(120%);
   transition-duration: 0.07s;
   height: 20px !important;
 }
 @media (min-width: 992px) {
-  .timeline .song:hover {
+  .playlist .song:hover {
     height: 30px !important;
   }
 }
@@ -361,6 +340,16 @@ footer a {
 }
 
 /* Settings / controls menu */
+#settings {
+  height: 2em;
+  align-self: center;
+  transition: 0.4s;
+  cursor: pointer;
+}
+#settings:hover {
+  transform: rotate(60deg);
+}
+
 #controls {
   padding: 0.5em;
   border-bottom: 1px solid white;
@@ -385,15 +374,15 @@ footer a {
 }
 
 /* Timeline graph */
-.poi-timeline {
+.timeline {
   display: inline-block;
   width: 100%;
 }
-.poi-timeline path {
+.timeline path {
   stroke: white;
   stroke-width: 2px;
 }
-.poi-timeline .cue-point {
+.timeline .cue-point {
   stroke: white;
   stroke-width: 2px;
 }
