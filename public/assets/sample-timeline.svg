@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg class="poi-timeline svg-content-responsive" preserveAspectRatio="xMinYMin meet" viewBox="0 0 320.5 50" xmlns="http://www.w3.org/2000/svg">
+<svg class="timeline svg-content-responsive" preserveAspectRatio="xMinYMin meet" viewBox="0 0 320.5 50" xmlns="http://www.w3.org/2000/svg">
     <style>
-        .poi-timeline {
+        .timeline {
             display: inline-block;
             width: 100%;
         }
 
-        .poi-timeline path {
+        .timeline path {
             stroke: white;
             stroke-width: 2px;
         }
 
-        .poi-timeline .cue-point {
+        .timeline .cue-point {
             stroke: white;
             stroke-width: 2px;
         }

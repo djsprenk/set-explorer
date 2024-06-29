@@ -47,7 +47,7 @@ function timelineGraph (container, songs, pois, setMetadata, index, relativeLeng
   // Build the timeline group
   const timeline = container
     .append('svg')
-    .attr('class', 'poi-timeline svg-content-responsive')
+    .attr('class', 'timeline svg-content-responsive')
   // Responsive SVG needs these 2 attributes and no width and height attr.
     .attr('preserveAspectRatio', 'xMinYMin meet')
     .attr('viewBox', `0 0 ${graphWidth} ${graphHeight}`)
