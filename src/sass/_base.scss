@@ -1,10 +1,6 @@
-@import '_responsive';
+@import 'abstracts/colors';
 
 $font: "Rubik", sans-serif;
-
-$primary-color: rgb(233, 233, 233);
-$secondary-color: grey;
-$background-color: rgb(10, 10, 10);
 
 @mixin theme {
     background: $background-color;
