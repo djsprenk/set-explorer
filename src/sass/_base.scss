@@ -1,3 +1,5 @@
+@import '_responsive';
+
 $font: "Rubik", sans-serif;
 
 $primary-color: rgb(233, 233, 233);
@@ -49,6 +51,10 @@ header {
 
     border-bottom: 1px solid white;
     box-shadow: 0px 10px 20px black;
+
+    @include respond-to('small') {
+        font-size: small;
+    }
 }
 
 #title {
@@ -120,6 +126,12 @@ main {
     grid-template-columns: 150px 1fr;
     gap: 2em;
     padding-bottom: 2em;
+
+    @include respond-to('small') {
+        grid-template-columns: 100px 1fr;
+        gap: 1.5em;
+        padding-bottom: 1.5em;
+    }
 }
 
 .set-info-container {
@@ -161,6 +173,10 @@ main {
         font-style: italic;
         color: $secondary-color;
         padding-bottom: 0.4em;
+
+        @include respond-to('small') {
+            font-size: x-small;
+        }
     }
 }
 
@@ -184,32 +200,56 @@ main {
     &[data-energy="1"] {
         background-color: blue;
         color: white;
+
+        @include respond-to('small') {
+            height: 4px;
+        }
     }
 
     &[data-energy="2"] {
         background-color: green;
         color: white;
+
+        @include respond-to('small') {
+            height: 8px;
+        }
     }
 
     &[data-energy="3"] {
         background-color: yellow;
         color: black;
+
+        @include respond-to('small') {
+            height: 12px;
+        }
     }
 
     &[data-energy="4"] {
         background-color: orange;
         color: black;
+
+        @include respond-to('small') {
+            height: 16px;
+        }
     }
 
     &[data-energy="5"] {
         background-color: red;
         color: white;
+
+        @include respond-to('small') {
+            height: 20px;
+        }
     }
 }
 
 .song-tooltip {
     border: 1px solid white;
     transition: 0.5s;
+
+    @include respond-to('small') {
+        padding: 0.2em;
+    }
 }
 
 /* Timeline graph */
@@ -236,6 +276,11 @@ main {
 .timeline {
     height: 20px;
 
+    @include respond-to('small') {
+        display: flex;
+        align-items: center;
+    }
+
     .song {
         cursor: crosshair;
         border: 1px solid white;
@@ -243,6 +288,18 @@ main {
         &:hover {
             filter: brightness(120%);
             transition-duration: .07s;
+        }
+
+        @include respond-to('small') {
+            margin: 0px 1px;
+            cursor: crosshair;
+            min-height: 4px;
+            width: 20px;
+            border: 1px solid white;
+
+            &:hover {
+                height: 20px !important;
+            }
         }
     }
 }
