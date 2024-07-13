@@ -1,6 +1,6 @@
 import * as d3 from 'd3'
 
-function timelineGraph (container, songs, pois, setMetadata, index, relativeLength = false) {
+function timelineGraph (container, songs, pois, setMetadata, index, scale) {
   // Dimensions / constant
   const graphHeight = 50
   const graphWidth = 500
@@ -8,6 +8,7 @@ function timelineGraph (container, songs, pois, setMetadata, index, relativeLeng
   const graphMaxBpm = 100
 
   // If we are in relative length mode, scale to the length below as max
+  const relativeLength = scale !== 'stretch'
   const maxSetLengthMinutes = 140
   const domainMax = relativeLength ? Math.max(maxSetLengthMinutes * 60, setMetadata.length) : setMetadata.length
 

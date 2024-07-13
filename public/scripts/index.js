@@ -132,15 +132,17 @@ function drawSetVisualizations (container, sets, displaySettings) {
     createBpmLabel(setDetails, setMetadata)
     createRuntimeLabel(setDetails, setMetadata)
 
-    if (displaySettings.graphType === 'timeline') {
+    // Use playlist graph if specifically requested
+    if (displaySettings.graphType === 'playlist') {
+      playlistGraph(setInfoContainer, songs, setMetadata)
+    } else {
+      // Default to timeline graph...
+      // Falling back to playlist graph if POIs are missing
       if (pois !== undefined) {
-        timelineGraph(setInfoContainer, songs, pois, setMetadata, i, displaySettings.scale === 'relative')
+        timelineGraph(setInfoContainer, songs, pois, setMetadata, i, displaySettings.scale)
       } else {
-      // Fallback to playlist graph
         playlistGraph(setInfoContainer, songs, setMetadata)
       }
-    } else {
-      playlistGraph(setInfoContainer, songs, setMetadata)
     }
   }
 }
