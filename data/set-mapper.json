@@ -949,9 +949,15 @@
     },
     {
         "playlist": "MyLists/Past Events.subfolders/2024 Zouk Heat.subfolders/20240407 - Zouk Heat 3.vdjfolder",
-        "slug": "",
+        "slug": "20240406-zouk-heat-3",
         "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20240406 - Zouk Heat 3.mp3",
         "type": "live-set"
+    },
+    {
+        "playlist": "MyLists/Produced Sets.subfolders/20240516 - Sex Kazoo.vdjfolder",
+        "slug": "20240516-sex-kazoo",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Produced Sets/20240516 - Sex Kazoo.mp3",
+        "type": "produced-set"
     },
     {
         "playlist": "MyLists/Past Events.subfolders/2024 Alisson & Bryn.subfolders/20240510 - Alisson & Bryn 1.vdjfolder",
