@@ -21,3 +21,5 @@ function getCookie (cname) {
 function setCookie (cname, cvalue) {
   document.cookie = `${cname}=${cvalue};SameSite=Strict;path=/;`
 }
+
+export { getCookie, setCookie }

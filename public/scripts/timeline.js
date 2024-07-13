@@ -1,3 +1,5 @@
+import * as d3 from 'd3'
+
 function timelineGraph (container, songs, pois, setMetadata, index, relativeLength = false) {
   // Dimensions / constant
   const graphHeight = 50
@@ -134,3 +136,5 @@ function timelineGraph (container, songs, pois, setMetadata, index, relativeLeng
       .attr('class', 'cue-point')
   })
 }
+
+export { timelineGraph }

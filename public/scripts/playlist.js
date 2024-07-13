@@ -47,3 +47,5 @@ function playlistGraph (container, songs, setMetadata) {
     tooltip.classed('invisible', true)
   })
 }
+
+export { playlistGraph }

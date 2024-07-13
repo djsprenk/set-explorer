@@ -1,3 +1,10 @@
+import * as d3 from 'd3'
+import songData from '../data/song-data'
+
+import { getCookie, setCookie } from './cookie'
+import { timelineGraph } from './timeline'
+import { playlistGraph } from './playlist'
+
 function getSetTitleSubtitle (longformTitle) {
   const titleParts = longformTitle.split(' | ')
 
@@ -76,8 +83,6 @@ function createRuntimeLabel (container, setMetadata) {
   return runtimeLabel
 }
 
-const main = d3.select('#my_dataviz')
-
 function setSortOrder (order, data) {
   // Default to newest first
   if (order === null || order === 'newest') {
@@ -103,72 +108,77 @@ function controlClick (event) {
   updatePath(param, value)
 }
 
-const controlMenu = document.getElementById('controls')
-const controls = controlMenu.getElementsByTagName('span')
+window.addEventListener('load', function () {
+  const main = d3.select('#my_dataviz')
 
-for (let i = 0; i < controls.length; i++) {
-  controls[i].addEventListener('click', controlClick)
-}
+  const controlMenu = document.getElementById('controls')
+  const controls = controlMenu.getElementsByTagName('span')
 
-// Handle settings menu open / close
-function handleSettingsMenuToggleClick (event) {
-  controlMenu.classList.toggle('hidden')
-  const isHidden = controlMenu.classList.contains('hidden')
+  // Handle settings menu open / close
+  function handleSettingsMenuToggleClick (event) {
+    controlMenu.classList.toggle('hidden')
+    const isHidden = controlMenu.classList.contains('hidden')
 
-  if (isHidden) {
-    setCookie('settingsMenu', 'closed')
-  } else {
-    setCookie('settingsMenu', 'open')
-  }
-}
-
-const settingsMenuToggle = document.getElementById('settings')
-settingsMenuToggle.addEventListener('click', handleSettingsMenuToggleClick)
-
-if (getCookie('settingsMenu') === 'open') {
-  controlMenu.classList.toggle('hidden', false)
-}
-
-// Get Query Params
-const urlParams = new URLSearchParams(window.location.search)
-const sortOrder = urlParams.get('order')
-const graphType = urlParams.get('graph')
-const scaleType = urlParams.get('scale')
-
-// Sort data
-const sortedData = setSortOrder(sortOrder, songData)
-
-for (const i in sortedData) {
-  const songs = sortedData[i].data
-  const pois = sortedData[i].pois
-  const setMetadata = sortedData[i]
-  delete setMetadata.data
-  delete setMetadata.pois
-
-  // Each set gets its own container
-  const container = main
-    .append('div')
-    .attr('class', 'set-container')
-
-  // Create thumbnail / link
-  createThumbnail(container, setMetadata)
-
-  // Add set information
-  const setInfoContainer = container.append('div').attr('class', 'set-info-container')
-
-  createTitle(setInfoContainer, setMetadata)
-  const setDetails = setInfoContainer.append('div').attr('class', 'set-details')
-  createBpmLabel(setDetails, setMetadata)
-  createRuntimeLabel(setDetails, setMetadata)
-
-  if (graphType === 'timeline') {
-    if (pois !== undefined) {
-      timelineGraph(setInfoContainer, songs, pois, setMetadata, i, relativeLength = scaleType === 'relative')
+    if (isHidden) {
+      setCookie('settingsMenu', 'closed')
     } else {
+      setCookie('settingsMenu', 'open')
+    }
+  }
+
+  for (let i = 0; i < controls.length; i++) {
+    controls[i].addEventListener('click', controlClick)
+  }
+
+  const settingsMenuToggle = document.getElementById('settings')
+  settingsMenuToggle.addEventListener('click', handleSettingsMenuToggleClick)
+
+  if (getCookie('settingsMenu') === 'open') {
+    controlMenu.classList.toggle('hidden', false)
+  }
+
+  // Get Query Params
+  const urlParams = new URLSearchParams(window.location.search)
+  const sortOrder = urlParams.get('order')
+  const graphType = urlParams.get('graph')
+  const scaleType = urlParams.get('scale')
+
+  console.log(`Song Data ${songData}`)
+  // Sort data
+  const sortedData = setSortOrder(sortOrder, songData)
+
+  for (const i in sortedData) {
+    const songs = sortedData[i].data
+    const pois = sortedData[i].pois
+    const setMetadata = sortedData[i]
+    delete setMetadata.data
+    delete setMetadata.pois
+
+    // Each set gets its own container
+    const container = main
+      .append('div')
+      .attr('class', 'set-container')
+
+    // Create thumbnail / link
+    createThumbnail(container, setMetadata)
+
+    // Add set information
+    const setInfoContainer = container.append('div').attr('class', 'set-info-container')
+
+    createTitle(setInfoContainer, setMetadata)
+    const setDetails = setInfoContainer.append('div').attr('class', 'set-details')
+    createBpmLabel(setDetails, setMetadata)
+    createRuntimeLabel(setDetails, setMetadata)
+
+    if (graphType === 'timeline') {
+      if (pois !== undefined) {
+        timelineGraph(setInfoContainer, songs, pois, setMetadata, i, scaleType === 'relative')
+      } else {
       // Fallback to playlist graph
+        playlistGraph(setInfoContainer, songs, setMetadata)
+      }
+    } else {
       playlistGraph(setInfoContainer, songs, setMetadata)
     }
-  } else {
-    playlistGraph(setInfoContainer, songs, setMetadata)
   }
-}
+})
