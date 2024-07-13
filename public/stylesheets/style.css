@@ -37,7 +37,7 @@ header {
 }
 @media (max-width: 600px) {
   header {
-    font-size: small;
+    font-size: x-small;
   }
 }
 
@@ -108,7 +108,7 @@ header {
 
 @media (max-width: 600px) {
   header {
-    font-size: small;
+    font-size: x-small;
   }
 }
 #title {
