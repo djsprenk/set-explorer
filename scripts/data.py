@@ -177,5 +177,6 @@ if __name__ == "__main__":
         print(f"Writing compiled set data to {SONG_DATA_FILE}")
         output_file.write("const songData = ")
         output_file.write(json.dumps(sets_data))
+        output_file.write("\n export default songData")
         output_file.close()
         print("DONE")

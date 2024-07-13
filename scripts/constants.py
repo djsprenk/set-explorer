@@ -19,11 +19,11 @@ SONGS_LIST_OVERRIDE_DIR = Path(SONG_LISTS_DIR, "overrides")
 RECORDINGS_DATA_OVERRIDE_DIR = Path(RECORDINGS_DATA_DIR, "overrides")
 
 # Data Output
-STATIC_DIR = Path("static")
+DATA_OUTPUT_DIR = Path("public/data")
 
 # Files
 VDJ_DB_FILE = Path(VDJ_EXPORT_DIR, "database.xml")
 JSON_DB_FILE = Path(PROCESSED_FILES_DIR, "database.json")
 SET_MAPPER_FILE = Path(DATA_DIR, "set-mapper.json")
 MIXCLOUD_DATA_FILE = Path(PROCESSED_FILES_DIR, "mixcloud-data.json")
-SONG_DATA_FILE = Path(STATIC_DIR, "song-data.js")
+SONG_DATA_FILE = Path(DATA_OUTPUT_DIR, "song-data.js")
