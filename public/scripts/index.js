@@ -1,9 +1,27 @@
 import * as d3 from 'd3'
 import songData from '../data/song-data'
 
-import { getCookie, setCookie } from './cookie'
+import { getDisplaySettingsFromQuery, setupGraphControlsMenu } from './controls'
 import { timelineGraph } from './timeline'
 import { playlistGraph } from './playlist'
+
+/**
+ * Sort sets based on the requested order.
+ * @param {*} sets List of sets
+ * @param {*} sortOrder Sort order ('newest' or 'oldest')
+ * @returns Sorted sets
+ */
+function sortSets (sets, sortOrder) {
+  // Default to newest first
+  if (sortOrder === null || sortOrder === 'newest') {
+    return sets.sort((a, b) => Date.parse(b.uploadTimestamp) - Date.parse(a.uploadTimestamp))
+  } else if (sortOrder === 'oldest') {
+    return sets.sort((a, b) => Date.parse(a.uploadTimestamp) - Date.parse(b.uploadTimestamp))
+  } else {
+    console.error(`Bad sort order: ${sortOrder}`)
+    return sortOrder
+  }
+}
 
 function getSetTitleSubtitle (longformTitle) {
   const titleParts = longformTitle.split(' | ')
@@ -83,96 +101,40 @@ function createRuntimeLabel (container, setMetadata) {
   return runtimeLabel
 }
 
-function setSortOrder (order, data) {
-  // Default to newest first
-  if (order === null || order === 'newest') {
-    return data.sort((a, b) => Date.parse(b.uploadTimestamp) - Date.parse(a.uploadTimestamp))
-  } else if (order === 'oldest') {
-    return data.sort((a, b) => Date.parse(a.uploadTimestamp) - Date.parse(b.uploadTimestamp))
-  } else {
-    console.error(`Bad sort order: ${order}`)
-    return data
-  }
-}
-
-function updatePath (param, value) {
-  const urlParams = new URLSearchParams(window.location.search)
-  if (value !== '') { urlParams.set(param, value) } else { urlParams.delete(value) }
-  window.location.search = urlParams.toString()
-}
-
-// Handle view controls actions
-function controlClick (event) {
-  const param = event.target.dataset.control
-  const value = event.target.dataset.value
-  updatePath(param, value)
-}
-
-window.addEventListener('load', function () {
-  const main = d3.select('#my_dataviz')
-
-  const controlMenu = document.getElementById('controls')
-  const controls = controlMenu.getElementsByTagName('span')
-
-  // Handle settings menu open / close
-  function handleSettingsMenuToggleClick (event) {
-    controlMenu.classList.toggle('hidden')
-    const isHidden = controlMenu.classList.contains('hidden')
-
-    if (isHidden) {
-      setCookie('settingsMenu', 'closed')
-    } else {
-      setCookie('settingsMenu', 'open')
-    }
-  }
-
-  for (let i = 0; i < controls.length; i++) {
-    controls[i].addEventListener('click', controlClick)
-  }
-
-  const settingsMenuToggle = document.getElementById('settings')
-  settingsMenuToggle.addEventListener('click', handleSettingsMenuToggleClick)
-
-  if (getCookie('settingsMenu') === 'open') {
-    controlMenu.classList.toggle('hidden', false)
-  }
-
-  // Get Query Params
-  const urlParams = new URLSearchParams(window.location.search)
-  const sortOrder = urlParams.get('order')
-  const graphType = urlParams.get('graph')
-  const scaleType = urlParams.get('scale')
-
-  console.log(`Song Data ${songData}`)
-  // Sort data
-  const sortedData = setSortOrder(sortOrder, songData)
-
-  for (const i in sortedData) {
-    const songs = sortedData[i].data
-    const pois = sortedData[i].pois
-    const setMetadata = sortedData[i]
+/**
+ * Draw set visualizations to the container with the given display settings
+ * @param {D3 Selection} container
+ * @param {[SetMetadata]} sets
+ * @param {Object} displaySettings
+ */
+function drawSetVisualizations (container, sets, displaySettings) {
+  // Draw graphs
+  for (const i in sets) {
+    const songs = sets[i].data
+    const pois = sets[i].pois
+    const setMetadata = sets[i]
     delete setMetadata.data
     delete setMetadata.pois
 
     // Each set gets its own container
-    const container = main
+    const setContainer = container
       .append('div')
       .attr('class', 'set-container')
 
     // Create thumbnail / link
-    createThumbnail(container, setMetadata)
+    createThumbnail(setContainer, setMetadata)
 
     // Add set information
-    const setInfoContainer = container.append('div').attr('class', 'set-info-container')
+    const setInfoContainer = setContainer.append('div').attr('class', 'set-info-container')
 
     createTitle(setInfoContainer, setMetadata)
     const setDetails = setInfoContainer.append('div').attr('class', 'set-details')
     createBpmLabel(setDetails, setMetadata)
     createRuntimeLabel(setDetails, setMetadata)
 
-    if (graphType === 'timeline') {
+    if (displaySettings.graphType === 'timeline') {
       if (pois !== undefined) {
-        timelineGraph(setInfoContainer, songs, pois, setMetadata, i, scaleType === 'relative')
+        timelineGraph(setInfoContainer, songs, pois, setMetadata, i, displaySettings.scale === 'relative')
       } else {
       // Fallback to playlist graph
         playlistGraph(setInfoContainer, songs, setMetadata)
@@ -181,4 +143,20 @@ window.addEventListener('load', function () {
       playlistGraph(setInfoContainer, songs, setMetadata)
     }
   }
+}
+
+// Wait until page is loaded
+window.addEventListener('load', function () {
+  // Init controls
+  setupGraphControlsMenu(this.document)
+
+  // Get display settings
+  const displaySettings = getDisplaySettingsFromQuery()
+
+  // Sort data
+  const sortedSets = sortSets(songData, displaySettings.sortOrder)
+
+  // Draw set visualizations
+  const container = d3.select('#visualizations')
+  drawSetVisualizations(container, sortedSets, displaySettings)
 })
