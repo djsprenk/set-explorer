@@ -1,6 +1,9 @@
+from datetime import datetime
+from pathlib import Path
+
 import requests
 from constants import MIXCLOUD_ACCOUNT_NAME, MIXCLOUD_DATA_FILE, PROCESSED_FILES_DIR
-from utils import write_json_file
+from utils import write_csv_file, write_json_file
 
 
 def get_cloudcasts():
@@ -37,6 +40,31 @@ def get_cloudcasts():
             cloudcasts["data"].append(cloudcast)
 
     return cloudcasts
+
+
+def cloudcasts_to_csv(cloudcasts):
+    """Convert cloudcasts into a CSV for data analysis."""
+
+    sets = cloudcasts["data"]
+    output = []
+
+    for item in sets:
+        # Convert date from YYYY-MM-DDTHH:mm:ssZ to YYYY-MM-DD HH:mm:ss
+        date_str = item["created_time"]
+        dt = datetime.strptime(date_str, "%Y-%m-%dT%H:%M:%SZ")
+
+        data = {
+            "name": item["name"],
+            "date": dt.strftime("%Y-%m-%d %H:%M:%S"),
+            "plays": item["play_count"],
+            "listeners": item["listener_count"],
+            "reposts": item["repost_count"],
+            "favorites": item["favorite_count"],
+            "length": item["audio_length"],
+        }
+        output.append(data)
+
+    write_csv_file(output, Path(PROCESSED_FILES_DIR, "mixcloud.csv"))
 
 
 if __name__ == "__main__":

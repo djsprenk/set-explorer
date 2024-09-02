@@ -1,11 +1,11 @@
 """Utility functions used across multiple files"""
 
+import csv
 import json
 import os
 import sys
 
 import xmltodict
-from constants import JSON_DB_FILE
 
 
 def command_args_flags():
@@ -63,6 +63,30 @@ def write_json_file(data, output_json_path):
     with open(output_json_path, "w") as json_file:
         json_file.write(json_data)
         json_file.close()
+
+
+def write_csv_file(data, output_path, field_names=None):
+    """Write list or list of dict data to a CSV file."""
+    with open(output_path, "w", newline="") as file:
+
+        # Dict writer
+        if isinstance(data[0], dict):
+            field_names = field_names if field_names else data[0].keys()
+            writer = csv.DictWriter(file, fieldnames=field_names)
+
+            writer.writeheader()
+            writer.writerows(data)
+
+        # List writer
+        elif isinstance(data[0], list):
+            writer = csv.writer(file)
+            writer.writerows(data)
+
+        # Failure case
+        else:
+            raise ValueError(
+                "Unsupported data format. Provide a list of lists or a list of dictionaries."
+            )
 
 
 def file_in_directory(filename, directory):
