@@ -31,3 +31,6 @@ update-all: playlists recording-scans update-mixcloud-data compile-data  # Combi
 
 publish:  # Copy files over to another project
 	cp -R static/. ../nsprenkle.github.io/projects/dj-analytics
+
+build:
+	npm run build
