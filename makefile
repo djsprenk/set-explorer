@@ -29,8 +29,14 @@ compile-data:  # Rewrite data without doing any additional data pulls
 
 update-all: playlists recording-scans update-mixcloud-data compile-data  # Combines song data and mixcloud data into song-data.js
 
-publish:  # Copy files over to another project
-	cp -R static/. ../nsprenkle.github.io/projects/dj-analytics
+develop:  # Open development environment
+	npm run develop
+
+build:  # Build files to /dist/
+	npm run build
+
+publish: build  # Copy files over to another project
+	cp -R dist/. ../djsprenk.github.io
 
 build:
 	npm run build
