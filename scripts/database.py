@@ -28,7 +28,7 @@ def lookup_song_from_database(tag, value, database=None):
         if song[tag] == value:
             return song
 
-    raise ValueError
+    raise ValueError(f"Not found: in database {value}")
 
 
 def database_to_json():
