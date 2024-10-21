@@ -173,6 +173,10 @@ footer a {
   }
 }
 
+#search-results {
+  margin-bottom: 1em;
+}
+
 /* Playlist graph */
 .playlist {
   display: flex;

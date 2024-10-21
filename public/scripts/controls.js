@@ -133,14 +133,16 @@ function handleBpmFilterChange (event) {
     }
   }
 
-  const emptySearchElement = document.getElementById('empty-search')
+  const searchResults = document.getElementById('search-results')
+  const searchResultsNumber = document.getElementById('search-results-number')
   const setsVisible = document.querySelectorAll('.set-container:not(.hidden)').length
 
   // Show no sets found message if all sets are filtered out
-  if (setsVisible <= 0) {
-    emptySearchElement.classList.remove('hidden')
+  if (setsVisible !== setContainers.length) {
+    searchResults.classList.remove('hidden')
+    searchResultsNumber.textContent = setsVisible
   } else {
-    emptySearchElement.classList.add('hidden')
+    searchResults.classList.add('hidden')
   }
 }
 
