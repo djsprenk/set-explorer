@@ -146,6 +146,12 @@ function drawSetVisualizations (container, sets, displaySettings) {
         playlistGraph(setInfoContainer, songs, setMetadata)
       }
     }
+
+    // Hide sets outside of filtered BPM range
+    if ((displaySettings.minBpm && setMetadata.bpmMin < displaySettings.minBpm) ||
+        (displaySettings.maxBpm && setMetadata.bpmMax > displaySettings.maxBpm)) {
+      setContainer.classed('hidden', true)
+    }
   }
 }
 

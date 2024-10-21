@@ -14,11 +14,15 @@ function getDisplaySettingsFromQuery () {
   const sortOrder = urlParams.get('order')
   const graphType = urlParams.get('graph')
   const scaleType = urlParams.get('scale')
+  const minBpm = urlParams.get('min-bpm')
+  const maxBpm = urlParams.get('max-bpm')
 
   return {
     sortOrder,
     graphType,
-    scale: scaleType
+    scale: scaleType,
+    minBpm,
+    maxBpm
   }
 }
 
@@ -44,6 +48,7 @@ function findMinMaxBpm (setArray) {
  */
 function setupGraphControlsMenu (document, songData) {
   const controlMenu = document.getElementById(controlMenuId)
+  const settingsFromQuery = getDisplaySettingsFromQuery()
 
   // Handle settings menu open / close
   function handleSettingsMenuToggleClick (event) {
@@ -80,8 +85,9 @@ function setupGraphControlsMenu (document, songData) {
   // Set up BPM menu
   const bpmControls = document.getElementById('bpm').getElementsByTagName('input')
   const { minBpm, maxBpm } = findMinMaxBpm(songData)
-  document.getElementById('min-bpm').value = parseInt(minBpm)
-  document.getElementById('max-bpm').value = parseInt(maxBpm)
+
+  document.getElementById('min-bpm').value = parseInt(settingsFromQuery.minBpm) || parseInt(minBpm)
+  document.getElementById('max-bpm').value = parseInt(settingsFromQuery.maxBpm) || parseInt(maxBpm)
 
   // Add BPM change handlers
   for (let i = 0; i < bpmControls.length; i++) {
@@ -93,11 +99,19 @@ function setupGraphControlsMenu (document, songData) {
  * Updates window location query params based on display selections
  * @param {*} param Query param to add / edit
  * @param {*} value Value to add / edit
+ * @param {Boolean} reload Whether or not to trigger a page reload or just push history
  */
-function updatePath (param, value) {
+function updatePath (param, value, reload = true) {
   const urlParams = new URLSearchParams(window.location.search)
   if (value !== '') { urlParams.set(param, value) } else { urlParams.delete(value) }
-  window.location.search = urlParams.toString()
+
+  // Clicking controls should reload page, JS controls should just update the path
+  if (reload) {
+    window.location.search = urlParams.toString()
+  } else {
+    // eslint-disable-next-line no-undef
+    history.pushState({}, '', `?${urlParams.toString()}`)
+  }
 }
 
 /**
@@ -116,6 +130,13 @@ function handleBpmFilterChange (event) {
   // Get set min/max BPM
   const minBpm = parseInt(document.getElementById('min-bpm').value)
   const maxBpm = parseInt(document.getElementById('max-bpm').value)
+
+  // Set the path
+  if (event.target.id === 'max-bpm') {
+    updatePath('max-bpm', maxBpm, false)
+  } else if (event.target.id === 'min-bpm') {
+    updatePath('min-bpm', minBpm, false)
+  }
 
   // Get all set containers
   const setContainers = document.getElementsByClassName('set-container')
