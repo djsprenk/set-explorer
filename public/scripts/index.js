@@ -120,6 +120,8 @@ function drawSetVisualizations (container, sets, displaySettings) {
     const setContainer = container
       .append('div')
       .attr('class', 'set-container')
+      .attr('data-minBpm', setMetadata.bpmMin)
+      .attr('data-maxBpm', setMetadata.bpmMax)
 
     // Create thumbnail / link
     createThumbnail(setContainer, setMetadata)
@@ -150,7 +152,7 @@ function drawSetVisualizations (container, sets, displaySettings) {
 // Wait until page is loaded
 window.addEventListener('load', function () {
   // Init controls
-  setupGraphControlsMenu(this.document)
+  setupGraphControlsMenu(this.document, songData)
 
   // Get display settings
   const displaySettings = getDisplaySettingsFromQuery()

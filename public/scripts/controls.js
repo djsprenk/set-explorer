@@ -23,15 +23,31 @@ function getDisplaySettingsFromQuery () {
 }
 
 /**
+ * Get the min and max BPM of all input sets
+ * @param {*} setArray - songData
+ * @returns {minBpm, maxBpm}
+ */
+function findMinMaxBpm (setArray) {
+  if (setArray.length === 0) return null
+
+  return setArray.reduce((acc, obj) => {
+    return {
+      minBpm: Math.min(acc.minBpm, obj.bpmMin),
+      maxBpm: Math.max(acc.maxBpm, obj.bpmMax)
+    }
+  }, { minBpm: setArray[0].bpmMin, maxBpm: setArray[0].bpmMax })
+}
+
+/**
  * Sets up handlers for graph control menu items.
  * @param {*} document document object
  */
-function setupGraphControlsMenu (document) {
+function setupGraphControlsMenu (document, songData) {
   const controlMenu = document.getElementById(controlMenuId)
-  const controls = controlMenu.getElementsByTagName('span')
 
   // Handle settings menu open / close
   function handleSettingsMenuToggleClick (event) {
+    event.preventDefault()
     controlMenu.classList.toggle('hidden')
     const isHidden = controlMenu.classList.contains('hidden')
 
@@ -42,15 +58,34 @@ function setupGraphControlsMenu (document) {
     }
   }
 
-  for (let i = 0; i < controls.length; i++) {
-    controls[i].addEventListener('click', controlClick)
-  }
-
   const settingsMenuToggle = document.getElementById('settings')
   settingsMenuToggle.addEventListener('click', handleSettingsMenuToggleClick)
 
   if (getCookie(settingsMenuCookie) === 'open') {
     controlMenu.classList.toggle('hidden', false)
+  }
+
+  // Set up view controls
+  const sortControls = document.getElementById('sort').getElementsByTagName('span')
+  const scaleControls = document.getElementById('scale').getElementsByTagName('span')
+  const graphTypeControls = document.getElementById('graph-type').getElementsByTagName('span')
+
+  const viewControls = [...sortControls, ...scaleControls, ...graphTypeControls]
+
+  // Add click handlers
+  for (let i = 0; i < viewControls.length; i++) {
+    viewControls[i].addEventListener('click', controlClick)
+  }
+
+  // Set up BPM menu
+  const bpmControls = document.getElementById('bpm').getElementsByTagName('input')
+  const { minBpm, maxBpm } = findMinMaxBpm(songData)
+  document.getElementById('min-bpm').value = parseInt(minBpm)
+  document.getElementById('max-bpm').value = parseInt(maxBpm)
+
+  // Add BPM change handlers
+  for (let i = 0; i < bpmControls.length; i++) {
+    bpmControls[i].addEventListener('change', handleBpmFilterChange)
   }
 }
 
@@ -73,6 +108,40 @@ function controlClick (event) {
   const param = event.target.dataset.control
   const value = event.target.dataset.value
   updatePath(param, value)
+}
+
+function handleBpmFilterChange (event) {
+  event.preventDefault()
+
+  // Get set min/max BPM
+  const minBpm = parseInt(document.getElementById('min-bpm').value)
+  const maxBpm = parseInt(document.getElementById('max-bpm').value)
+
+  // Get all set containers
+  const setContainers = document.getElementsByClassName('set-container')
+
+  // Hide those outside the BPM bounds
+  for (let i = 0; i < setContainers.length; i++) {
+    const setContainer = setContainers[i]
+
+    const minSetBpm = parseInt(setContainer.dataset.minbpm)
+    const maxSetBpm = parseInt(setContainer.dataset.maxbpm)
+    if (minSetBpm < minBpm || maxSetBpm > maxBpm) {
+      setContainer.classList.add('hidden')
+    } else {
+      setContainer.classList.remove('hidden')
+    }
+  }
+
+  const emptySearchElement = document.getElementById('empty-search')
+  const setsVisible = document.querySelectorAll('.set-container:not(.hidden)').length
+
+  // Show no sets found message if all sets are filtered out
+  if (setsVisible <= 0) {
+    emptySearchElement.classList.remove('hidden')
+  } else {
+    emptySearchElement.classList.add('hidden')
+  }
 }
 
 export { setupGraphControlsMenu, getDisplaySettingsFromQuery }
