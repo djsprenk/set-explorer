@@ -134,6 +134,9 @@ def extract_song_data_for_playlist(set_data, additional_meta):
 
     # For now, skip anything not published to mixcloud
     if not matches:
+        print(
+            f"NOTE: Set {set_data['playlist']} not found in Mixcloud ({set_data.get('slug') or 'no slug'}). Skipping."
+        )
         return
     mixcloud_data = mixcloud_slugs.iloc[matches[0]] if matches else {}
 
