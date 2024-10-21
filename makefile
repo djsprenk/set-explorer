@@ -37,6 +37,3 @@ build:  # Build files to /dist/
 
 publish: build  # Copy files over to another project
 	cp -R dist/. ../djsprenk.github.io
-
-build:
-	npm run build
