@@ -352,7 +352,7 @@ footer a {
 
 #controls {
   padding: 0.5em;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid rgb(233, 233, 233);
   /* Add slight shadow effect as a scrolling signifier */
   z-index: 2;
   box-shadow: 0px 10px 20px black;
@@ -367,10 +367,38 @@ footer a {
 }
 #controls div {
   display: inline-block;
-  padding-right: 1em;
+  margin: 0.2em 0em;
+  margin-right: 1em;
+}
+@media (max-width: 600px) {
+  #controls div {
+    display: block;
+    margin-right: 0em;
+  }
 }
 #controls .control {
   cursor: pointer;
+}
+#controls #bpm input {
+  appearance: textfield;
+  cursor: pointer;
+  color: inherit;
+  background: inherit;
+  border: none;
+  border-bottom: 1px solid rgb(233, 233, 233);
+  width: 3em;
+  text-align: center;
+  /* Hide number select arrows in Chrome, Safari, Edge, Opera */
+  /* Hide number select arrows in Firefox */
+}
+#controls #bpm input input::-webkit-outer-spin-button,
+#controls #bpm input input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+#controls #bpm input input[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 /* Timeline graph */
