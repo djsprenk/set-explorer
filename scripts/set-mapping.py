@@ -53,7 +53,7 @@ def main():
 
     # Get slug, if fully-qualified URL is provided, just get the end
     url = input(f"Enter the slug for {recording_file_path.name}")
-    slug = urlparse(url).path.rstrip("/")[-1]  # Remove trailing slash if present
+    slug = urlparse(url).path.strip("/").split("/")[-1]
     if not slug:
         exit(0)
 
