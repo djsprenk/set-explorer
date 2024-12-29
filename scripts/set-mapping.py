@@ -44,12 +44,18 @@ def main():
     recording_file_path = select_file(initial_dir=MUSIC_DIR, title="Select a recording")
     if not recording_file_path:
         exit(0)
+    if recording_file_path.suffix.lower() not in (".mp3", ".wav"):
+        print("File must be an audio recording")
+        exit(1)
 
     # Get playlist
     print(f"Select a playlist for {recording_file_path.name}")
     playlist_path = select_file(initial_dir=VDJ_DIR, title="Select a playlist")
     if not playlist_path:
         exit(0)
+    if playlist_path.suffix.lower() != ".vdjfolder":
+        print("Playlist must be a .vdjfolder")
+        exit(1)
 
     # Get slug, if fully-qualified URL is provided, just get the end
     url = input(f"Enter the slug for {recording_file_path.name}")
