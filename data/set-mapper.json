@@ -1012,5 +1012,71 @@
         "slug": "20240616-phoenix-4",
         "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20240616 - PHX 4.mp3",
         "type": "live-set"
+    },
+    {
+        "playlist": "MyLists/Past Events.subfolders/20240725 - Senior.vdjfolder",
+        "slug": "20240725-nyc-senior-social",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20240725 - Senior.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2024 - NYC Zouk Fest.subfolders/20241006 - NYC Zouk Fest 1.vdjfolder",
+        "slug": "20241006-nyc-zouk-fest-1",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20241006 - NYC 1.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2024 - NYC Zouk Fest.subfolders/20241006 - NYC Zouk Fest 2.vdjfolder",
+        "slug": "20241006-nyc-zouk-fest-2",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20241006 - NYC 2.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2024 - ATL.subfolders/20241025 - ATL 1.vdjfolder",
+        "slug": "20241025-atlanta-1",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20241025 - ATL 1.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2024 - ATL.subfolders/20241026 - ATL 2.vdjfolder",
+        "slug": "20241026-atlanta-2",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20241026 - ATL 2.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2024 - ATL.subfolders/20241027 - ATL 3.vdjfolder",
+        "slug": "20241027-atlanta-3",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20241027 - ATL 3.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Produced Sets.subfolders/20241123 - Room Full of Love.vdjfolder",
+        "slug": "20241123-room-full-of-love",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Produced Sets/20241123 - Room Full Of Love.mp3",
+        "type": "produced-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2024 - BraZouky US.subfolders/20241108 - BraZouky 1.vdjfolder",
+        "slug": "20241108-brazouky-1",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20241108 - Brazouky 1.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2024 - BraZouky US.subfolders/20241109 - BraZouky 2.vdjfolder",
+        "slug": "20241109-brazouky-2",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20241109 - Brazouky 2.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2024 - Leandro & Nayara.subfolders/20241213 - Leandro & Nayara 1.vdjfolder",
+        "slug": "20241213-leandro-and-nayara-1",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20241213 - Leandro and Nayara 1.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2024 - Leandro & Nayara.subfolders/20241214 - Leandro & Nayara 2.vdjfolder",
+        "slug": "20241214-leandro-and-nayara-2",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20241214 - Leandro and Nayara 2.mp3",
+        "type": "live-set"
     }
 ]
