@@ -1,4 +1,5 @@
 /* Colors */
+/* Light Mode */
 /* From https://sass-guidelin.es/#architecture */
 .hidden {
   display: none !important;
@@ -10,10 +11,28 @@
   opacity: 0;
 }
 
+/* Automatically detect device preference */
+@media (prefers-color-scheme: dark) {
+  body {
+    font-family: "Rubik", sans-serif;
+    --color-primary: rgb(233, 233, 233);
+    --color-secondary: rgb(128, 128, 128);
+    --color-background: rgb(10, 10, 10);
+    color: var(--color-primary);
+    background-color: var(--color-background);
+  }
+}
+@media (prefers-color-scheme: light) {
+  body {
+    font-family: "Rubik", sans-serif;
+    --color-primary: rgb(22, 22, 22);
+    --color-secondary: rgb(117, 117, 117);
+    --color-background: rgb(245, 245, 245);
+    color: var(--color-primary);
+    background-color: var(--color-background);
+  }
+}
 body {
-  background: rgb(10, 10, 10);
-  color: rgb(233, 233, 233);
-  font-family: "Rubik", sans-serif;
   max-width: 840px;
   margin: auto;
   padding: 20px;
@@ -26,14 +45,30 @@ body {
   /* Adjust for padding of the body */
   box-sizing: border-box;
 }
+body.dark {
+  font-family: "Rubik", sans-serif;
+  --color-primary: rgb(233, 233, 233);
+  --color-secondary: rgb(128, 128, 128);
+  --color-background: rgb(10, 10, 10);
+  color: var(--color-primary);
+  background-color: var(--color-background);
+}
+body.light {
+  font-family: "Rubik", sans-serif;
+  --color-primary: rgb(22, 22, 22);
+  --color-secondary: rgb(117, 117, 117);
+  --color-background: rgb(245, 245, 245);
+  color: var(--color-primary);
+  background-color: var(--color-background);
+}
 
 header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   z-index: 1;
-  border-bottom: 1px solid rgb(233, 233, 233);
-  box-shadow: 0px 10px 20px rgb(10, 10, 10);
+  border-bottom: 1px solid var(--color-primary);
+  box-shadow: 0px 10px 20px var(--color-background);
 }
 @media (max-width: 600px) {
   header {
@@ -58,17 +93,18 @@ main {
 }
 
 footer {
-  border-top: 1px solid rgb(233, 233, 233);
+  border-top: 1px solid var(--color-primary);
   padding: 0.5em;
   /* Add slight shadow effect as a scrolling signifier */
   z-index: 1;
-  box-shadow: 0px -10px 20px rgb(10, 10, 10);
+  box-shadow: 0px -10px 20px var(--color-background);
 }
 footer a {
-  color: rgb(233, 233, 233);
+  color: var(--color-primary);
 }
 
 /* Colors */
+/* Light Mode */
 /* From https://sass-guidelin.es/#architecture */
 .hidden {
   display: none !important;
@@ -80,10 +116,28 @@ footer a {
   opacity: 0;
 }
 
+/* Automatically detect device preference */
+@media (prefers-color-scheme: dark) {
+  body {
+    font-family: "Rubik", sans-serif;
+    --color-primary: rgb(233, 233, 233);
+    --color-secondary: rgb(128, 128, 128);
+    --color-background: rgb(10, 10, 10);
+    color: var(--color-primary);
+    background-color: var(--color-background);
+  }
+}
+@media (prefers-color-scheme: light) {
+  body {
+    font-family: "Rubik", sans-serif;
+    --color-primary: rgb(22, 22, 22);
+    --color-secondary: rgb(117, 117, 117);
+    --color-background: rgb(245, 245, 245);
+    color: var(--color-primary);
+    background-color: var(--color-background);
+  }
+}
 body {
-  background: rgb(10, 10, 10);
-  color: rgb(233, 233, 233);
-  font-family: "Rubik", sans-serif;
   max-width: 840px;
   margin: auto;
   padding: 20px;
@@ -97,13 +151,31 @@ body {
   box-sizing: border-box;
 }
 
+body.dark {
+  font-family: "Rubik", sans-serif;
+  --color-primary: rgb(233, 233, 233);
+  --color-secondary: rgb(128, 128, 128);
+  --color-background: rgb(10, 10, 10);
+  color: var(--color-primary);
+  background-color: var(--color-background);
+}
+
+body.light {
+  font-family: "Rubik", sans-serif;
+  --color-primary: rgb(22, 22, 22);
+  --color-secondary: rgb(117, 117, 117);
+  --color-background: rgb(245, 245, 245);
+  color: var(--color-primary);
+  background-color: var(--color-background);
+}
+
 header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   z-index: 1;
-  border-bottom: 1px solid rgb(233, 233, 233);
-  box-shadow: 0px 10px 20px rgb(10, 10, 10);
+  border-bottom: 1px solid var(--color-primary);
+  box-shadow: 0px 10px 20px var(--color-background);
 }
 
 @media (max-width: 600px) {
@@ -128,15 +200,15 @@ main {
 }
 
 footer {
-  border-top: 1px solid rgb(233, 233, 233);
+  border-top: 1px solid var(--color-primary);
   padding: 0.5em;
   /* Add slight shadow effect as a scrolling signifier */
   z-index: 1;
-  box-shadow: 0px -10px 20px rgb(10, 10, 10);
+  box-shadow: 0px -10px 20px var(--color-background);
 }
 
 footer a {
-  color: rgb(233, 233, 233);
+  color: var(--color-primary);
 }
 
 #about-page {
@@ -151,7 +223,7 @@ footer a {
   grid-column: 2/span 4;
 }
 #about-page a {
-  color: rgb(233, 233, 233);
+  color: var(--color-primary);
 }
 #about-page .code {
   font-family: "Courier New", Courier, monospace;
@@ -319,7 +391,7 @@ footer a {
 
 /* Set title & subtitle */
 .set-title {
-  color: rgb(233, 233, 233);
+  color: var(--color-primary);
   text-decoration: none;
 }
 .set-title .set-name {
@@ -328,7 +400,7 @@ footer a {
 }
 .set-title .set-subtitle {
   font-style: italic;
-  color: grey;
+  color: var(--color-secondary);
   padding-bottom: 0.4em;
 }
 @media (max-width: 600px) {
@@ -356,10 +428,10 @@ footer a {
 
 #controls {
   padding: 0.5em;
-  border-bottom: 1px solid rgb(233, 233, 233);
+  border-bottom: 1px solid var(--color-primary);
   /* Add slight shadow effect as a scrolling signifier */
   z-index: 2;
-  box-shadow: 0px 10px 20px black;
+  box-shadow: 0px 10px 20px var(--color-background);
 }
 #controls.hidden {
   display: block !important;
@@ -389,7 +461,7 @@ footer a {
   color: inherit;
   background: inherit;
   border: none;
-  border-bottom: 1px solid rgb(233, 233, 233);
+  border-bottom: 1px solid var(--color-primary);
   width: 3em;
   text-align: center;
   /* Hide number select arrows in Chrome, Safari, Edge, Opera */
@@ -411,11 +483,11 @@ footer a {
   width: 100%;
 }
 .timeline path {
-  stroke: white;
+  stroke: rgb(233, 233, 233);
   stroke-width: 2px;
 }
 .timeline .cue-point {
-  stroke: white;
+  stroke: rgb(233, 233, 233);
   stroke-width: 2px;
 }
 
