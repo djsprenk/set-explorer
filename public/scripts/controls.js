@@ -54,6 +54,7 @@ function setUpTheming (document) {
   // Check initial preference
   let prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
   body.classList.add(prefersDark ? 'dark' : 'light')
+  logo.src = `assets/sprenk-logo-gradient-${prefersDark ? 'white' : 'black'}.png`
 
   // Toggle mode manually
   // toggleButton.addEventListener('click', () => {
@@ -68,6 +69,7 @@ function setUpTheming (document) {
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
     prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
     body.classList.replace(e.matches ? 'light' : 'dark', e.matches ? 'dark' : 'light')
+    logo.src = `assets/sprenk-logo-gradient-${prefersDark ? 'white' : 'black'}.png`
   })
 }
 

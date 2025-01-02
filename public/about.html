@@ -25,11 +25,13 @@
             // Check initial preference
             let prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
             body.classList.add(prefersDark ? 'dark' : 'light')
+            logo.src = `assets/sprenk-logo-gradient-${prefersDark ? 'white' : 'black'}.png`
 
             // Listen for changes in preference
             window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
                 prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
                 body.classList.replace(e.matches ? 'light' : 'dark', e.matches ? 'dark' : 'light')
+                logo.src = `assets/sprenk-logo-gradient-${prefersDark ? 'white' : 'black'}.png`
             })
         }
 
