@@ -10,6 +10,35 @@
 
     <!-- Load stylesheets -->
     <link rel="stylesheet" href="stylesheets/style.css">
+
+    <!-- Setup theming -->
+    <script>
+        /**
+         * Determine light/dark mode and set styling
+         * @param {*} document
+         */
+        function setUpTheming(document) {
+            const body = document.body
+            const logo = document.getElementById('logo')
+            // const toggleButton = document.getElementById('toggle-mode')
+
+            // Check initial preference
+            let prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+            body.classList.add(prefersDark ? 'dark' : 'light')
+
+            // Listen for changes in preference
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+                body.classList.replace(e.matches ? 'light' : 'dark', e.matches ? 'dark' : 'light')
+            })
+        }
+
+        // Wait until page is loaded
+        window.addEventListener('load', function () {
+            // Set up Light / Dark mode
+            setUpTheming(this.document)
+        })
+    </script>
 </head>
 
 <body id="about-page">
@@ -35,7 +64,7 @@
             <p>
                 For each set I have two styles of graph:
             <ol>
-                <li>Timeilne</li>
+                <li>Timeline</li>
                 <li>Playlist</li>
             </ol>
             </p>

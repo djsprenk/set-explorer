@@ -40,7 +40,7 @@
 /* Set title & subtitle */
 
 .set-title {
-    color: $primary-color;
+    color: var(--color-primary);
     text-decoration: none;
 
     .set-name {
@@ -50,7 +50,7 @@
 
     .set-subtitle {
         font-style: italic;
-        color: $secondary-color;
+        color: var(--color-secondary);
         padding-bottom: 0.4em;
 
         @include respond-to('small') {

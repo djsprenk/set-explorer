@@ -1,7 +1,7 @@
 import * as d3 from 'd3'
 import songData from '../data/song-data'
 
-import { getDisplaySettingsFromQuery, setupGraphControlsMenu } from './controls'
+import { getDisplaySettingsFromQuery, setupGraphControlsMenu, setUpTheming } from './controls'
 import { timelineGraph } from './timeline'
 import { playlistGraph } from './playlist'
 
@@ -157,6 +157,9 @@ function drawSetVisualizations (container, sets, displaySettings) {
 
 // Wait until page is loaded
 window.addEventListener('load', function () {
+  // Set up Light / Dark mode
+  setUpTheming(this.document)
+
   // Init controls
   setupGraphControlsMenu(this.document, songData)
 

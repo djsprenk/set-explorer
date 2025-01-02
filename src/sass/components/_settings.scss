@@ -13,11 +13,11 @@
 
 #controls {
     padding: .5em;
-    border-bottom: 1px solid $primary-color;
+    border-bottom: 1px solid var(--color-primary);
 
     /* Add slight shadow effect as a scrolling signifier */
     z-index: 2;
-    box-shadow: 0px 10px 20px black;
+    box-shadow: 0px 10px 20px var(--color-background);
 
     &.hidden {
         display: block !important;
@@ -50,7 +50,7 @@
         color: inherit;
         background: inherit;
         border: none;
-        border-bottom: 1px solid $primary-color;
+        border-bottom: 1px solid var(--color-primary);
         width: 3em;
         text-align: center;
 

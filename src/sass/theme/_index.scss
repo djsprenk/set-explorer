@@ -1,7 +1,27 @@
 $font: "Rubik", sans-serif;
 
 @mixin theme {
-    background: $background-color;
-    color: $primary-color;
     font-family: $font;
+}
+
+@mixin dark-theme {
+    @include theme;
+
+    --color-primary: #{$primary-color};
+    --color-secondary: #{$secondary-color};
+    --color-background: #{$background-color};
+
+    color: var(--color-primary);
+    background-color: var(--color-background);
+}
+
+@mixin light-theme {
+    @include theme;
+
+    --color-primary: #{$primary-color-light};
+    --color-secondary: #{$secondary-color-light};
+    --color-background: #{$background-color-light};
+
+    color: var(--color-primary);
+    background-color: var(--color-background);
 }

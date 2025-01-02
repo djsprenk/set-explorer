@@ -13,7 +13,7 @@
     }
 
     a {
-        color: $primary-color;
+        color: var(--color-primary)
     }
 
     .code {

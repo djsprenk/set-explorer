@@ -43,6 +43,35 @@ function findMinMaxBpm (setArray) {
 }
 
 /**
+ * Determine light/dark mode and set styling
+ * @param {*} document
+ */
+function setUpTheming (document) {
+  const body = document.body
+  const logo = document.getElementById('logo')
+  // const toggleButton = document.getElementById('toggle-mode')
+
+  // Check initial preference
+  let prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+  body.classList.add(prefersDark ? 'dark' : 'light')
+
+  // Toggle mode manually
+  // toggleButton.addEventListener('click', () => {
+  //   if (body.classList.contains('dark')) {
+  //     body.classList.replace('dark', 'light')
+  //   } else {
+  //     body.classList.replace('light', 'dark')
+  //   }
+  // })
+
+  // Listen for changes in preference
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    body.classList.replace(e.matches ? 'light' : 'dark', e.matches ? 'dark' : 'light')
+  })
+}
+
+/**
  * Sets up handlers for graph control menu items.
  * @param {*} document document object
  */
@@ -167,4 +196,4 @@ function handleBpmFilterChange (event) {
   }
 }
 
-export { setupGraphControlsMenu, getDisplaySettingsFromQuery }
+export { setUpTheming, setupGraphControlsMenu, getDisplaySettingsFromQuery }

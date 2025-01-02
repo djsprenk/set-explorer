@@ -1,8 +1,17 @@
 /* Colors */
 
 $primary-color: rgb(233, 233, 233);
-$secondary-color: grey;
+$secondary-color: rgb(128, 128, 128);
 
 $background-color: rgb(10, 10, 10);
 
 $ui-primary-color: $primary-color;
+
+
+/* Light Mode */
+$primary-color-light: rgb(22, 22, 22);
+$secondary-color-light: rgb(117, 117, 117);
+
+$background-color-light: rgb(245, 245, 245);
+
+$ui-primary-color-light: $primary-color-light;

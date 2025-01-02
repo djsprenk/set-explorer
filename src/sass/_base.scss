@@ -13,8 +13,27 @@
     opacity: 0;
 }
 
+/* Automatically detect device preference */
+@media (prefers-color-scheme: dark) {
+    body {
+        @include dark-theme;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    body {
+        @include light-theme;
+    }
+}
+
 body {
-    @include theme;
+    &.dark {
+        @include dark-theme;
+    }
+
+    &.light {
+        @include light-theme;
+    }
 
     max-width: 840px;
     margin: auto;
@@ -39,8 +58,8 @@ header {
     justify-content: space-between;
     z-index: 1;
 
-    border-bottom: 1px solid $ui-primary-color;
-    box-shadow: 0px 10px 20px $background-color;
+    border-bottom: 1px solid var(--color-primary);
+    box-shadow: 0px 10px 20px var(--color-background);
 
     @include respond-to('small') {
         font-size: x-small;
@@ -64,14 +83,14 @@ main {
 }
 
 footer {
-    border-top: 1px solid $ui-primary-color;
+    border-top: 1px solid var(--color-primary);
     padding: .5em;
 
     /* Add slight shadow effect as a scrolling signifier */
     z-index: 1;
-    box-shadow: 0px -10px 20px $background-color;
+    box-shadow: 0px -10px 20px var(--color-background);
 
     a {
-        color: $primary-color;
+        color: var(--color-primary);
     }
 }
