@@ -596,3 +596,80 @@ Ideally, this is used infrequently, but I use it do do things like:
 1. Remove samples from the cue points lists.
 2. Remove unnecessary or incorrect BPM points.
 3. Fix incorrect song titles / formats that I don't want to correct in the source data.
+
+## Adding Light / Dark Modes
+
+Followed this tutorial from [Dev.to](https://dev.to/wgnrd/adding-a-dark-mode-to-your-website-using-scss-4pdc) using SCSS.
+
+The big "ah-ha" was to define CSS variables (not SCSS) for colors and dynamically set them for the given theme.
+
+First, I specified the light and dark theme as mixins, referencing SCSS color variables defined elsewhere:
+
+```scss
+@mixin dark-theme {
+    @include theme;
+    --color-primary: #{$primary-color};
+    --color-secondary: #{$secondary-color};
+    --color-background: #{$background-color};
+}
+
+@mixin light-theme {
+    @include theme;
+    --color-primary: #{$primary-color-light};
+    --color-secondary: #{$secondary-color-light};
+    --color-background: #{$background-color-light};
+}
+```
+
+Then, using JS, I set a class on the body (though could also use with data or any other CSS query-able specifier). This was required because the media queries for detecting light / dark mode weren't working for me on Firefox.
+
+This is identified by the body SCSS as below:
+
+```scss
+body{ 
+    &.dark {
+      @include dark-theme;
+  }
+
+  &.light {
+      @include light-theme;
+  }
+}
+```
+
+Which is then then use them throughout component styling like so:
+
+```scss
+    border-color: 1px solid var(--color-primary);
+    box-shadow: 0px 10px 20px var(--color-background);
+```
+
+### Updating assets
+
+Next, I had to figure out how to set the assets to also respond to color changes.
+
+For my SVG graphic, I added styling inside the SVG that responded to color preference:
+
+```svg
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg">
+   <style>
+        path {
+            fill: rgb(10, 10, 10);
+        }
+        @media (prefers-color-scheme: dark) {
+            path { fill: rgb(233, 233, 233); }
+        }
+    </style>
+<path .../>
+</svg>
+```
+
+Note that this has the issue that we won't currently respond to color scheme if it is modified outside of the media query (e.g. manual override of class).
+
+For my logo, I rely on knowing the naming convention of where the file is, swapping out a light / dark version based on the user's preference like below:
+
+```js 
+    prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    logo.src = `assets/my-logo-${prefersDark ? 'dark' : 'light'}.png`
+```
