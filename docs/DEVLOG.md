@@ -673,3 +673,34 @@ For my logo, I rely on knowing the naming convention of where the file is, swapp
     prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
     logo.src = `assets/my-logo-${prefersDark ? 'dark' : 'light'}.png`
 ```
+
+## Getting Statistics
+
+Another idea I liked was getting statistics for my mixes. In particular, I really liked the idea of finding how many transitions I have repeated (since I make it a goal to rarely, if ever, repeat a transition).
+
+*This was also when I started using Copilot to speed up some of my coding.*
+
+While I was there, I thought it would be fun to also capture things like:
+
+1. Total number of mixes.
+2. Total play time.
+3. Total number of songs played.
+4. Total number of unique songs played.
+5. Total number of BPM changes.
+
+I wrote a simple file, `scripts/stats.py` that walked through the playlists and recording data to do those checks.
+
+After a quick run of these stats (on 2025-02-06) I found the following:
+
+- Total mixes: 184
+- Total time played: 7 days, 21 hours, 30 minutes, and 6 seconds.
+- Total songs: 3547 (1109 unique)
+- Total BPM changes: 5423
+- Total transitions: 3363 (53 repeated)
+
+2 transitions were reused more than once:
+
+1. **Softly (Cuppy Remix) -> LEAVE ME ALONE [Explicit]** in : "Valentine's Funk", "BIZF Part 2", and "YYC (2022, Part 2)".
+2. **Im Not That Girl -> I Love You feat Billie Eilish (Kakah Zouk Remix)** in : "Valentine's Funk", "BIZF Part 1" and "YYC (2022, Part 2)".
+
+Interestingly, both in the same sets...
