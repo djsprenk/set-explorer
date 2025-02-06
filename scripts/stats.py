@@ -15,6 +15,7 @@ def get_stats():
         "total_time_played": 0,
         "total_transitions": 0,
         "reused_transitions": 0,
+        "bpm_changes": 0,
     }
 
     sets = read_json_file(SET_MAPPER_FILE)
@@ -54,6 +55,11 @@ def get_stats():
 
         # Get total time played
         stats["total_time_played"] += float(recording_data["Infos"]["@SongLength"])
+
+        # Get BPM changes
+        for poi in recording_data["Poi"]:
+            if poi["@Type"] == "beatgrid":
+                stats["bpm_changes"] += 1
 
     # Call out reused transitions
     for transition, usage in unique_transitions.items():
