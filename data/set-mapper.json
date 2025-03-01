@@ -1102,5 +1102,29 @@
         "slug": "20250112-interfusion-3",
         "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20250112 - Interfusion 3.mp3",
         "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2025.subfolders/2025 - RVAZM.subfolders/20250131 - RVAZM 1.vdjfolder",
+        "slug": "20250131-rva-zouk-movement-1",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20250131 - RVA 1.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2025.subfolders/2025 - RVAZM.subfolders/20250131 - RVAZM 2.vdjfolder",
+        "slug": "20250131-rva-zouk-movement-2",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20250131 - RVA 2.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2025.subfolders/2025 - RVAZM.subfolders/20250201 - RVAZM 3.vdjfolder",
+        "slug": "20250201-rva-zouk-movement-3",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20250201 - RVA 3.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2025.subfolders/2025 - RVAZM.subfolders/20250202 - RVAZM 4.vdjfolder",
+        "slug": "20250202-rva-zouk-movement-4",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20250202 - RVA 4.mp3",
+        "type": "live-set"
     }
 ]
