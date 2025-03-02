@@ -117,15 +117,19 @@ def extract_song_data_for_playlist(set_data, additional_meta):
             "Tags.@Title": "Title",
             "Tags.@Author": "Artist",
             "Tags.@Stars": "Energy",
+            "Tags.@User1": "E3",
         }
     )
 
     # A few, rare playlists don't have any songs with energy associated, zero them out
     if song_data.get("Energy") is None:
         song_data["Energy"] = 0
+    if song_data.get("E3") is None:
+        song_data["E3"] = "Unknown"
 
     # Fill NaN values
     song_data["Energy"] = song_data["Energy"].fillna(0)
+    # song_data["E3"] = song_data["E3"].fillna(undefined)
 
     # Find match in mixcloud_slugs
     matches = mixcloud_slugs.index[
@@ -145,7 +149,7 @@ def extract_song_data_for_playlist(set_data, additional_meta):
 
     song_data["index"] = [i for i in range(len(song_data))]
     song_data["set"] = playlist_file.name
-    song_energy = song_data[["index", "Title", "Artist", "Energy"]]
+    song_energy = song_data[["index", "Title", "Artist", "Energy", "E3"]]
 
     return {
         "title": mixcloud_data.get("name") or playlist_file.name,

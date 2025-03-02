@@ -4,6 +4,7 @@ import songData from '../data/song-data'
 import { getDisplaySettingsFromQuery, setupGraphControlsMenu, setUpTheming } from './controls'
 import { timelineGraph } from './timeline'
 import { playlistView } from './playlist'
+import { e3Graph } from './e3'
 
 /**
  * Sort sets based on the requested order.
@@ -137,6 +138,8 @@ function drawSetVisualizations (container, sets, displaySettings) {
     // Use playlist graph if specifically requested
     if (displaySettings.graphType === 'playlist') {
       playlistView(setInfoContainer, songs, setMetadata)
+    } else if (displaySettings.graphType === 'type') {
+      e3Graph(setInfoContainer, songs, pois, setMetadata, i, displaySettings.scale)
     } else {
       // Default to timeline graph...
       // Falling back to playlist graph if POIs are missing
