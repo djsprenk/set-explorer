@@ -249,109 +249,16 @@ footer a {
   margin-bottom: 1em;
 }
 
-/* Playlist graph */
+/* Playlist view */
 .playlist {
-  display: flex;
-  align-items: center;
-  height: 20px;
+  margin-top: 1em;
 }
-.playlist .song {
-  cursor: crosshair;
-  min-height: 4px;
-  width: 20px;
-  margin: 0px 1px;
-  border: 1px solid white;
+.playlist .artist {
+  font-style: italic;
+  color: var(--color-secondary);
 }
-.playlist .song:hover {
-  filter: brightness(120%);
-  transition-duration: 0.07s;
-  height: 20px !important;
-}
-@media (min-width: 992px) {
-  .playlist .song:hover {
-    height: 30px !important;
-  }
-}
-
-.song[data-energy="0"],
-.song-tooltip[data-energy="0"] {
-  background-color: grey;
-  color: black;
-  height: 4px;
-}
-@media (min-width: 992px) {
-  .song[data-energy="0"],
-  .song-tooltip[data-energy="0"] {
-    height: 5px;
-  }
-}
-.song[data-energy="1"],
-.song-tooltip[data-energy="1"] {
-  background-color: blue;
-  color: white;
-  height: 4px;
-}
-@media (min-width: 992px) {
-  .song[data-energy="1"],
-  .song-tooltip[data-energy="1"] {
-    height: 10px;
-  }
-}
-.song[data-energy="2"],
-.song-tooltip[data-energy="2"] {
-  background-color: green;
-  color: white;
-  height: 8px;
-}
-@media (min-width: 992px) {
-  .song[data-energy="2"],
-  .song-tooltip[data-energy="2"] {
-    height: 15px;
-  }
-}
-.song[data-energy="3"],
-.song-tooltip[data-energy="3"] {
-  background-color: yellow;
-  color: black;
-  height: 12px;
-}
-@media (min-width: 992px) {
-  .song[data-energy="3"],
-  .song-tooltip[data-energy="3"] {
-    height: 20px;
-  }
-}
-.song[data-energy="4"],
-.song-tooltip[data-energy="4"] {
-  background-color: orange;
-  color: black;
-  height: 16px;
-}
-@media (min-width: 992px) {
-  .song[data-energy="4"],
-  .song-tooltip[data-energy="4"] {
-    height: 25px;
-  }
-}
-.song[data-energy="5"],
-.song-tooltip[data-energy="5"] {
-  background-color: red;
-  color: white;
-  height: 20px;
-}
-@media (min-width: 992px) {
-  .song[data-energy="5"],
-  .song-tooltip[data-energy="5"] {
-    height: 30px;
-  }
-}
-
-.song-tooltip {
-  border: 1px solid white;
-  transition: 0.5s;
-  padding: 0.2em;
-  /* Allows us to set color in one place but unset height here */
-  height: unset !important;
+.playlist .artist::before {
+  content: " - ";
 }
 
 /* Set container */

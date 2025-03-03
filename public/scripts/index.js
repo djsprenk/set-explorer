@@ -3,7 +3,7 @@ import songData from '../data/song-data'
 
 import { getDisplaySettingsFromQuery, setupGraphControlsMenu, setUpTheming } from './controls'
 import { timelineGraph } from './timeline'
-import { playlistGraph } from './playlist'
+import { playlistView } from './playlist'
 
 /**
  * Sort sets based on the requested order.
@@ -136,14 +136,14 @@ function drawSetVisualizations (container, sets, displaySettings) {
 
     // Use playlist graph if specifically requested
     if (displaySettings.graphType === 'playlist') {
-      playlistGraph(setInfoContainer, songs, setMetadata)
+      playlistView(setInfoContainer, songs, setMetadata)
     } else {
       // Default to timeline graph...
       // Falling back to playlist graph if POIs are missing
       if (pois !== undefined) {
         timelineGraph(setInfoContainer, songs, pois, setMetadata, i, displaySettings.scale)
       } else {
-        playlistGraph(setInfoContainer, songs, setMetadata)
+        playlistView(setInfoContainer, songs, setMetadata)
       }
     }
 
