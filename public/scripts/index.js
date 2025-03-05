@@ -142,12 +142,7 @@ function drawSetVisualizations (container, sets, displaySettings) {
       e3Graph(setInfoContainer, songs, pois, setMetadata, i, displaySettings.scale)
     } else {
       // Default to timeline graph...
-      // Falling back to playlist graph if POIs are missing
-      if (pois !== undefined) {
-        timelineGraph(setInfoContainer, songs, pois, setMetadata, i, displaySettings.scale)
-      } else {
-        playlistView(setInfoContainer, songs, setMetadata)
-      }
+      timelineGraph(setInfoContainer, songs, pois, setMetadata, i, displaySettings.scale)
     }
 
     // Hide sets outside of filtered BPM range
