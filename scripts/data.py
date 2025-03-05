@@ -116,16 +116,19 @@ def extract_song_data_for_playlist(set_data, additional_meta):
         columns={
             "Tags.@Title": "Title",
             "Tags.@Author": "Artist",
+            "Tags.@Remix": "Remix",
             "Tags.@Stars": "Energy",
             "Tags.@User1": "E3",
         }
     )
 
-    # A few, rare playlists don't have any songs with energy associated, zero them out
+    # Fill in missing data, where it exists
     if song_data.get("Energy") is None:
         song_data["Energy"] = 0
     if song_data.get("E3") is None:
         song_data["E3"] = "Unknown"
+    if song_data.get("Remix") is None:
+        song_data["Remix"] = None
 
     # Fill NaN values
     song_data["Energy"] = song_data["Energy"].fillna(0)
@@ -149,14 +152,15 @@ def extract_song_data_for_playlist(set_data, additional_meta):
 
     song_data["index"] = [i for i in range(len(song_data))]
     song_data["set"] = playlist_file.name
-    song_energy = song_data[["index", "Title", "Artist", "Energy", "E3"]]
 
     return {
         "title": mixcloud_data.get("name") or playlist_file.name,
         "url": mixcloud_data.get("url"),
         "uploadTimestamp": mixcloud_data.get("created_time"),
         "img": mixcloud_data.get("pictures.large"),
-        "data": song_energy.to_dict(orient="records"),
+        "data": song_data[
+            ["index", "Title", "Artist", "Remix", "Energy", "E3"]
+        ].to_dict(orient="records"),
         **recording_data,
         **additional_meta,
     }

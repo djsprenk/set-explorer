@@ -260,6 +260,15 @@ footer a {
 .playlist .artist::before {
   content: " - ";
 }
+.playlist .remix {
+  font-style: italic;
+}
+.playlist .remix::before {
+  content: " (";
+}
+.playlist .remix::after {
+  content: ")";
+}
 
 /* Set container */
 .set-container {

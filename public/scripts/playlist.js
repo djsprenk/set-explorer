@@ -1,6 +1,6 @@
 import * as d3 from 'd3'
 
-function playlistView (container, songs, setMetadata) {
+function playlistView (container, songs) {
   // Build the playlist listing
   const playlist = container
     .append('div')
@@ -18,6 +18,11 @@ function playlistView (container, songs, setMetadata) {
       songElement.append('span')
         .attr('class', 'title')
         .text(d.Title || 'Unknown')
+      if (d.Remix && !(d.Title || 'Unknown').includes(d.Remix)) {
+        songElement.append('span')
+          .attr('class', 'remix')
+          .text(d.Remix)
+      }
       songElement.append('span')
         .attr('class', 'artist')
         .text(d.Artist || 'Unknown')

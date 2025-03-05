@@ -13,6 +13,18 @@
         }
     }
 
+    .remix {
+        font-style: italic;
+
+        &::before {
+            content: " (";
+        }
+
+        &::after {
+            content: ")";
+        }
+    }
+
     // .title {
     // }
 }

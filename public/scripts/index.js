@@ -137,7 +137,7 @@ function drawSetVisualizations (container, sets, displaySettings) {
 
     // Use playlist graph if specifically requested
     if (displaySettings.graphType === 'playlist') {
-      playlistView(setInfoContainer, songs, setMetadata)
+      playlistView(setInfoContainer, songs)
     } else if (displaySettings.graphType === 'type') {
       e3Graph(setInfoContainer, songs, pois, setMetadata, i, displaySettings.scale)
     } else {
