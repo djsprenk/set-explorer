@@ -103,7 +103,7 @@ function timelineGraph (container, songs, pois, setMetadata, index, scale) {
     addColorStop(pos, energy)
   })
 
-  console.log(`Drawing set: ${setMetadata.title}`)
+  // console.log(`Drawing set: ${setMetadata.title}`)
 
   // Create the path for the timeline graph
   const line = d3.line()
