@@ -17,7 +17,7 @@ const sortOrders = ['newest', 'oldest']
 
 const defaultDisplaySettings = {
   sortOrder: sortOrders[0],
-  show: [visualizationTypes.PLAYLIST, visualizationTypes.TIMELINE],
+  show: [visualizationTypes.TIMELINE],
   scale: scaleTypes[0]
 }
 
