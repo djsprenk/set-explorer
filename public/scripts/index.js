@@ -1,7 +1,7 @@
 import * as d3 from 'd3'
 import songData from '../data/song-data'
 
-import { getDisplaySettingsFromQuery, setupGraphControlsMenu, setUpTheming } from './controls'
+import { getDisplaySettings, setupGraphControlsMenu, setUpTheming } from './controls'
 import { timelineGraph } from './timeline'
 import { playlistView } from './playlist'
 import { e3Graph } from './e3'
@@ -135,19 +135,23 @@ function drawSetVisualizations (container, sets, displaySettings) {
     createBpmLabel(setDetails, setMetadata)
     createRuntimeLabel(setDetails, setMetadata)
 
-    // Use playlist graph if specifically requested
-    if (displaySettings.graphType === 'playlist') {
-      playlistView(setInfoContainer, songs)
-    } else if (displaySettings.graphType === 'type') {
-      e3Graph(setInfoContainer, songs, pois, setMetadata, i, displaySettings.scale)
-    } else {
+    // Show the selected graphs
+    if (displaySettings.show.includes('timelines')) {
       // Default to timeline graph...
       timelineGraph(setInfoContainer, songs, pois, setMetadata, i, displaySettings.scale)
     }
 
+    if (displaySettings.show.includes('type')) {
+      e3Graph(setInfoContainer, songs, pois, setMetadata, i, displaySettings.scale)
+    }
+
+    if (displaySettings.show.includes('playlists')) {
+      playlistView(setInfoContainer, songs)
+    }
+
     // Hide sets outside of filtered BPM range
     if ((displaySettings.minBpm && setMetadata.bpmMin < displaySettings.minBpm) ||
-        (displaySettings.maxBpm && setMetadata.bpmMax > displaySettings.maxBpm)) {
+      (displaySettings.maxBpm && setMetadata.bpmMax > displaySettings.maxBpm)) {
       setContainer.classed('hidden', true)
     }
   }
@@ -155,14 +159,14 @@ function drawSetVisualizations (container, sets, displaySettings) {
 
 // Wait until page is loaded
 window.addEventListener('load', function () {
+  // Get display settings
+  const displaySettings = getDisplaySettings()
+
   // Set up Light / Dark mode
   setUpTheming(this.document)
 
   // Init controls
-  setupGraphControlsMenu(this.document, songData)
-
-  // Get display settings
-  const displaySettings = getDisplaySettingsFromQuery()
+  setupGraphControlsMenu(this.document, songData, displaySettings)
 
   // Sort data
   const sortedSets = sortSets(songData, displaySettings.sortOrder)

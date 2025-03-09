@@ -2,28 +2,63 @@
 
 import { getCookie, setCookie } from './cookie'
 
+// Selectors
 const controlMenuId = 'controls'
 const settingsMenuCookie = 'settingsMenu'
 
+// Constants
+const visualizationTypes = {
+  PLAYLIST: 'playlists',
+  TIMELINE: 'timelines',
+  TYPE: 'types'
+}
+const scaleTypes = ['relative', 'stretch']
+const sortOrders = ['newest', 'oldest']
+
+const defaultDisplaySettings = {
+  sortOrder: sortOrders[0],
+  show: [visualizationTypes.PLAYLIST, visualizationTypes.TIMELINE],
+  scale: scaleTypes[0]
+}
+
+/**
+ * Get display settings using the order (1) query, or (2) default
+ * @returns {Object} sortOrder, show, scale, minBpm, maxBpm
+ */
+function getDisplaySettings () {
+  const querySettings = getDisplaySettingsFromQuery()
+
+  const calculatedSettings = { ...defaultDisplaySettings, ...querySettings }
+
+  return calculatedSettings
+}
+
 /**
  * Get display settings from query params
- * @returns {Object} sortOrder, graphType, scale
+ * @returns {Object} sortOrder, show, scale, minBpm, maxBpm
  */
 function getDisplaySettingsFromQuery () {
   const urlParams = new URLSearchParams(window.location.search)
-  const sortOrder = urlParams.get('order')
-  const graphType = urlParams.get('graph')
-  const scaleType = urlParams.get('scale')
-  const minBpm = urlParams.get('min-bpm')
-  const maxBpm = urlParams.get('max-bpm')
 
-  return {
-    sortOrder,
-    graphType,
-    scale: scaleType,
-    minBpm,
-    maxBpm
+  const querySettings = {
+    sortOrder: urlParams.get('order'),
+    show: urlParams.get('show'),
+    scale: urlParams.get('scale'),
+    minBpm: urlParams.get('min-bpm'),
+    maxBpm: urlParams.get('max-bpm')
   }
+
+  // Handle show param as a comma separated array, if set
+  querySettings.show = querySettings.show ? String(querySettings.show).split(',') : null
+
+  // Remove null values
+  for (const key in querySettings) {
+    if (querySettings[key] === null || querySettings[key] === '') {
+      delete querySettings[key]
+    }
+  }
+
+  return querySettings
 }
 
 /**
@@ -74,12 +109,60 @@ function setUpTheming (document) {
 }
 
 /**
+ * Get the currently selected options from the UI
+ */
+function getSettingsSelections (document) {
+  const displaySettings = getDisplaySettings()
+
+  // Sort - Not yet a selector
+
+  // Show
+  displaySettings.show = []
+  if (document.getElementById('playlist-control').checked) { displaySettings.show.push(visualizationTypes.PLAYLIST) }
+  if (document.getElementById('timeline-control').checked) { displaySettings.show.push(visualizationTypes.TIMELINE) }
+
+  // Scale - Not yet a selector
+
+  // BPM Range
+  displaySettings.minBpm = parseInt(document.getElementById('min-bpm').value)
+  displaySettings.maxBpm = parseInt(document.getElementById('max-bpm').value)
+
+  return displaySettings
+}
+
+/**
+ * Set the UI to the provided settings
+ * @param {*} document
+ * @param {*} settings
+ */
+function setSettingsSelections (document, settings) {
+  // Sort - Not yet a selector
+
+  // Show
+  if (settings.show.includes('playlists')) {
+    document.getElementById('playlist-control').checked = true
+  } else {
+    document.getElementById('playlist-control').checked = false
+  }
+  if (settings.show.includes('timelines')) {
+    document.getElementById('timeline-control').checked = true
+  } else {
+    document.getElementById('timeline-control').checked = false
+  }
+
+  // Scale - Not yet a selector
+
+  // BPM Range
+  document.getElementById('min-bpm').value = parseInt(settings.minBpm)
+  document.getElementById('max-bpm').value = parseInt(settings.maxBpm)
+}
+
+/**
  * Sets up handlers for graph control menu items.
  * @param {*} document document object
  */
-function setupGraphControlsMenu (document, songData) {
+function setupGraphControlsMenu (document, songData, displaySettings) {
   const controlMenu = document.getElementById(controlMenuId)
-  const settingsFromQuery = getDisplaySettingsFromQuery()
 
   // Handle settings menu open / close
   function handleSettingsMenuToggleClick (event) {
@@ -104,26 +187,38 @@ function setupGraphControlsMenu (document, songData) {
   // Set up view controls
   const sortControls = document.getElementById('sort').getElementsByTagName('span')
   const scaleControls = document.getElementById('scale').getElementsByTagName('span')
-  const graphTypeControls = document.getElementById('graph-type').getElementsByTagName('span')
 
-  const viewControls = [...sortControls, ...scaleControls, ...graphTypeControls]
+  const viewControls = [...sortControls, ...scaleControls]
 
   // Add click handlers
   for (let i = 0; i < viewControls.length; i++) {
     viewControls[i].addEventListener('click', controlClick)
   }
 
+  // Set up show visualizations menu
+  const visualizationControls = document.getElementById('visualization-display').getElementsByTagName('input')
+  for (let i = 0; i < visualizationControls.length; i++) {
+    visualizationControls[i].addEventListener('click', (e) => {
+      const settings = getSettingsSelections(document)
+      const param = 'show'
+      const value = settings.show
+      updatePath(param, value)
+    })
+  }
+
   // Set up BPM menu
   const bpmControls = document.getElementById('bpm').getElementsByTagName('input')
   const { minBpm, maxBpm } = findMinMaxBpm(songData)
-
-  document.getElementById('min-bpm').value = parseInt(settingsFromQuery.minBpm) || parseInt(minBpm)
-  document.getElementById('max-bpm').value = parseInt(settingsFromQuery.maxBpm) || parseInt(maxBpm)
+  if (!displaySettings.minBpm) displaySettings.minBpm = minBpm
+  if (!displaySettings.maxBpm) displaySettings.maxBpm = maxBpm
 
   // Add BPM change handlers
   for (let i = 0; i < bpmControls.length; i++) {
     bpmControls[i].addEventListener('change', handleBpmFilterChange)
   }
+
+  // Write settings to the UI
+  setSettingsSelections(document, displaySettings)
 }
 
 /**
@@ -134,6 +229,7 @@ function setupGraphControlsMenu (document, songData) {
  */
 function updatePath (param, value, reload = true) {
   const urlParams = new URLSearchParams(window.location.search)
+
   if (value !== '') { urlParams.set(param, value) } else { urlParams.delete(value) }
 
   // Clicking controls should reload page, JS controls should just update the path
@@ -198,4 +294,4 @@ function handleBpmFilterChange (event) {
   }
 }
 
-export { setUpTheming, setupGraphControlsMenu, getDisplaySettingsFromQuery }
+export { setUpTheming, setupGraphControlsMenu, getDisplaySettings }

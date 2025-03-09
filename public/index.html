@@ -40,10 +40,12 @@
             <span class="control" data-control="order" data-value="newest" title="Show newest first">Newest</span>,
             <span class="control" data-control="order" data-value="oldest" title="Show oldest first">Oldest</span>
         </div>
-        <div id="graph-type">
+        <div id="visualization-display">
             <strong>Show:</strong>
-            <span class="control" data-control="graph" data-value="playlist" title="Show playlists">Songs</span>,
-            <span class="control" data-control="graph" data-value="timeline" title="Show timelines">BPM / Energy</span>
+            <input type="checkbox" id="playlist-control" class="control" data-control="show" data-value="playlists" title="Show playlists"></input>
+            <label for="playlist-control">Playlists</label>
+            <input type="checkbox" id="timeline-control" class="control" data-control="show" data-value="timelines" title="Show timelines"></input>
+            <label for ="timeline-control">Combined BPM & Energy</label>
         </div>
         <div id="scale">
             <strong>Scale:</strong>
