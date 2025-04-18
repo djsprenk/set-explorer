@@ -1126,5 +1126,29 @@
         "slug": "20250202-rva-zouk-movement-4",
         "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20250202 - RVA 4.mp3",
         "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2025.subfolders/2025 - NY SBKZ.subfolders/20250208 - NY SBKZ 1 (Not recorded).vdjfolder",
+        "slug": "20250208-ny-sbkz-1",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20250208 - SBKZ 1.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2025.subfolders/2025 - NY SBKZ.subfolders/20250209 - NY SBKZ 2 (Sat Closer 1).vdjfolder",
+        "slug": "20250209-ny-sbkz-2",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20250209 - SBKZ 2.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2025.subfolders/2025 - NY SBKZ.subfolders/20250209 - SBKZ 3 (Sat Closer 2).vdjfolder",
+        "slug": "20250209-ny-sbkz-3",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20250209 - SBKZ 3.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2025.subfolders/2025 - NY SBKZ.subfolders/20250210 - SBKZ 4 (Sun Closer).vdjfolder",
+        "slug": "20250210-ny-sbkz-4",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20250210 - SBKZ 4.mp3",
+        "type": "live-set"
     }
 ]
