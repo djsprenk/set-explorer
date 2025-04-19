@@ -1,0 +1,33 @@
+@mixin graph-container {
+    // Flexbox container for the graph
+    display: flex;
+
+    @media only screen and (max-width: 992px) {
+        // Wrap rows on small screens
+        flex-wrap: wrap;
+
+        .graph-label {
+            // Add a padding between label and graph on small screens
+            padding-bottom: 1em;
+        }
+    }
+    
+
+    // Add some padding between visualizations
+    padding-top: 1em;
+
+    // Label that exists before all graphs
+    .graph-label {
+        display: inline-block;
+
+        // Consistent width so the visuals align
+        width: 6.5em;
+        // Don't shrink as flex space shrinks
+        flex-shrink: 0;
+
+        // Aligns the label with the bottom of the visualization
+        align-self: end;
+    }
+
+
+}
