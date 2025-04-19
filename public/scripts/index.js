@@ -2,6 +2,7 @@ import * as d3 from 'd3'
 import songData from '../data/song-data'
 
 import { getDisplaySettings, setupGraphControlsMenu, setUpTheming } from './controls'
+import { e3Graph } from './e3'
 import { timelineGraph } from './timeline'
 import { playlistView } from './playlist'
 import { e3Graph } from './e3'

@@ -2,10 +2,8 @@ import * as d3 from 'd3'
 
 function e3Graph (container, songs, pois, setMetadata, index, scale) {
   // Dimensions / constant
-  const graphHeight = 50
+  const graphHeight = 20
   const graphWidth = 500
-  const graphMinBpm = 50
-  const graphMaxBpm = 100
 
   // If we are in relative length mode, scale to the length below as max
   const relativeLength = scale !== 'stretch'
@@ -18,7 +16,7 @@ function e3Graph (container, songs, pois, setMetadata, index, scale) {
     .range([0, graphWidth])
 
   const yScale = d3.scaleLinear()
-    .domain([graphMinBpm, graphMaxBpm])
+    .domain([0, 1])
     .range([graphHeight, 0])
 
   const gradientScale = d3.scaleLinear()
@@ -40,24 +38,25 @@ function e3Graph (container, songs, pois, setMetadata, index, scale) {
   }
 
   function getYPos (d, i) {
-    const effectiveBpm = d.bpm
-    if (isNaN(effectiveBpm)) {
-      console.warn(`BPM is NaN: ${d.stringify()}`)
-    }
+    const effectiveBpm = Math.min(d.bpm, 1)
     return yScale(effectiveBpm)
   }
 
-  // Build the timeline group
-  const timeline = container
+  // Add a container
+  const familiarityContainer = container.append('div').attr('class', 'familiarity-container')
+  familiarityContainer.append('span').attr('class', 'graph-label').text('Familiarity')
+
+  // Build the familiarity visualization
+  const familiarityVisualization = familiarityContainer
     .append('svg')
-    .attr('class', 'timeline svg-content-responsive')
+    .attr('class', 'familiarity-graph svg-content-responsive')
   // Responsive SVG needs these 2 attributes and no width and height attr.
     .attr('preserveAspectRatio', 'xMinYMin meet')
     .attr('viewBox', `0 0 ${graphWidth} ${graphHeight}`)
 
   // Create gradient
-  const gradientId = `gradient-${index}`
-  const gradient = timeline.append('defs')
+  const gradientId = `e3-gradient-${index}`
+  const gradient = familiarityVisualization.append('defs')
     .append('linearGradient')
     .attr('id', gradientId)
     .attr('gradientUnits', 'userSpaceOnUse')
@@ -67,22 +66,24 @@ function e3Graph (container, songs, pois, setMetadata, index, scale) {
     .attr('y2', 0)
 
   // Add stops
-  function addColorStop (pos, energy) {
+  function addColorStop (pos, familiarity) {
     const mapper = {
-      '#Educate': 'yellow',
-      '#Entertain': 'green',
-      '#Expand': 'red',
-      Unknown: 'grey'
+      '#Educate': 'purple',
+      '#Entertain': 'magenta',
+      '#Expand': 'darkblue',
+      Unknown: 'white',
+      null: 'white',
+      undefined: 'white'
     }
     gradient.append('stop')
     // .attr('offset', xScale(pos))
       .attr('offset', gradientScale(pos) + '%')
-      .attr('stop-color', mapper[energy])
+      .attr('stop-color', mapper[familiarity])
   }
 
   // Get just cue points from list
   function filterCues (list) {
-    return list.filter(item => item.type.toLowerCase() === 'cue')
+    return list.filter(item => item.type === 'cue')
   }
 
   const cuePoints = filterCues(pois)
@@ -104,20 +105,21 @@ function e3Graph (container, songs, pois, setMetadata, index, scale) {
 
   // console.log(`Drawing set: ${setMetadata.title}`)
 
-  // Create the path for the timeline graph
+  // Create the path for the familiarity graph
   const line = d3.line()
     .x((d, i) => getXPos(d, i))
     .y((d, i) => getYPos(d, i))
     .curve(d3.curveLinearClosed)
 
   // Close the path by filling in the corners
-  const bottomLeftPoint = { timestamp: 0, bpm: graphMinBpm }
-  const finalBpm = { timestamp: setMetadata.length, bpm: pois[pois.length - 1].bpm }
-  const bottomRightPoint = { timestamp: setMetadata.length, bpm: graphMinBpm }
-  const poisPoints = [bottomLeftPoint, ...pois, finalBpm, bottomRightPoint]
+  const bottomLeftPoint = { timestamp: 0, bpm: 0 }
+  const topLeftPoint = { timestamp: 0, bpm: 1 }
+  const topRightPoint = { timestamp: setMetadata.length, bpm: 1 }
+  const bottomRightPoint = { timestamp: setMetadata.length, bpm: 0 }
+  const poisPoints = [bottomLeftPoint, topLeftPoint, ...pois, topRightPoint, bottomRightPoint]
 
   // Draw the path and add fill
-  timeline.append('path')
+  familiarityVisualization.append('path')
     .datum(poisPoints)
     .attr('d', line)
     .attr('fill', `url(#${gradientId})`)
@@ -125,10 +127,10 @@ function e3Graph (container, songs, pois, setMetadata, index, scale) {
   // Add cue point lines for each cue point
   cuePoints.forEach((d, i) => {
     const x = getXPos(d, i)
-    const y1 = getYPos(d, i)
-    const y2 = yScale(graphMinBpm)
+    const y1 = graphHeight
+    const y2 = 0
 
-    timeline.append('line')
+    familiarityVisualization.append('line')
       .attr('x1', x)
       .attr('y1', y1)
       .attr('x2', x)
