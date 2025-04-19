@@ -2,6 +2,7 @@ import * as d3 from 'd3'
 import songData from '../data/song-data'
 
 import { getDisplaySettings, setupGraphControlsMenu, setUpTheming } from './controls'
+import { bpmGraph } from './bpm'
 import { e3Graph } from './e3'
 import { timelineGraph } from './timeline'
 import { playlistView } from './playlist'
@@ -140,6 +141,10 @@ function drawSetVisualizations (container, sets, displaySettings) {
     if (displaySettings.show.includes('timelines')) {
       // Default to timeline graph...
       timelineGraph(setInfoContainer, songs, pois, setMetadata, i, displaySettings.scale)
+    }
+
+    if (displaySettings.show.includes('bpm')) {
+      bpmGraph(setInfoContainer, songs, pois, setMetadata, i, displaySettings.scale)
     }
 
     if (displaySettings.show.includes('type')) {
