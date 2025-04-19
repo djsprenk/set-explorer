@@ -4,6 +4,8 @@ import songData from '../data/song-data'
 import { getDisplaySettings, setupGraphControlsMenu, setUpTheming } from './controls'
 import { bpmGraph } from './bpm'
 import { e3Graph } from './e3'
+import { energyGraph } from './energy'
+import { playlistView } from './playlist'
 import { timelineGraph } from './timeline'
 import { playlistView } from './playlist'
 import { e3Graph } from './e3'
@@ -141,6 +143,10 @@ function drawSetVisualizations (container, sets, displaySettings) {
     if (displaySettings.show.includes('timelines')) {
       // Default to timeline graph...
       timelineGraph(setInfoContainer, songs, pois, setMetadata, i, displaySettings.scale)
+    }
+
+    if (displaySettings.show.includes('energy')) {
+      energyGraph(setInfoContainer, songs, pois, setMetadata, i, displaySettings.scale)
     }
 
     if (displaySettings.show.includes('bpm')) {
