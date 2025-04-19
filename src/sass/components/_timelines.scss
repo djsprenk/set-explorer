@@ -1,19 +1,25 @@
 /* Timeline graph */
 
-.timeline {
-    display: inline-block;
-    width: 100%;
+@import "../abstracts/_graph.scss";
 
-    // Intentionally left white stroke
-    path {
-        stroke: $primary-color;
-        stroke-width: 2px;
-    }
 
-    // Intentionally left white stroke
-    .cue-point {
-        stroke: $primary-color;
-        stroke-width: 2px;
+.timeline-container {
+    @include graph-container;
+
+    .timeline {
+        display: inline-block;
+        width: 100%;
+
+        // Intentionally left white stroke
+        path {
+            stroke: $primary-color;
+            stroke-width: 2px;
+        }
+
+        // Intentionally left white stroke
+        .cue-point {
+            stroke: $primary-color;
+            stroke-width: 2px;
+        }
     }
-}
 }
