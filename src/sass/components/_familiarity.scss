@@ -1,0 +1,26 @@
+/* Energy graph */
+
+@import "../abstracts/_graph.scss";
+
+.familiarity-container {
+
+    @include graph-container;
+
+    .familiarity-graph {
+        display: inline-block;
+        width: 100%;
+
+        // Intentionally left white stroke
+        path {
+            stroke: $primary-color;
+            stroke-width: 2px;
+        }
+
+        // Intentionally left white stroke
+        .cue-point {
+            stroke: $primary-color;
+            stroke-width: 2px;
+        }
+    }
+
+}
