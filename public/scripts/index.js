@@ -7,8 +7,6 @@ import { e3Graph } from './e3'
 import { energyGraph } from './energy'
 import { playlistView } from './playlist'
 import { timelineGraph } from './timeline'
-import { playlistView } from './playlist'
-import { e3Graph } from './e3'
 
 /**
  * Sort sets based on the requested order.
