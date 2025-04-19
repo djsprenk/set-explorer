@@ -48,7 +48,11 @@ function timelineGraph (container, songs, pois, setMetadata, index, scale) {
   }
 
   // Build the timeline group
-  const timeline = container
+  const timelineContainer = container.append('div').attr('class', 'timeline-container')
+  // Add a label
+  timelineContainer.append('span').attr('class', 'graph-label').text('Timeline')
+
+  const timeline = timelineContainer
     .append('svg')
     .attr('class', 'timeline svg-content-responsive')
   // Responsive SVG needs these 2 attributes and no width and height attr.
