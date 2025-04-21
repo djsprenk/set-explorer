@@ -249,6 +249,102 @@ footer a {
   margin-bottom: 1em;
 }
 
+/* Energy graph */
+.bpm-container {
+  display: flex;
+  padding-top: 1em;
+}
+@media only screen and (max-width: 992px) {
+  .bpm-container {
+    flex-wrap: wrap;
+  }
+  .bpm-container .graph-label {
+    padding-bottom: 1em;
+  }
+}
+.bpm-container .graph-label {
+  display: inline-block;
+  width: 6.5em;
+  flex-shrink: 0;
+  align-self: end;
+}
+.bpm-container .bpm-graph {
+  display: inline-block;
+  width: 100%;
+}
+.bpm-container .bpm-graph path {
+  stroke: rgb(233, 233, 233);
+  stroke-width: 2px;
+}
+.bpm-container .bpm-graph .cue-point {
+  stroke: rgb(233, 233, 233);
+  stroke-width: 2px;
+}
+
+/* Energy graph */
+.energy-container {
+  display: flex;
+  padding-top: 1em;
+}
+@media only screen and (max-width: 992px) {
+  .energy-container {
+    flex-wrap: wrap;
+  }
+  .energy-container .graph-label {
+    padding-bottom: 1em;
+  }
+}
+.energy-container .graph-label {
+  display: inline-block;
+  width: 6.5em;
+  flex-shrink: 0;
+  align-self: end;
+}
+.energy-container .energy-graph {
+  display: inline-block;
+  width: 100%;
+}
+.energy-container .energy-graph path {
+  stroke: rgb(233, 233, 233);
+  stroke-width: 2px;
+}
+.energy-container .energy-graph .cue-point {
+  stroke: rgb(233, 233, 233);
+  stroke-width: 2px;
+}
+
+/* Energy graph */
+.familiarity-container {
+  display: flex;
+  padding-top: 1em;
+}
+@media only screen and (max-width: 992px) {
+  .familiarity-container {
+    flex-wrap: wrap;
+  }
+  .familiarity-container .graph-label {
+    padding-bottom: 1em;
+  }
+}
+.familiarity-container .graph-label {
+  display: inline-block;
+  width: 6.5em;
+  flex-shrink: 0;
+  align-self: end;
+}
+.familiarity-container .familiarity-graph {
+  display: inline-block;
+  width: 100%;
+}
+.familiarity-container .familiarity-graph path {
+  stroke: rgb(233, 233, 233);
+  stroke-width: 2px;
+}
+.familiarity-container .familiarity-graph .cue-point {
+  stroke: rgb(233, 233, 233);
+  stroke-width: 2px;
+}
+
 /* Playlist view */
 .playlist {
   margin-top: 1em;
@@ -331,6 +427,11 @@ footer a {
   display: inline-block;
 }
 
+/* Shared for graphs */
+.svg-content-responsive {
+  display: inline-block;
+}
+
 /* Settings / controls menu */
 #settings {
   height: 2em;
@@ -394,21 +495,35 @@ footer a {
 }
 
 /* Timeline graph */
-.timeline {
+.timeline-container {
+  display: flex;
+  padding-top: 1em;
+}
+@media only screen and (max-width: 992px) {
+  .timeline-container {
+    flex-wrap: wrap;
+  }
+  .timeline-container .graph-label {
+    padding-bottom: 1em;
+  }
+}
+.timeline-container .graph-label {
+  display: inline-block;
+  width: 6.5em;
+  flex-shrink: 0;
+  align-self: end;
+}
+.timeline-container .timeline {
   display: inline-block;
   width: 100%;
 }
-.timeline path {
+.timeline-container .timeline path {
   stroke: rgb(233, 233, 233);
   stroke-width: 2px;
 }
-.timeline .cue-point {
+.timeline-container .timeline .cue-point {
   stroke: rgb(233, 233, 233);
   stroke-width: 2px;
-}
-
-.svg-content-responsive {
-  display: inline-block;
 }
 
 /*# sourceMappingURL=style.css.map */
