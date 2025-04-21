@@ -433,6 +433,12 @@ footer a {
 }
 
 /* Settings / controls menu */
+#color-mode {
+  height: 2em;
+  cursor: pointer;
+  padding-right: 1em;
+}
+
 #settings {
   height: 2em;
   align-self: center;
