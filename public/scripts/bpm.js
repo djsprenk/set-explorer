@@ -70,10 +70,8 @@ function bpmGraph (container, songs, pois, setMetadata, index, scale) {
 
   // Add stops
   const bpmChanges = filterPois(pois, 'beatgrid')
-  console.log(`BPM changes: ${JSON.stringify(bpmChanges)}`)
 
   function addColorStop (pos, bpm) {
-    // console.log(`Adding color stop ${colorScale(bpm)} at ${pos} with bpm ${bpm}`)
     gradient.append('stop')
       .attr('offset', gradientScale(pos) + '%')
       .attr('stop-color', colorScale(bpm))

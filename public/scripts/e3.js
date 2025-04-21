@@ -93,7 +93,6 @@ function e3Graph (container, songs, pois, setMetadata, index, scale) {
   }
   for (let i = 0; i < Math.min(cuePoints.length, songs.length); i++) {
     cuePoints[i].e3 = songs[i].E3
-    console.log(`song type ${songs[i].E3}`)
   }
 
   // Add color for familiarity of each song
