@@ -4,6 +4,8 @@
 
 - [x] Update controls for new graphs
 - [x] Change BPM to rectangular graph with gradient fill for speed hi/lo
+- [x] Add toggleable light / dark mode
+    - [ ] Remember override with cookie setting
 - [ ] Familiarity grouping
     - [ ] Fuzzy categorization of familiarity / BPM / etc.
 
