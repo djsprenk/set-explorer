@@ -11,7 +11,7 @@ const visualizationTypes = {
   TIMELINE: 'timelines',
   BPM: 'bpm',
   ENERGY: 'energy',
-  TYPE: 'type',
+  FAMILIARITY: 'familiarity',
   PLAYLIST: 'playlists'
 }
 const scaleTypes = ['relative', 'stretch']
@@ -123,7 +123,7 @@ function getSettingsSelections (document) {
   if (document.getElementById('timeline-control').checked) { displaySettings.show.push(visualizationTypes.TIMELINE) }
   if (document.getElementById('bpm-control').checked) { displaySettings.show.push(visualizationTypes.BPM) }
   if (document.getElementById('energy-control').checked) { displaySettings.show.push(visualizationTypes.ENERGY) }
-  if (document.getElementById('familiarity-control').checked) { displaySettings.show.push(visualizationTypes.TYPE) }
+  if (document.getElementById('familiarity-control').checked) { displaySettings.show.push(visualizationTypes.FAMILIARITY) }
   if (document.getElementById('playlist-control').checked) { displaySettings.show.push(visualizationTypes.PLAYLIST) }
 
   // Scale - Not yet a selector
@@ -159,7 +159,7 @@ function setSettingsSelections (document, settings) {
   } else {
     document.getElementById('energy-control').checked = false
   }
-  if (settings.show.includes(visualizationTypes.TYPE)) {
+  if (settings.show.includes(visualizationTypes.FAMILIARITY)) {
     document.getElementById('familiarity-control').checked = true
   } else {
     document.getElementById('familiarity-control').checked = false
