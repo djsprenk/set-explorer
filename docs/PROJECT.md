@@ -1,5 +1,12 @@
 # Project Tasks, Ideas, To Dos
 
+## Up Next
+
+- [x] Update controls for new graphs
+- [x] Change BPM to rectangular graph with gradient fill for speed hi/lo
+- [ ] Familiarity grouping
+    - [ ] Fuzzy categorization of familiarity / BPM / etc.
+
 ## In-progress / Complete
 
 - [x] Create energy graph of sets from VDJ.
@@ -30,10 +37,8 @@
 - [x] Add automated fetching of database from backup
 - [x] Add override data folder for hand-edits
 
-## Upcoming
+## Defer
 
 - [ ] Add search function to find sets instead of having to provide a fully-qualified path.
 - [ ] Add hover / click behavior to graphs
 - [ ] Combine Mixcloud stats and VirtualDJ data
-
-## Defer
