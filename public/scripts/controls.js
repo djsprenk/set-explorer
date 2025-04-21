@@ -8,9 +8,11 @@ const settingsMenuCookie = 'settingsMenu'
 
 // Constants
 const visualizationTypes = {
-  PLAYLIST: 'playlists',
   TIMELINE: 'timelines',
-  TYPE: 'types'
+  BPM: 'bpm',
+  ENERGY: 'energy',
+  TYPE: 'type',
+  PLAYLIST: 'playlists'
 }
 const scaleTypes = ['relative', 'stretch']
 const sortOrders = ['newest', 'oldest']
@@ -118,8 +120,11 @@ function getSettingsSelections (document) {
 
   // Show
   displaySettings.show = []
-  if (document.getElementById('playlist-control').checked) { displaySettings.show.push(visualizationTypes.PLAYLIST) }
   if (document.getElementById('timeline-control').checked) { displaySettings.show.push(visualizationTypes.TIMELINE) }
+  if (document.getElementById('bpm-control').checked) { displaySettings.show.push(visualizationTypes.BPM) }
+  if (document.getElementById('energy-control').checked) { displaySettings.show.push(visualizationTypes.ENERGY) }
+  if (document.getElementById('familiarity-control').checked) { displaySettings.show.push(visualizationTypes.TYPE) }
+  if (document.getElementById('playlist-control').checked) { displaySettings.show.push(visualizationTypes.PLAYLIST) }
 
   // Scale - Not yet a selector
 
@@ -139,15 +144,30 @@ function setSettingsSelections (document, settings) {
   // Sort - Not yet a selector
 
   // Show
+  if (settings.show.includes(visualizationTypes.TIMELINE)) {
+    document.getElementById('timeline-control').checked = true
+  } else {
+    document.getElementById('timeline-control').checked = false
+  }
+  if (settings.show.includes(visualizationTypes.BPM)) {
+    document.getElementById('bpm-control').checked = true
+  } else {
+    document.getElementById('bpm-control').checked = false
+  }
+  if (settings.show.includes(visualizationTypes.ENERGY)) {
+    document.getElementById('energy-control').checked = true
+  } else {
+    document.getElementById('energy-control').checked = false
+  }
+  if (settings.show.includes(visualizationTypes.TYPE)) {
+    document.getElementById('familiarity-control').checked = true
+  } else {
+    document.getElementById('familiarity-control').checked = false
+  }
   if (settings.show.includes('playlists')) {
     document.getElementById('playlist-control').checked = true
   } else {
     document.getElementById('playlist-control').checked = false
-  }
-  if (settings.show.includes('timelines')) {
-    document.getElementById('timeline-control').checked = true
-  } else {
-    document.getElementById('timeline-control').checked = false
   }
 
   // Scale - Not yet a selector
