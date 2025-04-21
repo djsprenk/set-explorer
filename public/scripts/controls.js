@@ -17,9 +17,15 @@ const visualizationTypes = {
 const scaleTypes = ['relative', 'stretch']
 const sortOrders = ['newest', 'oldest']
 
+// Default display settings for first visit
 const defaultDisplaySettings = {
   sortOrder: sortOrders[0],
-  show: [visualizationTypes.TIMELINE],
+  show: [
+    visualizationTypes.ENERGY,
+    visualizationTypes.BPM,
+    visualizationTypes.FAMILIARITY,
+    visualizationTypes.PLAYLIST
+  ],
   scale: scaleTypes[0]
 }
 
@@ -29,7 +35,6 @@ const defaultDisplaySettings = {
  */
 function getDisplaySettings () {
   const querySettings = getDisplaySettingsFromQuery()
-
   const calculatedSettings = { ...defaultDisplaySettings, ...querySettings }
 
   return calculatedSettings
