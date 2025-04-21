@@ -84,34 +84,64 @@ function findMinMaxBpm (setArray) {
   }, { minBpm: setArray[0].bpmMin, maxBpm: setArray[0].bpmMax })
 }
 
+function setDarkMode (document) {
+  const body = document.body
+  const logo = document.getElementById('logo')
+  const settingsButton = document.getElementById('settings')
+  const toggleButton = document.getElementById('color-mode')
+
+  // Set dark mode
+  body.classList.replace('light', 'dark')
+  toggleButton.src = 'assets/sun-icon.svg'
+  logo.src = 'assets/sprenk-logo-gradient-white.png'
+  settingsButton.style.filter = 'invert(0)'
+}
+
+function setLightMode (document) {
+  const body = document.body
+  const logo = document.getElementById('logo')
+  const settingsButton = document.getElementById('settings')
+  const toggleButton = document.getElementById('color-mode')
+
+  // Set light mode
+  console.log(body.classList)
+  body.classList.replace('dark', 'light')
+  toggleButton.src = 'assets/moon-icon.svg'
+  logo.src = 'assets/sprenk-logo-gradient-black.png'
+  settingsButton.style.filter = 'invert(1)'
+}
+
 /**
  * Determine light/dark mode and set styling
  * @param {*} document
  */
 function setUpTheming (document) {
   const body = document.body
-  const logo = document.getElementById('logo')
-  // const toggleButton = document.getElementById('toggle-mode')
+  const toggleButton = document.getElementById('color-mode')
 
   // Check initial preference
   let prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-  body.classList.add(prefersDark ? 'dark' : 'light')
-  logo.src = `assets/sprenk-logo-gradient-${prefersDark ? 'white' : 'black'}.png`
+  if (prefersDark) {
+    setDarkMode(document)
+    body.classList.add('dark')
+  } else {
+    setLightMode(document)
+    body.classList.add('light')
+  }
 
-  // Toggle mode manually
-  // toggleButton.addEventListener('click', () => {
-  //   if (body.classList.contains('dark')) {
-  //     body.classList.replace('dark', 'light')
-  //   } else {
-  //     body.classList.replace('light', 'dark')
-  //   }
-  // })
+  // Toggle light / mode manually
+  toggleButton.addEventListener('click', () => {
+    if (body.classList.contains('light')) {
+      setDarkMode(document)
+    } else {
+      setLightMode(document)
+    }
+  })
 
   // Listen for changes in preference
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
     prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    body.classList.replace(e.matches ? 'light' : 'dark', e.matches ? 'dark' : 'light')
-    logo.src = `assets/sprenk-logo-gradient-${prefersDark ? 'white' : 'black'}.png`
+    if (prefersDark) { setDarkMode(document) } else { setLightMode(document) }
   })
 }
 
