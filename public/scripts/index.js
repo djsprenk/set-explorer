@@ -151,7 +151,7 @@ function drawSetVisualizations (container, sets, displaySettings) {
       bpmGraph(setInfoContainer, songs, pois, setMetadata, i, displaySettings.scale)
     }
 
-    if (displaySettings.show.includes('type')) {
+    if (displaySettings.show.includes('familiarity')) {
       e3Graph(setInfoContainer, songs, pois, setMetadata, i, displaySettings.scale)
     }
 
