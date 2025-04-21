@@ -1,11 +1,14 @@
 import * as d3 from 'd3'
 
+// Get just cue points from list
+function filterPois (list, type) {
+  return list.filter(item => item.type === type)
+}
+
 function bpmGraph (container, songs, pois, setMetadata, index, scale) {
   // Dimensions / constant
-  const graphHeight = 50
+  const graphHeight = 20
   const graphWidth = 500
-  const graphMinBpm = 50
-  const graphMaxBpm = 100
 
   // If we are in relative length mode, scale to the length below as max
   const relativeLength = scale !== 'stretch'
@@ -18,12 +21,11 @@ function bpmGraph (container, songs, pois, setMetadata, index, scale) {
     .range([0, graphWidth])
 
   const yScale = d3.scaleLinear()
-    .domain([graphMinBpm, graphMaxBpm])
+    .domain([0, 1])
     .range([graphHeight, 0])
 
-  // Gradient stops are a percentage from 0 to 100
   const gradientScale = d3.scaleLinear()
-    .domain([graphMinBpm, graphMaxBpm])
+    .domain([0, domainMax])
     .range([0, 100])
 
   function getXPos (d, i) {
@@ -35,67 +37,56 @@ function bpmGraph (container, songs, pois, setMetadata, index, scale) {
   }
 
   function getYPos (d, i) {
-    const effectiveBpm = d.bpm
-    if (isNaN(effectiveBpm)) {
-      console.warn(`BPM is NaN: ${d.stringify()}`)
-    }
+    const effectiveBpm = Math.min(d.bpm, 1)
     return yScale(effectiveBpm)
   }
-
   // Create a container
   const bpmContainer = container.append('div').attr('class', 'bpm-container')
-
-  // Add a label
   bpmContainer.append('span').attr('class', 'graph-label').text('BPM')
 
   // Build the BPM graph
-  const bpmGraph = bpmContainer
+  const bpmVisualization = bpmContainer
     .append('svg')
-    .attr('class', 'bpmGraph svg-content-responsive')
+    .attr('class', 'bpm-graph svg-content-responsive')
   // Responsive SVG needs these 2 attributes and no width and height attr.
     .attr('preserveAspectRatio', 'xMinYMin meet')
     .attr('viewBox', `0 0 ${graphWidth} ${graphHeight}`)
 
-  // Create vertical gradient
-  const gradientId = `gradient-bpm-${index}`
-  const gradient = bpmGraph.append('defs')
+  // Create gradient
+  const gradientId = `bpm-gradient-${index}`
+  const gradient = bpmVisualization.append('defs')
     .append('linearGradient')
     .attr('id', gradientId)
     .attr('gradientUnits', 'userSpaceOnUse')
     .attr('x1', 0)
-    .attr('y1', graphHeight)
-    .attr('x2', 0)
+    .attr('y1', 0)
+    .attr('x2', graphWidth)
     .attr('y2', 0)
 
-  // Create color stops
-  const mapper = {
-    0: 'black',
-    50: 'purple',
-    60: 'blue',
-    70: 'green',
-    75: 'yellow',
-    80: 'orange',
-    85: 'red'
+  const colorScale = d3.scaleLinear()
+    .domain([0, 60, 65, 70, 75, 80, 85])
+    .range(['black', 'purple', 'blue', 'green', 'yellow', 'orange', 'red'])
+    .interpolate(d3.interpolateRgb)
+
+  // Add stops
+  const bpmChanges = filterPois(pois, 'beatgrid')
+  console.log(`BPM changes: ${JSON.stringify(bpmChanges)}`)
+
+  function addColorStop (pos, bpm) {
+    // console.log(`Adding color stop ${colorScale(bpm)} at ${pos} with bpm ${bpm}`)
+    gradient.append('stop')
+      .attr('offset', gradientScale(pos) + '%')
+      .attr('stop-color', colorScale(bpm))
   }
 
   // Add stops
-  for (const i in mapper) {
-    const bpm = i
-    const color = mapper[i]
+  bpmChanges.forEach((bpmChange) => {
+    const bpm = bpmChange.bpm
+    const pos = bpmChange.timestamp
+    addColorStop(pos, bpm)
+  })
 
-    // console.log(`Adding stop for ${bpm} at ${gradientScale(bpm)}: ${color}`)
-    gradient.append('stop')
-    // .attr('offset', xScale(pos))
-      .attr('offset', gradientScale(bpm) + '%')
-      .attr('stop-color', color)
-  }
-
-  // Get just cue points from list
-  function filterCues (list) {
-    return list.filter(item => item.type === 'cue')
-  }
-
-  const cuePoints = filterCues(pois)
+  const cuePoints = filterPois(pois, 'cue')
 
   if (cuePoints.length !== songs.length) {
     console.warn(`Mismatched song / cue length for ${setMetadata.title}`)
@@ -111,13 +102,14 @@ function bpmGraph (container, songs, pois, setMetadata, index, scale) {
     .curve(d3.curveLinearClosed)
 
   // Close the path by filling in the corners
-  const bottomLeftPoint = { timestamp: 0, bpm: graphMinBpm }
-  const finalBpm = { timestamp: setMetadata.length, bpm: pois[pois.length - 1].bpm }
-  const bottomRightPoint = { timestamp: setMetadata.length, bpm: graphMinBpm }
-  const poisPoints = [bottomLeftPoint, ...pois, finalBpm, bottomRightPoint]
+  const bottomLeftPoint = { timestamp: 0, bpm: 0 }
+  const topLeftPoint = { timestamp: 0, bpm: 1 }
+  const topRightPoint = { timestamp: setMetadata.length, bpm: 1 }
+  const bottomRightPoint = { timestamp: setMetadata.length, bpm: 0 }
+  const poisPoints = [bottomLeftPoint, topLeftPoint, ...pois, topRightPoint, bottomRightPoint]
 
   // Draw the path and add fill
-  bpmGraph.append('path')
+  bpmVisualization.append('path')
     .datum(poisPoints)
     .attr('d', line)
     .attr('fill', `url(#${gradientId})`)
@@ -125,10 +117,10 @@ function bpmGraph (container, songs, pois, setMetadata, index, scale) {
   // Add cue point lines for each cue point
   cuePoints.forEach((d, i) => {
     const x = getXPos(d, i)
-    const y1 = getYPos(d, i)
-    const y2 = yScale(graphMinBpm)
+    const y1 = graphHeight
+    const y2 = 0
 
-    bpmGraph.append('line')
+    bpmVisualization.append('line')
       .attr('x1', x)
       .attr('y1', y1)
       .attr('x2', x)
