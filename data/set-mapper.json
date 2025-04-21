@@ -1150,5 +1150,23 @@
         "slug": "20250210-ny-sbkz-4",
         "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20250210 - SBKZ 4.mp3",
         "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2025.subfolders/2025 - Honolulu Zouk Marathon (HZM).subfolders/20250320 - HZM 1.vdjfolder",
+        "slug": "20250320-honolulu-1",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20250320 - HZM 1.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2025.subfolders/2025 - Honolulu Zouk Marathon (HZM).subfolders/20250321 - HZM 2.vdjfolder",
+        "slug": "20250321-honolulu-2",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20250321 - HZM 2.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2025.subfolders/2025 - Honolulu Zouk Marathon (HZM).subfolders/20250322 - HZM 3.vdjfolder",
+        "slug": "20250322-honolulu-3",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20250322 - HZM 3.mp3",
+        "type": "live-set"
     }
 ]
