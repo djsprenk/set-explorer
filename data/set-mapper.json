@@ -1128,25 +1128,25 @@
         "type": "live-set"
     },
     {
-        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2025.subfolders/2025 - NY SBKZ.subfolders/20250208 - NY SBKZ 1 (Not recorded).vdjfolder",
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2025.subfolders/2025 - NY SBKZ.subfolders/20250208 - NY SBKZ 1.vdjfolder",
         "slug": "20250208-ny-sbkz-1",
         "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20250208 - SBKZ 1.mp3",
         "type": "live-set"
     },
     {
-        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2025.subfolders/2025 - NY SBKZ.subfolders/20250209 - NY SBKZ 2 (Sat Closer 1).vdjfolder",
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2025.subfolders/2025 - NY SBKZ.subfolders/20250209 - NY SBKZ 2.vdjfolder",
         "slug": "20250209-ny-sbkz-2",
         "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20250209 - SBKZ 2.mp3",
         "type": "live-set"
     },
     {
-        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2025.subfolders/2025 - NY SBKZ.subfolders/20250209 - SBKZ 3 (Sat Closer 2).vdjfolder",
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2025.subfolders/2025 - NY SBKZ.subfolders/20250209 - NY SBKZ 3.vdjfolder",
         "slug": "20250209-ny-sbkz-3",
         "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20250209 - SBKZ 3.mp3",
         "type": "live-set"
     },
     {
-        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2025.subfolders/2025 - NY SBKZ.subfolders/20250210 - SBKZ 4 (Sun Closer).vdjfolder",
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2025.subfolders/2025 - NY SBKZ.subfolders/20250210 - NY SBKZ 4.vdjfolder",
         "slug": "20250210-ny-sbkz-4",
         "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20250210 - SBKZ 4.mp3",
         "type": "live-set"
@@ -1167,6 +1167,36 @@
         "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2025.subfolders/2025 - Honolulu Zouk Marathon (HZM).subfolders/20250322 - HZM 3.vdjfolder",
         "slug": "20250322-honolulu-3",
         "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20250322 - HZM 3.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2025.subfolders/2025 - Zouk Heat.subfolders/20250403 - Zouk Heat 0.vdjfolder",
+        "slug": "20250403-zouk-heat-0",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20250403 - Zouk Heat 0.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2025.subfolders/2025 - Zouk Heat.subfolders/20250404 - Zouk Heat 1.vdjfolder",
+        "slug": "20250404-zouk-heat-1",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20250404 - Zouk Heat 1.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2025.subfolders/2025 - Zouk Heat.subfolders/20250404 - Zouk Heat 2.vdjfolder",
+        "slug": "20250404-zouk-heat-2",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20250404 - Zouk Heat 2.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2025.subfolders/2025 - Zouk Heat.subfolders/20250405 - Zouk Heat 3.vdjfolder",
+        "slug": "20250405-zouk-heat-3",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20250405 - Zouk Heat 3.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2025.subfolders/2025 - Zouk Heat.subfolders/20250406 - Zouk Heat 4.vdjfolder",
+        "slug": "20250406-zouk-heat-4",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20250406 - Zouk Heat 4.mp3",
         "type": "live-set"
     }
 ]
