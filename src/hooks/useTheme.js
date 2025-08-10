@@ -16,6 +16,11 @@ export function useTheme () {
     return () => mediaQuery.removeEventListener('change', handleChange)
   }, [])
 
+  useEffect(() => {
+    // Apply theme class to body element
+    document.body.className = isDarkMode ? 'dark' : 'light'
+  }, [isDarkMode])
+
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode)
   }

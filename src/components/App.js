@@ -44,7 +44,7 @@ function App () {
   }
 
   return (
-    <div className={isDarkMode ? 'dark' : 'light'}>
+    <>
       <Header
         isDarkMode={isDarkMode}
         onToggleTheme={toggleTheme}
@@ -61,7 +61,7 @@ function App () {
         displaySettings={displaySettings}
       />
       <Footer />
-    </div>
+    </>
   )
 }
 
