@@ -141,14 +141,14 @@ function Controls ({ visible, displaySettings, songData, onSettingsChange }) {
         <input
           type='number'
           id='min-bpm'
-          value={settings.minBpm || dataMinBpm}
+          value={settings.minBpm || Math.round(dataMinBpm)}
           onChange={(e) => handleBpmChange('minBpm', parseInt(e.target.value))}
         />
         <span> - </span>
         <input
           type='number'
           id='max-bpm'
-          value={settings.maxBpm || dataMaxBpm}
+          value={settings.maxBpm || Math.round(dataMaxBpm)}
           onChange={(e) => handleBpmChange('maxBpm', parseInt(e.target.value))}
         />
         <span>BPM</span>
