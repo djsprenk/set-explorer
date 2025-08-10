@@ -14,9 +14,9 @@
     "webpack-dev-server": "^5.0.4"
   },
   "scripts": {
-    "build": "webpack --config webpack.config.prod.js",
-    "develop": "webpack serve --open --config webpack.config.dev.js",
-    "sass": "sass --watch src/sass:public/stylesheets",
+    "build": "sass src/stylesheets:dist/stylesheets && webpack --config webpack.config.prod.js",
+    "develop": "sass --watch src/stylesheets:dist/stylesheets & webpack serve --open --config webpack.config.dev.js",
+    "sass": "sass --watch src/stylesheets:dist/stylesheets",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "npx standard --fix"
   },

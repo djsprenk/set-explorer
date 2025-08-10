@@ -4,11 +4,11 @@ module.exports = {
   mode: 'development',
   devtool: 'inline-source-map',
   devServer: {
-    static: './public'
+    static: './dist'
   },
-  entry: './public/scripts/index.js',
+  entry: './src/scripts/index.js',
   output: {
     filename: 'main.js',
-    path: path.resolve(__dirname, 'public')
+    path: path.resolve(__dirname, 'dist')
   }
 }
