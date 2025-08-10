@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
-
+<html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+    
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-VDRYX4E0D3"></script>
     <script>
@@ -18,58 +19,10 @@
         href="https://fonts.googleapis.com/css2?family=IM+Fell+Double+Pica+SC&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
         rel="stylesheet">
 
-    <!-- Load stylesheets -->
-    <link rel="stylesheet" href="stylesheets/style.css">
-
-    <!-- Load index script -->
-    <script src="./main.js"></script>
+    <title>DJ Sprenk - Set Explorer</title>
 </head>
 
 <body>
-    <!-- Create a div where the graph will take place -->
-    <header>
-        <a href="https://djsprenk.com"><img id="logo" src="assets/sprenk-logo-gradient-white.png" alt="DJ Sprenk"></a>
-        <h1 id="title">
-            Set Explorer
-        </h1>
-        <img id="color-mode" src ="assets/moon-icon.svg" title="Toggle light / dark mode" alt="Toggle light / dark mode"/>
-        <img id="settings" src="assets/gear-icon.svg" title="Toggle settings menu" alt="Toggle settings menu"/>
-    </header>
-    <aside id="controls" class="hidden">
-        <div id="sort">
-            <strong>Sort:</strong>
-            <span class="control" data-control="order" data-value="newest" title="Show newest first">Newest</span>,
-            <span class="control" data-control="order" data-value="oldest" title="Show oldest first">Oldest</span>
-        </div>
-        <div id="visualization-display">
-            <strong>Show:</strong>
-            <input type="checkbox" id="timeline-control" class="control" data-control="show" data-value="timelines" title="Show timelines"></input>
-            <label for ="timeline-control">Combined BPM & Energy</label>
-            <input type="checkbox" id="bpm-control" class="control" data-control="show" data-value="playlists" title="Show BPM"></input>
-            <label for="bpm-control">BPM</label>
-            <input type="checkbox" id="energy-control" class="control" data-control="show" data-value="energy" title="Show energy"></input>
-            <label for="energy-control">Energy</label>
-            <input type="checkbox" id="familiarity-control" class="control" data-control="show" data-value="familiarity" title="Show familiarity"></input>
-            <label for="familiarity-control">Familiarity</label>
-            <input type="checkbox" id="playlist-control" class="control" data-control="show" data-value="playlists" title="Show playlists"></input>
-            <label for="playlist-control">Playlists</label>
-        </div>
-        <div id="scale">
-            <strong>Scale:</strong>
-            <span class="control" data-control="scale" data-value="stretch" title="Scale stretch">Stretch</span>,
-            <span class="control" data-control="scale" data-value="relative" title="Scale relative">Relative</span>
-        </div>
-        <div id="bpm">
-            <strong>BPM Range:</strong>
-            <input type="number" id="min-bpm" />
-            <span> - </span>
-            <input type="number" id="max-bpm" />
-            <span>BPM</span>
-        </div>
-    </aside>
-    <main id="visualizations">
-        <div id="search-results" class="hidden"><span id="search-results-number">No</span> sets found with current
-            filter.</div>
-    </main>
-    <footer>© DJ Sprenk | <a href="about.html">About this project</footer>
+    <div id="root"></div>
 </body>
+</html>
