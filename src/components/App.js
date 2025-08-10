@@ -24,7 +24,7 @@ function App () {
   const [displaySettings, setDisplaySettings] = useState(getDisplaySettings())
   const [sortedSets, setSortedSets] = useState([])
   const [settingsMenuState, setSettingsMenuState] = useCookie('settingsMenu', 'closed')
-  
+
   const { isDarkMode, toggleTheme } = useTheme()
 
   const controlsVisible = settingsMenuState === 'open'
