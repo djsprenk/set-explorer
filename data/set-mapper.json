@@ -1086,6 +1086,30 @@
         "type": "produced-set"
     },
     {
+        "playlist": "MyLists/Produced Sets.subfolders/20251211 - Serenity Found.vdjfolder",
+        "slug": "20251211-serenity-found",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Produced Sets/20251211 - Serenity Found.mp3",
+        "type": "produced-set"
+    },
+    {
+        "playlist": "MyLists/Produced Sets.subfolders/20260217 - Dream On.vdjfolder",
+        "slug": "20260217-dream-on",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Produced Sets/20260217 - Dream On.mp3",
+        "type": "produced-set"
+    },
+    {
+        "playlist": "MyLists/Produced Sets.subfolders/20260302 - Love Again (Again).vdjfolder",
+        "slug": "20260302-love-again",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Produced Sets/20260302 - Love Again (Again).mp3",
+        "type": "produced-set"
+    },
+    {
+        "playlist": "MyLists/Produced Sets.subfolders/20260309 - Without You.vdjfolder",
+        "slug": "20260309-without-you",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Produced Sets/20260309 - Without You.mp3",
+        "type": "produced-set"
+    },
+    {
         "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2025.subfolders/2025 - Interfusion.subfolders/20250110 - IF 1.vdjfolder",
         "slug": "20250110-interfusion-1",
         "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20250110 - Interfusion 1.mp3",
@@ -1239,6 +1263,114 @@
         "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2025.subfolders/2025 - Zouk Diverse.subfolders/20250720 - Zouk Diverse 2.vdjfolder",
         "slug": "20250720-zouk-diverse",
         "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/20250720 - Zouk Diverse 2.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2025.subfolders/2025 - Ariel & Leticia Lambada.subfolders/20250823 - A&L 1.vdjfolder",
+        "slug": "20250822-ariel-and-leticia-1",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/2025/20250822 - Ariel and Leticia 1.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2025.subfolders/2025 - Ariel & Leticia Lambada.subfolders/20250824 - A&L 2.vdjfolder",
+        "slug": "20250823-ariel-and-leticia-2",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/2025/20250823 - Ariel and Leticia 2.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2025.subfolders/2025 - L&N.subfolders/20250919 - L&N 1.vdjfolder",
+        "slug": "20250919-leandro-and-nayara-1",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/2025/20250919 - L&N 1.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2025.subfolders/2025 - L&N.subfolders/20250920 - L&N 2.vdjfolder",
+        "slug": "20250920-leandro-and-nayara-2",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/2025/20250920 - L&N 2.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2025.subfolders/20251003 - NYC Zouk Fest.vdjfolder",
+        "slug": "20251003-nyc-zouk-fest",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/2025/20251003 - NYC Zouk Fest.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2026.subfolders/2026 - Interfusion.subfolders/2026016 - Interfusion 1.vdjfolder",
+        "slug": "20260116-interfusion-1",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/2026/20260116 - Interfusion 1.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2026.subfolders/2026 - Interfusion.subfolders/20260116 - Interfusion 2.vdjfolder",
+        "slug": "20260116-interfusion-2",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/2026/20260116 - Interfusion 2.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2026.subfolders/2026 - Interfusion.subfolders/20260117 - Interfusion 3.vdjfolder",
+        "slug": "20260117-interfusion-3",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/2026/20260117 - Interfusion 3.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2026.subfolders/2026 - Interfusion.subfolders/20260117 - Interfusion 4.vdjfolder",
+        "slug": "20260117-interfusion-4",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/2026/20260117 - Interfusion 4.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2026.subfolders/2026 - Interfusion.subfolders/20260118 - Interfusion 5.vdjfolder",
+        "slug": "20260118-interfusion-5",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/2026/20260118 - Interfusion 5.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2026.subfolders/2026 - Omni.subfolders/20260130 - Omni 1.vdjfolder",
+        "slug": "20260130-omnifest-1",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/2026/20260130 - Omni 1.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2026.subfolders/2026 - Omni.subfolders/20260131 - Omni 2.vdjfolder",
+        "slug": "20260131-omnifest-2",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/2026/20260131 - Omni 2.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2026.subfolders/2026 - Omni.subfolders/20260201 - Omni 3.vdjfolder",
+        "slug": "20260201-omnifest-3",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/2026/20260201 - Omni 3.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2026.subfolders/2026 - Omni.subfolders/20260201 - Omni 4.vdjfolder",
+        "slug": "20260201-omnifest-4",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/2026/20260201 - Omni 4.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2026.subfolders/2026 - Zouk Heat.subfolders/20260409 - Zouk Heat 0.vdjfolder",
+        "slug": "20260409-zouk-heat-0",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/2026/20260409 - Zouk Heat 0.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2026.subfolders/2026 - Zouk Heat.subfolders/20260410 - Zouk Heat 1.vdjfolder",
+        "slug": "20260410-zouk-heat-1",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/2026/20260410 - Zouk Heat 1.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2026.subfolders/2026 - Zouk Heat.subfolders/20260411 - Zouk Heat 2.vdjfolder",
+        "slug": "20260411-zouk-heat-2",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/2026/20260411 - Zouk Heat 2.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2026.subfolders/2026 - Zouk Heat.subfolders/20260412 - Zouk Heat 3.vdjfolder",
+        "slug": "20260412-zouk-heat-3",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/2026/20260412 - Zouk Heat 3.mp3",
         "type": "live-set"
     }
 ]
