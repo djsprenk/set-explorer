@@ -24,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nsprenkle/dj-analytics.git"
+    "url": "git+https://github.com/djsprenk/dj-analytics.git"
   },
   "keywords": [
     "DJ",
@@ -33,9 +33,9 @@
   "author": "DJ Sprenk",
   "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/nsprenkle/dj-analytics/issues"
+    "url": "https://github.com/djsprenk/dj-analytics/issues"
   },
-  "homepage": "https://github.com/nsprenkle/dj-analytics#readme",
+  "homepage": "https://github.com/djsprenk/dj-analytics#readme",
   "dependencies": {
     "d3": "=5.1.0"
   }
