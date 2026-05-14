@@ -19,7 +19,7 @@ SONGS_LIST_OVERRIDE_DIR = Path(SONG_LISTS_DIR, "overrides")
 RECORDINGS_DATA_OVERRIDE_DIR = Path(RECORDINGS_DATA_DIR, "overrides")
 
 # Data Output
-DATA_OUTPUT_DIR = Path("public/data")
+DATA_OUTPUT_DIR = Path("src/data")
 
 # Files
 VDJ_DB_FILE = Path(VDJ_EXPORT_DIR, "database.xml")
