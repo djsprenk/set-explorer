@@ -34,6 +34,3 @@ develop:  # Open development environment
 
 build:  # Build files to /dist/
 	npm run build
-
-publish: build  # Copy files over to another project
-	cp -R dist/. ../djsprenk.github.io
