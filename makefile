@@ -7,7 +7,7 @@ install:  # Install requirements
 	pip install -r requirements.in
 	npm i
 
-format:  # Format Python and JS files
+format:  # Format Python, JS, and Markdown files
 	black .
 	isort .
 	npm run format

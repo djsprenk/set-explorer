@@ -9,6 +9,7 @@
   "devDependencies": {
     "copy-webpack-plugin": "^14.0.0",
     "html-webpack-plugin": "^5.6.7",
+    "prettier": "^3.8.3",
     "sass": "^1.77.6",
     "standard": "^17.1.0",
     "webpack": "^5.93.0",
@@ -20,7 +21,7 @@
     "develop": "sass --watch src/stylesheets:dist/stylesheets & webpack serve --open --config webpack.config.dev.js",
     "sass": "sass --watch src/stylesheets:dist/stylesheets",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "npx standard --fix"
+    "format": "npx standard --fix && npx prettier --write \"**/*.md\""
   },
   "repository": {
     "type": "git",
