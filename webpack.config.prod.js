@@ -21,7 +21,10 @@ module.exports = {
       inject: false
     }),
     new CopyWebpackPlugin({
-      patterns: [{ from: 'src/assets', to: 'assets' }]
+      patterns: [
+        { from: 'src/assets', to: 'assets' },
+        { from: 'CNAME', to: '.' }
+      ]
     })
   ],
   optimization: {
