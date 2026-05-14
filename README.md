@@ -1,6 +1,6 @@
-# DJ Visualization
+# Set Explorer
 
-Analysis of DJ data / playlists.
+Visualization of DJ sets for DJ Sprenk, published to [sets.djsprenk.com](sets.djsprenk.com) and [djsprenk.com/set-explorer](djsprenk.com/set-explorer)
 
 ## Quickstart
 
@@ -14,10 +14,16 @@ source venv/bin/activate
 2. Install project requirements.
 
 ```sh
-pip install -r requirements.in
+make install
 ```
 
 3. Download and unpack relevant data into `data/` (see [data/README.md](data/README.md))
+
+4. Update [data/set-mapper.json](data/set-mapper.json) with appropriate mappings to files.
+
+5. Run `make update-all` to compile and build data.
+
+6. View site with `make develop`
 
 ## Develop
 
