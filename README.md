@@ -1,6 +1,8 @@
 # Set Explorer
 
-Visualization of DJ sets for DJ Sprenk, published to [sets.djsprenk.com](sets.djsprenk.com) and [djsprenk.com/set-explorer](djsprenk.com/set-explorer)
+Visualization of DJ sets for DJ Sprenk, published to
+[sets.djsprenk.com](sets.djsprenk.com) and
+[djsprenk.com/set-explorer](djsprenk.com/set-explorer)
 
 ## Quickstart
 
@@ -17,9 +19,11 @@ source venv/bin/activate
 make install
 ```
 
-3. Download and unpack relevant data into `data/` (see [data/README.md](data/README.md))
+3. Download and unpack relevant data into `data/` (see
+   [data/README.md](data/README.md))
 
-4. Update [data/set-mapper.json](data/set-mapper.json) with appropriate mappings to files.
+4. Update [data/set-mapper.json](data/set-mapper.json) with appropriate mappings
+   to files.
 
 5. Run `make update-all` to compile and build data.
 
@@ -29,10 +33,14 @@ make install
 
 ### Formatting
 
-JS is formatted following [StandardJS](https://standardjs.com/) style.
+All files should be auto-formatted with:
 
-Format JS with `npm run format`.
+```sh
+make format
+```
 
-Python is formatted with [Black](https://github.com/psf/black).
+The filetypes & formatters handled are:
 
-Format Python with `python black .`
+- JS, with [StandardJS](https://standardjs.com/).
+- Python, with [Black](https://github.com/psf/black).
+- Markdown with [Prettier](https://prettier.io/)
