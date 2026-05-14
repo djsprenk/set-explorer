@@ -5,6 +5,7 @@ Reads from sets_list.json and writes to data-processed-files/song-data.js.
 """
 
 import json
+import re
 from math import nan
 from pathlib import Path
 
@@ -77,6 +78,50 @@ def get_recording_data(set_data):
     # Fill in missing BPMs from songs, starting with backfill, then forward fill
     pois["@Bpm"] = pois["@Bpm"].fillna(method="bfill")
     pois["@Bpm"] = pois["@Bpm"].fillna(method="ffill")
+
+    # Newer VDJ versions store the beat grid as a compact string in Scan.@BeatGrid
+    # rather than individual beatgrid-type POIs. Parse it to get per-cue BPM.
+    if pois["@Bpm"].isna().any() and "Scan.@BeatGrid" in recording_data_frame.columns:
+        beatgrid_str = recording_data_frame["Scan.@BeatGrid"].iloc[0]
+        if pd.notna(beatgrid_str):
+            bg_entries = re.findall(r"\[([0-9.]+):\d+(?:,([0-9.]+))?\]", beatgrid_str)
+            current_spb = float(recording_data_frame["Scan.@Bpm"].iloc[0])
+            bg_timeline = []
+            for ts, spb in bg_entries:
+                if spb:
+                    current_spb = float(spb)
+                bg_timeline.append((float(ts), round(60 / current_spb, 1)))
+
+            def bpm_from_beatgrid(timestamp):
+                bpm = bg_timeline[0][1] if bg_timeline else set_bpm
+                for ts, b in bg_timeline:
+                    if ts <= timestamp:
+                        bpm = b
+                    else:
+                        break
+                return bpm
+
+            pois["@Bpm"] = pois["@Pos"].apply(bpm_from_beatgrid)
+
+            # Synthesize beatgrid-type POIs from BPM-change points so the JS
+            # gradient builder (which filters for type='beatgrid') has data to work with.
+            # Only emit rows where BPM changes to avoid emitting 600+ identical rows.
+            seen_bpm = None
+            bg_change_points = []
+            for ts, bpm in bg_timeline:
+                if bpm != seen_bpm:
+                    bg_change_points.append(
+                        {"@Pos": ts, "@Name": None, "@Bpm": bpm, "@Type": "beatgrid"}
+                    )
+                    seen_bpm = bpm
+            if bg_change_points:
+                pois = pd.concat(
+                    [pois, pd.DataFrame(bg_change_points)], ignore_index=True
+                )
+                pois = pois.sort_values(by="@Pos")
+
+    # Final fallback for recordings with neither beatgrid POIs nor @BeatGrid data
+    pois["@Bpm"] = pois["@Bpm"].fillna(set_bpm)
 
     # Rename the columns for export
     pois = pois.rename(
