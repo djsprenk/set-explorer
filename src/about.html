@@ -2,51 +2,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
 
 <head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=IM+Fell+Double+Pica+SC&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
-        rel="stylesheet">
-
     <!-- Load stylesheets -->
     <link rel="stylesheet" href="stylesheets/style.css">
 
-    <!-- Setup theming -->
-    <script>
-        /**
-         * Determine light/dark mode and set styling
-         * @param {*} document
-         */
-        function setUpTheming(document) {
-            const body = document.body
-            const logo = document.getElementById('logo')
-            // const toggleButton = document.getElementById('toggle-mode')
-
-            // Check initial preference
-            let prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-            body.classList.add(prefersDark ? 'dark' : 'light')
-            logo.src = `assets/sprenk-logo-gradient-${prefersDark ? 'white' : 'black'}.png`
-
-            // Listen for changes in preference
-            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-                prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-                body.classList.replace(e.matches ? 'light' : 'dark', e.matches ? 'dark' : 'light')
-                logo.src = `assets/sprenk-logo-gradient-${prefersDark ? 'white' : 'black'}.png`
-            })
-        }
-
-        // Wait until page is loaded
-        window.addEventListener('load', function () {
-            // Set up Light / Dark mode
-            setUpTheming(this.document)
-        })
-    </script>
 </head>
 
 <body id="about-page">
 
     <header>
-        <a href="https://djsprenk.com"><img id="logo" src="assets/sprenk-logo-gradient-white.png" alt="DJ Sprenk"></a>
+        <a id="logo" href="https://djsprenk.com">DJ Sprenk</a>
         <h1 id="title">
             Set Explorer
         </h1>

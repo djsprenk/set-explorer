@@ -1,3 +1,4 @@
+@import 'abstracts/fonts';
 @import 'abstracts/colors';
 @import 'abstracts/media-query';
 @import 'theme';
@@ -73,8 +74,26 @@ header {
 }
 
 #logo {
-    height: 2em;
-    align-self: center;
+    font-family: $font-display;
+    font-size: 1.4em;
+    text-decoration: none;
+    text-transform: uppercase;
+    background: linear-gradient(
+        to right,
+        #{$color-brand-pink},
+        #{$color-brand-yellow},
+        #{$color-brand-pink}
+    );
+    background-size: 200% 100%;
+    background-position: 0% center;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: background-position 0.4s ease;
+
+    &:hover {
+        background-position: 100% center;
+    }
 }
 
 main {

@@ -86,28 +86,21 @@ function findMinMaxBpm (setArray) {
 
 function setDarkMode (document) {
   const body = document.body
-  const logo = document.getElementById('logo')
   const settingsButton = document.getElementById('settings')
   const toggleButton = document.getElementById('color-mode')
 
-  // Set dark mode
   body.classList.replace('light', 'dark')
   toggleButton.src = 'assets/sun-icon.svg'
-  logo.src = 'assets/sprenk-logo-gradient-white.png'
   settingsButton.style.filter = 'invert(0)'
 }
 
 function setLightMode (document) {
   const body = document.body
-  const logo = document.getElementById('logo')
   const settingsButton = document.getElementById('settings')
   const toggleButton = document.getElementById('color-mode')
 
-  // Set light mode
-  console.log(body.classList)
   body.classList.replace('dark', 'light')
   toggleButton.src = 'assets/moon-icon.svg'
-  logo.src = 'assets/sprenk-logo-gradient-black.png'
   settingsButton.style.filter = 'invert(1)'
 }
 

@@ -1,7 +1,13 @@
-$font: "Rubik", sans-serif;
+$font-display: 'Always Smile', Georgia, serif;
+$font-heading: 'Staatliches', Georgia, serif;
+$font-body: system-ui, -apple-system, sans-serif;
 
 @mixin theme {
-    font-family: $font;
+    font-family: $font-body;
+
+    h1, h2, h3, h4, h5, h6 {
+        font-family: $font-heading;
+    }
 }
 
 @mixin dark-theme {

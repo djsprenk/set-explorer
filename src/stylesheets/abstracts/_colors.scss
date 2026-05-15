@@ -1,17 +1,21 @@
+/* Brand */
+$color-brand-pink: #ff2d78;
+$color-brand-yellow: #fff278;
+
 /* Colors */
 
-$primary-color: rgb(233, 233, 233);
-$secondary-color: rgb(128, 128, 128);
+$primary-color: #f0f0f0;
+$secondary-color: #a0a0a0;
 
-$background-color: rgb(10, 10, 10);
+$background-color: #0f0f0f;
 
 $ui-primary-color: $primary-color;
 
 
 /* Light Mode */
-$primary-color-light: rgb(22, 22, 22);
-$secondary-color-light: rgb(117, 117, 117);
+$primary-color-light: #161616;
+$secondary-color-light: #757575;
 
-$background-color-light: rgb(245, 245, 245);
+$background-color-light: #f5f5f5;
 
 $ui-primary-color-light: $primary-color-light;
