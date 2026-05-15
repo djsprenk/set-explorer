@@ -3,6 +3,8 @@ $font-heading: 'Staatliches', Georgia, serif;
 $font-body: system-ui, -apple-system, sans-serif;
 
 @mixin theme {
+    --font-display: #{$font-display};
+
     font-family: $font-body;
 
     h1, h2, h3, h4, h5, h6 {
@@ -16,6 +18,8 @@ $font-body: system-ui, -apple-system, sans-serif;
     --color-primary: #{$primary-color};
     --color-secondary: #{$secondary-color};
     --color-background: #{$background-color};
+    --color-border: #2a2a2a;
+    --color-text-muted: #{$secondary-color};
 
     color: var(--color-primary);
     background-color: var(--color-background);
@@ -27,6 +31,8 @@ $font-body: system-ui, -apple-system, sans-serif;
     --color-primary: #{$primary-color-light};
     --color-secondary: #{$secondary-color-light};
     --color-background: #{$background-color-light};
+    --color-border: #d0d0d0;
+    --color-text-muted: #{$secondary-color-light};
 
     color: var(--color-primary);
     background-color: var(--color-background);
