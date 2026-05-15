@@ -12,7 +12,7 @@ format:  # Format Python, JS, and Markdown files
 	isort .
 	npm run format
 
-database:  # Converts XML database from data/vdj-database inot data/processed-files/database.json
+database:  # Converts XML database from data/vdj-database into data/processed-files/database.json
 	python scripts/database.py
 
 playlists: database  # Gets song metadata for playlists
