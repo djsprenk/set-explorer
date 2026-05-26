@@ -8,7 +8,8 @@ html, body {
     padding: 0;
 }
 
-.hidden {
+.hidden,
+[hidden] {
     display: none !important;
 }
 
@@ -41,9 +42,6 @@ body {
         @include light-theme;
     }
 
-    max-width: 840px;
-    margin: auto;
-
     /* Display page elements as a grid */
     display: grid;
 
@@ -54,13 +52,18 @@ body {
     height: 100vh;
 }
 
+header {
+    background: var(--color-background);
+    box-shadow: var(--shadow-header);
+}
+
 header nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 1rem;
-    z-index: 1;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    max-width: 760px;
+    margin: 0 auto;
 }
 
 #title {
@@ -78,6 +81,7 @@ header nav {
 #logo {
     font-family: $font-display;
     font-size: 1.25rem;
+    font-weight: bold;
     text-decoration: none;
     text-transform: uppercase;
     white-space: nowrap;
@@ -105,6 +109,10 @@ header nav {
 main {
     overflow: scroll;
     padding: 20px;
+    max-width: 760px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 footer {
@@ -120,7 +128,8 @@ footer {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    margin: 0;
+    max-width: 760px;
+    margin: 0 auto;
     padding: 0;
 
     a {

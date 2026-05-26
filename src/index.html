@@ -27,8 +27,7 @@
             <h1 id="title">
                 Set Explorer
             </h1>
-            <img id="color-mode" src ="assets/moon-icon.svg" title="Toggle light / dark mode" alt="Toggle light / dark mode"/>
-            <img id="settings" src="assets/gear-icon.svg" title="Toggle settings menu" alt="Toggle settings menu"/>
+            <button id="settings" aria-label="Toggle settings menu" aria-expanded="false"><span></span><span></span><span></span><span class="settings-close">&times;</span></button>
         </nav>
     </header>
     <aside id="controls" class="hidden">
@@ -61,6 +60,11 @@
             <span> - </span>
             <input type="number" id="max-bpm" />
             <span>BPM</span>
+        </div>
+        <div id="theme">
+            <strong>Theme:</strong>
+            <span class="control" data-control="theme" data-value="light">Light</span>,
+            <span class="control" data-control="theme" data-value="dark">Dark</span>
         </div>
     </aside>
     <main id="visualizations">

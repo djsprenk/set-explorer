@@ -1,24 +1,67 @@
 /* Settings / controls menu */
 
-#color-mode {
-    height: 2em;
-    cursor: pointer;
-    padding-right: 1em;
-}
-
 #settings {
-    height: 2em;
+    /* Fixed size so the nav never shifts when toggling open/closed */
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
     align-self: center;
-    transition: .4s;
+    width: 2.5rem;
+    height: 2.5rem;
+    flex-shrink: 0;
+    background: none;
+    border: none;
     cursor: pointer;
+    padding: 0.5rem;
 
-    &:hover {
-        transform: rotate(60deg)
+    /* Hamburger bars — shown by default */
+    span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: var(--color-primary);
+        transition: background 0.2s ease;
+    }
+
+    /* Close × — hidden by default */
+    .settings-close {
+        display: none;
+        height: auto;
+        background: none;
+        color: var(--color-primary);
+        font-size: 1.5rem;
+        line-height: 1;
+    }
+
+    /* When open: hide bars, show × */
+    &[aria-expanded="true"] {
+        flex-direction: row;
+        gap: 0;
+
+        span:not(.settings-close) {
+            display: none;
+        }
+
+        .settings-close {
+            display: block;
+        }
+    }
+
+    &:hover span:not(.settings-close) {
+        opacity: 0.7;
+    }
+
+    &[aria-expanded="true"]:hover .settings-close {
+        opacity: 0.7;
     }
 }
 
 #controls {
     padding: .5em;
+    max-width: 760px;
+    margin: 0 auto;
     border-bottom: 1px solid var(--color-primary);
 
     /* Add slight shadow effect as a scrolling signifier */

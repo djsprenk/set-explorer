@@ -20,6 +20,7 @@ $font-body: system-ui, -apple-system, sans-serif;
     --color-background: #{$background-color};
     --color-border: #2a2a2a;
     --color-text-muted: #{$secondary-color};
+    --shadow-header: 0 2px 8px rgba(0, 0, 0, 0.4);
 
     color: var(--color-primary);
     background-color: var(--color-background);
@@ -33,6 +34,7 @@ $font-body: system-ui, -apple-system, sans-serif;
     --color-background: #{$background-color-light};
     --color-border: #d0d0d0;
     --color-text-muted: #{$secondary-color-light};
+    --shadow-header: 0 2px 8px rgba(0, 0, 0, 0.1);
 
     color: var(--color-primary);
     background-color: var(--color-background);

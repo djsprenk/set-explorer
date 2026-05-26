@@ -85,23 +85,11 @@ function findMinMaxBpm (setArray) {
 }
 
 function setDarkMode (document) {
-  const body = document.body
-  const settingsButton = document.getElementById('settings')
-  const toggleButton = document.getElementById('color-mode')
-
-  body.classList.replace('light', 'dark')
-  toggleButton.src = 'assets/sun-icon.svg'
-  settingsButton.style.filter = 'invert(0)'
+  document.body.classList.replace('light', 'dark')
 }
 
 function setLightMode (document) {
-  const body = document.body
-  const settingsButton = document.getElementById('settings')
-  const toggleButton = document.getElementById('color-mode')
-
-  body.classList.replace('dark', 'light')
-  toggleButton.src = 'assets/moon-icon.svg'
-  settingsButton.style.filter = 'invert(1)'
+  document.body.classList.replace('dark', 'light')
 }
 
 /**
@@ -110,29 +98,28 @@ function setLightMode (document) {
  */
 function setUpTheming (document) {
   const body = document.body
-  const toggleButton = document.getElementById('color-mode')
 
   // Check initial preference
   let prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
   if (prefersDark) {
-    setDarkMode(document)
     body.classList.add('dark')
   } else {
-    setLightMode(document)
     body.classList.add('light')
   }
 
-  // Toggle light / mode manually
-  toggleButton.addEventListener('click', () => {
-    if (body.classList.contains('light')) {
+  // Theme control clicks (Light / Dark spans in the settings menu)
+  document.getElementById('theme').addEventListener('click', (e) => {
+    const control = e.target.closest('[data-control="theme"]')
+    if (!control) return
+    if (control.dataset.value === 'dark') {
       setDarkMode(document)
     } else {
       setLightMode(document)
     }
   })
 
-  // Listen for changes in preference
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+  // Listen for changes in system preference
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
     prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
     if (prefersDark) { setDarkMode(document) } else { setLightMode(document) }
   })
@@ -212,24 +199,27 @@ function setSettingsSelections (document, settings) {
 function setupGraphControlsMenu (document, songData, displaySettings) {
   const controlMenu = document.getElementById(controlMenuId)
 
-  // Handle settings menu open / close
-  function handleSettingsMenuToggleClick (event) {
-    event.preventDefault()
-    controlMenu.classList.toggle('hidden')
-    const isHidden = controlMenu.classList.contains('hidden')
+  const settingsMenuToggle = document.getElementById('settings')
 
-    if (isHidden) {
-      setCookie(settingsMenuCookie, 'closed')
-    } else {
-      setCookie(settingsMenuCookie, 'open')
-    }
+  function openSettingsMenu () {
+    controlMenu.classList.remove('hidden')
+    settingsMenuToggle.setAttribute('aria-expanded', 'true')
+    setCookie(settingsMenuCookie, 'open')
   }
 
-  const settingsMenuToggle = document.getElementById('settings')
-  settingsMenuToggle.addEventListener('click', handleSettingsMenuToggleClick)
+  function closeSettingsMenu () {
+    controlMenu.classList.add('hidden')
+    settingsMenuToggle.setAttribute('aria-expanded', 'false')
+    setCookie(settingsMenuCookie, 'closed')
+  }
+
+  settingsMenuToggle.addEventListener('click', () => {
+    const isOpen = settingsMenuToggle.getAttribute('aria-expanded') === 'true'
+    isOpen ? closeSettingsMenu() : openSettingsMenu()
+  })
 
   if (getCookie(settingsMenuCookie) === 'open') {
-    controlMenu.classList.toggle('hidden', false)
+    openSettingsMenu()
   }
 
   // Set up view controls
