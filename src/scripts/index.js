@@ -99,7 +99,8 @@ function createEnergyLabel (container, songs) {
 
   const energies = songs
     .map((song) => parseInt(song.Energy))
-    .filter((value) => !isNaN(value))
+    // Unknown energy is stored as 0 — ignore it when computing min/max
+    .filter((value) => !isNaN(value) && value > 0)
 
   if (energies.length) {
     const energyMin = Math.min(...energies)
