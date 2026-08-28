@@ -24,11 +24,10 @@ const defaultDisplaySettings = {
   show: [
     visualizationTypes.ENERGY,
     visualizationTypes.BPM,
-    visualizationTypes.FAMILIARITY,
-    visualizationTypes.PLAYLIST
+    visualizationTypes.FAMILIARITY
   ],
   scale: scaleTypes[0],
-  layout: layoutTypes[0]
+  layout: layoutTypes[1]
 }
 
 /**
