@@ -564,6 +564,12 @@
         "type": "live-set"
     },
     {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2022.subfolders/20221220 - Solas.vdjfolder",
+        "slug": "20221220-solas",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/2022/20221220 - Solas (edit).mp3",
+        "type": "live-set"
+    },
+    {
         "playlist": "MyLists/Past Events.subfolders/2022.subfolders/20221220 - XXXMas.vdjfolder",
         "slug": "20221220-xxxmas",
         "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/2022/20221220 - XXXmas.mp3",
@@ -1020,6 +1026,18 @@
         "type": "live-set"
     },
     {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Produced Sets.subfolders/20240805 - Cosmic Ocean.vdjfolder",
+        "slug": "20240805-cosmic-ocean",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Produced Sets/20240805 - Cosmic Ocean.mp3",
+        "type": "produced-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Produced Sets.subfolders/20240819 - Burning Man.vdjfolder",
+        "slug": "20240819-burning-man",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Produced Sets/20240819 - Burning Man.mp3",
+        "type": "produced-set"
+    },
+    {
         "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2024.subfolders/2024 - NYC Zouk Fest.subfolders/20241006 - NYC Zouk Fest 1.vdjfolder",
         "slug": "20241006-nyc-zouk-fest-1",
         "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/2024/20241006 - NYC 1.mp3",
@@ -1372,5 +1390,41 @@
         "slug": "20260412-zouk-heat-3",
         "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/2026/20260412 - Zouk Heat 3.mp3",
         "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2026.subfolders/2026 - MMM.subfolders/20260520 - MMM 1.vdjfolder",
+        "slug": "20260520-mind-movement-magic-1",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/2026/20260520 - MMM 1.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2026.subfolders/2026 - MMM.subfolders/20260522 - MMM 2.vdjfolder",
+        "slug": "20260522-mind-movement-magic-2",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/2026/20260522 - MMM 2.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2026.subfolders/2026 - MMM.subfolders/20260523 - MMM 3.vdjfolder",
+        "slug": "20260523-mind-movement-magic-3",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/2026/20260523 - MMM 3.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2026.subfolders/2026 - L&N.subfolders/20260605 - L&N 1.vdjfolder",
+        "slug": "20260605-leandro-and-nayara-1",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/2026/20260605 - L&N 1.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2026.subfolders/2026 - L&N.subfolders/20260606 - L&N 2.vdjfolder",
+        "slug": "20260606-leandro-and-nayara-2",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Live Zouk Sets/2026/20260606 - L&N 2.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Produced Sets.subfolders/20260530 - Amago.vdjfolder",
+        "slug": "20260530-amago",
+        "recording": "/Users/nathan/Music/Library/DJ Sets/DJ Sprenk/Produced Sets/20260530 - Amago (Director's Cut).mp3",
+        "type": "produced-set"
     }
 ]
