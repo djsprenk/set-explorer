@@ -112,6 +112,9 @@ main.cards-layout {
     text-decoration: none;
 
     .set-name {
+        margin: 0;
+        font-size: 1.2em;
+        font-weight: normal;
         font-family: $font-heading;
         padding-bottom: .4em;
     }

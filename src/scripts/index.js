@@ -61,7 +61,7 @@ function createTitle (container, setMetadata) {
   // Split title into name and subtitle
   const [setName, setSubtitle] = getSetTitleSubtitle(setMetadata.title)
 
-  title.append('div')
+  title.append('h2')
     .attr('class', 'set-name')
     .text(setName)
 
