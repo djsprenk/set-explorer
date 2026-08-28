@@ -16,6 +16,7 @@ const visualizationTypes = {
 }
 const scaleTypes = ['relative', 'stretch']
 const sortOrders = ['newest', 'oldest']
+const layoutTypes = ['list', 'card']
 
 // Default display settings for first visit
 const defaultDisplaySettings = {
@@ -26,7 +27,8 @@ const defaultDisplaySettings = {
     visualizationTypes.FAMILIARITY,
     visualizationTypes.PLAYLIST
   ],
-  scale: scaleTypes[0]
+  scale: scaleTypes[0],
+  layout: layoutTypes[0]
 }
 
 /**
@@ -51,6 +53,7 @@ function getDisplaySettingsFromQuery () {
     sortOrder: urlParams.get('order'),
     show: urlParams.get('show'),
     scale: urlParams.get('scale'),
+    layout: urlParams.get('layout'),
     minBpm: urlParams.get('min-bpm'),
     maxBpm: urlParams.get('max-bpm')
   }
@@ -225,8 +228,9 @@ function setupGraphControlsMenu (document, songData, displaySettings) {
   // Set up view controls
   const sortControls = document.getElementById('sort').getElementsByTagName('span')
   const scaleControls = document.getElementById('scale').getElementsByTagName('span')
+  const layoutControls = document.getElementById('layout').getElementsByTagName('span')
 
-  const viewControls = [...sortControls, ...scaleControls]
+  const viewControls = [...sortControls, ...scaleControls, ...layoutControls]
 
   // Add click handlers
   for (let i = 0; i < viewControls.length; i++) {

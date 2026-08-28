@@ -92,6 +92,29 @@ function createBpmLabel (container, setMetadata) {
   return bpm
 }
 
+function createEnergyLabel (container, songs) {
+  const energy = container
+    .append('span')
+    .attr('class', 'energy')
+
+  const energies = songs
+    .map((song) => parseInt(song.Energy))
+    .filter((value) => !isNaN(value))
+
+  if (energies.length) {
+    const energyMin = Math.min(...energies)
+    const energyMax = Math.max(...energies)
+
+    if (energyMin === energyMax) {
+      energy.text(`${energyMin} Energy`)
+    } else {
+      energy.text(`${energyMin} - ${energyMax} Energy`)
+    }
+  }
+
+  return energy
+}
+
 function createRuntimeLabel (container, setMetadata) {
   const runtimeLabel = container
     .append('span')
@@ -111,6 +134,14 @@ function createRuntimeLabel (container, setMetadata) {
  * @param {Object} displaySettings
  */
 function drawSetVisualizations (container, sets, displaySettings) {
+  const cardLayout = displaySettings.layout === 'card'
+
+  // Card layout always stretches graphs to fill the container
+  const graphScale = cardLayout ? 'stretch' : displaySettings.scale
+
+  // Card layout lays sets out as a wrapping grid of cards
+  container.classed('cards-layout', cardLayout)
+
   // Draw graphs
   for (const i in sets) {
     const songs = sets[i].data
@@ -122,7 +153,7 @@ function drawSetVisualizations (container, sets, displaySettings) {
     // Each set gets its own container
     const setContainer = container
       .append('div')
-      .attr('class', 'set-container')
+      .attr('class', cardLayout ? 'set-container card-view' : 'set-container')
       .attr('data-minBpm', setMetadata.bpmMin)
       .attr('data-maxBpm', setMetadata.bpmMax)
 
@@ -134,25 +165,26 @@ function drawSetVisualizations (container, sets, displaySettings) {
 
     createTitle(setInfoContainer, setMetadata)
     const setDetails = setInfoContainer.append('div').attr('class', 'set-details')
-    createBpmLabel(setDetails, setMetadata)
     createRuntimeLabel(setDetails, setMetadata)
+    createBpmLabel(setDetails, setMetadata)
+    createEnergyLabel(setDetails, songs)
 
     // Show the selected graphs
     if (displaySettings.show.includes('timelines')) {
       // Default to timeline graph...
-      timelineGraph(setInfoContainer, songs, pois, setMetadata, i, displaySettings.scale)
+      timelineGraph(setInfoContainer, songs, pois, setMetadata, i, graphScale)
     }
 
     if (displaySettings.show.includes('energy')) {
-      energyGraph(setInfoContainer, songs, pois, setMetadata, i, displaySettings.scale)
+      energyGraph(setInfoContainer, songs, pois, setMetadata, i, graphScale)
     }
 
     if (displaySettings.show.includes('bpm')) {
-      bpmGraph(setInfoContainer, songs, pois, setMetadata, i, displaySettings.scale)
+      bpmGraph(setInfoContainer, songs, pois, setMetadata, i, graphScale)
     }
 
     if (displaySettings.show.includes('familiarity')) {
-      e3Graph(setInfoContainer, songs, pois, setMetadata, i, displaySettings.scale)
+      e3Graph(setInfoContainer, songs, pois, setMetadata, i, graphScale)
     }
 
     if (displaySettings.show.includes('playlists')) {
