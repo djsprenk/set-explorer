@@ -48,6 +48,14 @@ main.cards-layout {
     padding-bottom: 1.5em;
     border: 1px solid var(--color-border);
     border-radius: 8px;
+    background-color: var(--color-card-background);
+    box-shadow: var(--shadow-card);
+    transition: box-shadow 0.15s ease, transform 0.07s ease;
+
+    &:hover {
+        box-shadow: var(--shadow-card-hover);
+        transform: translate3d(0, -2px, 0);
+    }
 
     @include respond-to('small') {
         padding: 1em;
@@ -61,6 +69,14 @@ main.cards-layout {
         width: 100%;
         height: auto;
         margin-bottom: 1em;
+
+        /* The card owns the shadow / hover now */
+        filter: none;
+
+        &:hover {
+            filter: none;
+            transform: none;
+        }
     }
 
     /* Centered title / subtitle */
