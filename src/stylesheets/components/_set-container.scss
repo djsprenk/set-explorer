@@ -80,13 +80,13 @@ main.cards-layout {
         }
     }
 
-    /* Graphs fill the full card width */
-    .energy-container,
-    .bpm-container {
-        .energy-graph,
-        .bpm-graph {
-            width: 100%;
-        }
+    /* Graphs fill the full card width and stretch to a fixed height,
+       since there's little horizontal room to derive it from aspect ratio */
+    .energy-graph,
+    .bpm-graph,
+    .familiarity-graph {
+        width: 100%;
+        height: 1rem;
     }
 }
 

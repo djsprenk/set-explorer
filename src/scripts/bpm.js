@@ -49,7 +49,8 @@ function bpmGraph (container, songs, pois, setMetadata, index, scale) {
     .append('svg')
     .attr('class', 'bpm-graph svg-content-responsive')
   // Responsive SVG needs these 2 attributes and no width and height attr.
-    .attr('preserveAspectRatio', 'xMinYMin meet')
+  // 'none' lets CSS stretch the graph both horizontally and vertically.
+    .attr('preserveAspectRatio', 'none')
     .attr('viewBox', `0 0 ${graphWidth} ${graphHeight}`)
 
   // Create gradient
@@ -111,6 +112,7 @@ function bpmGraph (container, songs, pois, setMetadata, index, scale) {
     .datum(poisPoints)
     .attr('d', line)
     .attr('fill', `url(#${gradientId})`)
+    .attr('vector-effect', 'non-scaling-stroke')
 
   // Add cue point lines for each cue point
   cuePoints.forEach((d, i) => {
@@ -124,6 +126,7 @@ function bpmGraph (container, songs, pois, setMetadata, index, scale) {
       .attr('x2', x)
       .attr('y2', y2)
       .attr('class', 'cue-point')
+      .attr('vector-effect', 'non-scaling-stroke')
   })
 }
 
