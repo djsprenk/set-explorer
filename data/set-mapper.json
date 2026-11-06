@@ -1426,5 +1426,23 @@
         "slug": "20260530-amago",
         "recording": "/Users/nathan/Music/Library/Music/DJ Sprenk/Produced Sets/20260530 - Amago (Director's Cut).mp3",
         "type": "produced-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2026.subfolders/2026 - NYC Zouk Fest.subfolders/20261002 - NYC Zouk Fest 1.vdjfolder",
+        "slug": "20261002-nyc-zouk-fest-1",
+        "recording": "/Users/nathan/Music/Library/Music/DJ Sprenk/Live Zouk Sets/2026/20261002 - NYC Zouk Fest 1.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2026.subfolders/2026 - NYC Zouk Fest.subfolders/20261003 - NYC Zouk Fest 2.vdjfolder",
+        "slug": "20261003-nyc-zouk-fest-2",
+        "recording": "/Users/nathan/Music/Library/Music/DJ Sprenk/Live Zouk Sets/2026/20261003 - NYC Zouk Fest 2.mp3",
+        "type": "live-set"
+    },
+    {
+        "playlist": "/Users/nathan/Documents/VirtualDJ/MyLists/Past Events.subfolders/2026.subfolders/2026 - NYC Zouk Fest.subfolders/20261004 - NYC Zouk Fest 3.vdjfolder",
+        "slug": "20261004-nyc-zouk-fest-3",
+        "recording": "/Users/nathan/Music/Library/Music/DJ Sprenk/Live Zouk Sets/2026/20261004 - NYC Zouk Fest 3.mp3",
+        "type": "live-set"
     }
 ]
